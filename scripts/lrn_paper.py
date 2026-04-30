@@ -458,6 +458,100 @@ story.extend(Plain("""
 - Test on real-world language tasks
 """))
 
+story.extend([PageBreak()])
+
+# ── PART V: COMPARISON TO MODERN AI ────────────────────────────────────────────────
+story.extend(Part("V", "COMPARISON TO MODERN AI"))
+
+story.extend(Heading("5.1 Fundamental Differences"))
+story.extend(Plain("""
+Modern AI systems—particularly large language models (LLMs) based on transformer 
+architectures—differ fundamentally from LRN in their computational approach:
+"""))
+
+story.append(make_table(
+    ["Aspect", "LLMs (Transformers)", "LRN (Tensegrity)"],
+    [
+        ["Computation", "Matrix multiplication + attention", "Physical propagation through springs"],
+        ["Training", "Backpropagation + gradient descent", "Hebbian association (local)"],
+        ["Knowledge", "Dense weight matrices", "Sparse graph topology"],
+        ["Inference", "Token prediction via softmax", "Equilibrium finding via propagation"],
+        ["Energy", "High (GPU/TPU compute)", "Low (simple iteration)"],
+        ["Interpretability", "Black box activation patterns", "Explicit graph structure"],
+    ],
+    col_widths=[100, 180, 180]
+))
+
+story.extend(Heading("5.2 Performance Comparison"))
+story.extend(Plain("""
+Important caveat: LRN has been tested on a limited 12-prompt benchmark, not on 
+large-scale language tasks. Direct performance comparison would be premature.
+"""))
+
+story.append(make_table(
+    ["Metric", "LLMs (GPT-4, Claude)", "LRN (Current)"],
+    [
+        ["Benchmark", "Massive datasets (trillions of tokens)", "Curated (50-100 examples)"],
+        ["Training compute", "ExaFLOPS (GPU clusters)", "Minimal (CPU)"],
+        ["Parameters", "Trillions", "~100-200 nodes"],
+        ["Language tasks", "Superhuman on many", "Proof of concept only"],
+        ["Math", "Symbolic computation", "Physical traversal (number line)"],
+        ["Reasoning", "Emergent from scale", "Pattern matching via associations"],
+    ]
+))
+
+story.extend(Heading("5.3 Advantages of LRN"))
+story.extend(Plain("""
+1. **Transparency**: Every node and spring is inspectable. No hidden layers 
+   of embeddings to decipher.
+
+2. **Energy Efficiency**: LRN computes via simple iteration, not massive matrix 
+   operations. Potential for very low-power deployment.
+
+3. **Biological Plausibility**: Hebbian learning ("neurons that fire together, 
+   wire together") mirrors actual neural plasticity more closely than backprop.
+
+4. **Physical Grounding**: Math works through spatial traversal, not symbolic 
+   manipulation—closer to how humans conceptualize numbers.
+
+5. **Curriculum Learning**: The "Teacher Curriculum" shows that quality can 
+   outperform quantity in training data—a counterpoint to the "more data is 
+   better" paradigm.
+"""))
+
+story.extend(Heading("5.4 Limitations Compared to LLMs"))
+story.extend(Plain("""
+1. **Scale**: LRN tested on small networks; unknown how it performs at scale.
+
+2. **Generalization**: Hebbian learning creates associations, not abstractions. 
+   Novel combinations are harder than for transformer attention.
+
+3. **Expressiveness**: Limited to patterns present in training; no emergent 
+   reasoning from scale.
+
+4. **Benchmark Coverage**: 12 prompts vs. thousands of standard benchmarks.
+
+5. **No Pretraining**: Must train from scratch; cannot leverage transfer learning.
+
+6. **No multimodal**: LRN focuses on text; no image, audio, or video processing.
+"""))
+
+story.extend(Heading("5.5 When to Choose LRN"))
+story.extend(Plain("""
+LRN may be preferable when:
+- Transparency and interpretability are critical
+- Compute resources are extremely limited
+- Training data quality is high but quantity is low
+- Physical/spatial reasoning is important
+- Biological plausibility is desired for research
+
+LLMs remain superior when:
+- Massive language understanding is needed
+- General-purpose AI capabilities are required
+- Scale enables emergent capabilities
+- State-of-the-art performance is mandatory
+"""))
+
 # ── REFERENCES ───────────────────────────────────────────────────────────────────
 story.extend(Part("VI", "REFERENCES"))
 
