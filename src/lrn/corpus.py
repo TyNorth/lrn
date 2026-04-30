@@ -1,6 +1,6 @@
 """
 CorpusExpander - Template-based sentence generator
-Generates ~500 sentences from 15 templates without external data
+Generates ~500 sentences from templates without external data
 """
 
 CORE_SENTENCES = [
@@ -57,29 +57,40 @@ NEGATIVES = [
     "rain don't fall up",
 ]
 
-SUBJECT_TEMPLATES = [
-    "birds", "fish", "fire", "ice", "sun", "water", "moon", "stars",
-    "wind", "rain", "snow", "clouds", "ocean", "flowers", "dogs", "cats",
-    "trees", "rivers", "mountains", "grass", "rocks", "sand"
+
+TEMPLATES = [
+    "{subject} {verb} in the {place}",
+    "the {subject} {verb} {location}",
+    "{subject} {verb} {modifier}",
+    "{subject} can {verb}",
+    "the {subject} is {modifier}",
+    "{subject} and {subject2} are both {modifier}",
+    "when {subject} {verb}, it {verb2}",
+    "{subject} {verb} because it is {modifier}",
+    "every {subject} {verb}",
+    "many {subject}s {verb} together",
+    "the {subject} always {verb}",
+    "some {subject}s {verb} sometimes",
+    "no {subject} {verb}",
+    "all {subject}s {verb}",
+    "{subject} often {verb}",
 ]
 
-VERB_TEMPLATES = [
-    "fly", "swim", "burn", "melt", "shine", "flow", "glow", "twinkle",
-    "blow", "fall", "cover", "float", "crash", "bloom", "bark", "sleep",
-    "build", "create", "change", "need", "like", "have", "are", "is"
-]
+SUBJECTS = ["bird", "fish", "fire", "ice", "sun", "water", "moon", "star",
+            "wind", "rain", "snow", "cloud", "ocean", "flower", "dog", "cat",
+            "tree", "river", "mountain", "grass", "rock", "sand"]
 
-LOCATION_TEMPLATES = [
-    "in the sky", "in the river", "in the sun", "in the water",
-    "at night", "in the dark", "through trees", "from clouds",
-    "on shore", "in the garden", "in winter", "across the sky",
-    "to the sea", "tall", "green", "hard", "at the beach"
-]
+VERBS = ["fly", "swim", "burn", "melt", "shine", "flow", "glow", "twinkle",
+         "blow", "fall", "cover", "float", "crash", "bloom", "bark", "sleep",
+         "build", "create", "change", "need", "like", "have", "are"]
 
-MODIFIER_TEMPLATES = [
-    "bright", "cold", "fast", "slow", "high", "low", "big", "small",
-    "hot", "warm", "cool", "soft", "hard", "light", "dark", "loud"
-]
+PLACES = ["sky", "river", "ocean", "forest", "mountain", "garden"]
+
+LOCATIONS = ["in the sky", "in the river", "at night", "in the dark",
+             "through trees", "from clouds", "on shore", "in the garden"]
+
+MODIFIERS = ["bright", "cold", "fast", "slow", "hot", "warm", "cool",
+             "soft", "hard", "light", "dark", "loud", "big", "small"]
 
 
 class CorpusExpander:
@@ -89,45 +100,31 @@ class CorpusExpander:
 
     def expand(self, target_count: int = 500) -> list:
         sentences = list(self.core_sentences)
-        template_id = 0
-
+        
+        idx = 0
         while len(sentences) < target_count:
-            template_id = (template_id + 1) % 15
-
-            if template_id == 0:
-                s = f"{SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]} in the {['sky', 'river', 'ocean'][template_id % 3]}"
-            elif template_id == 1:
-                s = f"the {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]} {LOCATION_TEMPLATES[template_id % len(LOCATION_TEMPLATES)]}"
-            elif template_id == 2:
-                s = f"{SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]} {MODIFIER_TEMPLATES[template_id % len(MODIFIER_TEMPLATES)]}"
-            elif template_id == 3:
-                s = f"{SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} can {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}"
-            elif template_id == 4:
-                s = f"the {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} is {MODIFIER_TEMPLATES[template_id % len(MODIFIER_TEMPLATES)]}"
-            elif template_id == 5:
-                s = f"{SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} and {SUBJECT_TEMPLATES[(template_id+3) % len(SUBJECT_TEMPLATES)]} are both {MODIFIER_TEMPLATES[template_id % len(MODIFIER_TEMPLATES)]}"
-            elif template_id == 6:
-                s = f"when {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}, it {VERB_TEMPLATES[(template_id+1) % len(VERB_TEMPLATES)]}"
-            elif template_id == 7:
-                s = f"{SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]} because it is {MODIFIER_TEMPLATES[template_id % len(MODIFIER_TEMPLATES)]}"
-            elif template_id == 8:
-                s = f"every {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}"
-            elif template_id == 9:
-                s = f"many {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]} together"
-            elif template_id == 10:
-                s = f"the {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} always {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}"
-            elif template_id == 11:
-                s = f"some {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]} sometimes"
-            elif template_id == 12:
-                s = f"no {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}"
-            elif template_id == 13:
-                s = f"all {SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}"
-            else:
-                s = f"{SUBJECT_TEMPLATES[template_id % len(SUBJECT_TEMPLATES)]} often {VERB_TEMPLATES[template_id % len(VERB_TEMPLATES)]}"
-
-            if s not in sentences:
-                sentences.append(s.lower())
-
+            template = TEMPLATES[idx % len(TEMPLATES)]
+            subj = SUBJECTS[idx % len(SUBJECTS)]
+            verb = VERBS[idx % len(VERBS)]
+            place = PLACES[idx % len(PLACES)]
+            loc = LOCATIONS[idx % len(LOCATIONS)]
+            mod = MODIFIERS[idx % len(MODIFIERS)]
+            subj2 = SUBJECTS[(idx + 7) % len(SUBJECTS)]
+            verb2 = VERBS[(idx + 1) % len(VERBS)]
+            
+            s = template.format(
+                subject=subj,
+                subject2=subj2,
+                verb=verb,
+                verb2=verb2,
+                place=place,
+                location=loc,
+                modifier=mod
+            )
+            
+            sentences.append(s)
+            idx += 1
+        
         return sentences[:target_count]
 
     def get_all_negatives(self) -> list:
