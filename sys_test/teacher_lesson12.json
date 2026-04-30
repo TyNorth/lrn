@@ -1,0 +1,84 @@
+{
+  "lesson": 12,
+  "original": 11,
+  "extended": 9,
+  "total_extended": 12,
+  "network": {
+    "nodes": 195,
+    "springs": 541
+  },
+  "results": [
+    {
+      "prompt": "happy feels",
+      "expected": "good",
+      "got": "good",
+      "match": true
+    },
+    {
+      "prompt": "eyes",
+      "expected": "see",
+      "got": "see",
+      "match": true
+    },
+    {
+      "prompt": "ears",
+      "expected": "hear",
+      "got": "hear",
+      "match": true
+    },
+    {
+      "prompt": "plants need",
+      "expected": "sun",
+      "got": "to",
+      "match": false
+    },
+    {
+      "prompt": "plants make",
+      "expected": "oxygen",
+      "got": "oxygen",
+      "match": true
+    },
+    {
+      "prompt": "water becomes",
+      "expected": "ice",
+      "got": "when",
+      "match": false
+    },
+    {
+      "prompt": "vapor becomes",
+      "expected": "water",
+      "got": "when",
+      "match": false
+    },
+    {
+      "prompt": "sky is",
+      "expected": "blue",
+      "got": "blue",
+      "match": true
+    },
+    {
+      "prompt": "grass is",
+      "expected": "green",
+      "got": "green",
+      "match": true
+    },
+    {
+      "prompt": "heart pumps",
+      "expected": "blood",
+      "got": "blood",
+      "match": true
+    },
+    {
+      "prompt": "computer",
+      "expected": "computes",
+      "got": "computes",
+      "match": true
+    },
+    {
+      "prompt": "tree",
+      "expected": "grows",
+      "got": "grows",
+      "match": true
+    }
+  ]
+}

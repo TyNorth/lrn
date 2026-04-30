@@ -54,6 +54,27 @@ Adding new concepts reinforces existing ones:
 ## Key Insight
 **"Junk in, junk out"** - the quality of training data matters more than quantity. A curated 50 examples with proper repetition beats a noisy 10,000 example corpus.
 
+## Generalization Findings
+
+### Exact Phrase Matching (Lesson 10)
+- **100%** on original 12-prompt benchmark
+- Network learns specific phrases, not abstract rules
+
+### Novel Combinations (Generalization Test)
+- **1/13 (7.7%)** - network cannot generalize to unseen combinations
+- Hebbian learning creates associations, not abstractions
+
+### Trade-off: Diversity vs Accuracy
+| Approach | Exact Match | Generalization |
+|----------|-------------|-----------------|
+| Exact phrase (L10) | 100% | ~8% |
+| Diverse training (L13) | 44% | ~44% |
+
+**Conclusion**: Current LRN excels at exact phrase completion. True generalization requires either:
+1. Much more diverse training (many variations of each pattern)
+2. Additional abstraction layer for rule extraction
+3. Larger network with more training iterations
+
 ## Files
 - `scripts/teacher_lesson*.py`: Each lesson
 - `checkpoints/lesson*.pkl`: Saved network states

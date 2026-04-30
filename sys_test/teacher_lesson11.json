@@ -1,0 +1,72 @@
+{
+  "lesson": 11,
+  "new_concepts": 75,
+  "original": {
+    "passed": 12,
+    "total": 12
+  },
+  "new_test": {
+    "passed": 6,
+    "total": 9,
+    "results": [
+      {
+        "prompt": "happy feels",
+        "expected": "good",
+        "got": "good",
+        "match": true
+      },
+      {
+        "prompt": "eyes",
+        "expected": "see",
+        "got": "see",
+        "match": true
+      },
+      {
+        "prompt": "ears",
+        "expected": "hear",
+        "got": "hear",
+        "match": true
+      },
+      {
+        "prompt": "plants need",
+        "expected": "sun",
+        "got": "gives",
+        "match": false
+      },
+      {
+        "prompt": "plants make",
+        "expected": "oxygen",
+        "got": "oxygen",
+        "match": true
+      },
+      {
+        "prompt": "water becomes",
+        "expected": "ice",
+        "got": "vapor",
+        "match": false
+      },
+      {
+        "prompt": "vapor becomes",
+        "expected": "water",
+        "got": "gives",
+        "match": false
+      },
+      {
+        "prompt": "sky is",
+        "expected": "blue",
+        "got": "blue",
+        "match": true
+      },
+      {
+        "prompt": "grass is",
+        "expected": "green",
+        "got": "green",
+        "match": true
+      }
+    ]
+  },
+  "network": {
+    "nodes": 168,
+    "springs": 502
+  }
+}
