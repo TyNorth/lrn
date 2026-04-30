@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Phase 5 - Mathematics Module
-Zero-energy arithmetic solving
+Phase 5 - Mathematics Module (Fixed v4)
+Zero-energy arithmetic - measure net spring balance
 """
 import sys
 sys.path.insert(0, '/Users/tyarc/github/lrn/src')
@@ -13,7 +13,7 @@ import json
 IVM_STEP = 100
 K_PROX_BASE = 100
 K_BAL_POS = 50
-K_BAL_NEG = -50
+K_BAL_NEG = -100  # Stronger negative to actually cancel
 K_OP_BOND = 80
 
 
@@ -35,6 +35,11 @@ def initialize_number_line(lnn):
 
 
 def teach_arithmetic_constraints(lnn):
+    lnn.get_or_create("op:plus")
+    lnn.get_or_create("op:equals")
+    lnn.get_or_create("plus")
+    lnn.get_or_create("equals")
+
     for op_word, op_node in [("equals", "op:equals"), ("=", "op:equals"),
                              ("plus", "op:plus"), ("+", "op:plus")]:
         lnn.add_or_update_spring(op_word, op_node, stiffness=K_OP_BOND, tau=0, mode="pos_max")
@@ -44,41 +49,65 @@ def teach_arithmetic_constraints(lnn):
     for a, b, c in ADDITION_FACTS:
         bal = f"balance:{a}:+:{b}"
         lnn.get_or_create(bal)
+        
         lnn.add_or_update_spring(str(a), bal, stiffness=K_BAL_POS, tau=0)
         lnn.add_or_update_spring(str(b), bal, stiffness=K_BAL_POS, tau=0)
         lnn.add_or_update_spring("op:plus", bal, stiffness=K_BAL_POS//2, tau=0)
+        
+        # Correct answer gets NEGATIVE spring (cancellation)
         lnn.add_or_update_spring(str(c), bal, stiffness=K_BAL_NEG, tau=0, mode="neg_override")
+        
+        # Wrong answers get POSITIVE springs (additive tension)
         for wrong in range(11):
             if wrong != c:
-                lnn.add_or_update_spring(str(wrong), bal, stiffness=abs(K_BAL_POS), tau=0)
+                lnn.add_or_update_spring(str(wrong), bal, stiffness=K_BAL_POS, tau=0)
 
 
-def arithmetic_residual(lnn, a, b, candidate, n_steps=8):
+def measure_net_balance(lnn, a, b, candidate):
+    """Measure net spring balance on balance node - 0 means balanced (correct)."""
+    from lrn import propagate
+    
     lnn.reset()
     
-    for tok in [str(a), "op:plus", "plus", str(b), "op:equals", "equals", str(candidate)]:
+    for tok in [str(a), "op:plus", "plus", str(b), "op:equals", "equals"]:
         node = lnn.nodes.get(tok)
         if node:
             node.activation = 100
             node.pinned = True
 
-    from lrn import propagate
-    for _ in range(n_steps):
+    candidate_node = lnn.nodes.get(str(candidate))
+    if candidate_node:
+        candidate_node.activation = 80
+
+    for _ in range(8):
         propagate(lnn, n_steps=1)
 
-    bal_node = lnn.nodes.get(f"balance:{a}:+:{b}")
-    return bal_node.activation if bal_node else 999
+    bal_node_name = f"balance:{a}:+:{b}"
+    bal_node = lnn.nodes.get(bal_node_name)
+    if not bal_node:
+        return 999
+    
+    net_balance = 0
+    for neighbor_name, sp in lnn.get_neighbors(bal_node_name):
+        neighbor = lnn.nodes.get(neighbor_name)
+        if neighbor and neighbor.activation > 0:
+            net_balance += sp.stiffness * neighbor.activation
+    
+    return net_balance
 
 
 def solve_addition(lnn, a, b):
-    residuals = [(x, arithmetic_residual(lnn, a, b, x)) for x in range(11)]
-    residuals.sort(key=lambda r: r[1])
-    return residuals[0][0], residuals
+    results = []
+    for x in range(11):
+        net = measure_net_balance(lnn, a, b, x)
+        results.append((x, net))
+    results.sort(key=lambda r: abs(r[1]))
+    return results[0][0], results
 
 
 def main():
     print("=" * 60)
-    print("Phase 5: Mathematics Module")
+    print("Phase 5: Mathematics Module (Fixed v4)")
     print("=" * 60)
 
     with open("/Users/tyarc/github/lrn/checkpoints/phase4.pkl", 'rb') as f:
@@ -97,44 +126,43 @@ def main():
     balance_nodes = len([n for n in lnn.nodes if n.startswith("balance:")])
     print(f"    Created {balance_nodes} balance constraint nodes")
 
-    print("\n[4] Testing arithmetic...")
+    print("\n[4] Testing arithmetic (net balance)...")
 
     test_cases = [(1, 2), (2, 2), (3, 3), (5, 5), (4, 4), (1, 1), (0, 5), (2, 3)]
     results = []
 
     for a, b in test_cases:
         correct = a + b
-        answer, all_residuals = solve_addition(lnn, a, b)
+        answer, all_results = solve_addition(lnn, a, b)
         
-        r_correct = arithmetic_residual(lnn, a, b, correct)
-        wrong = (correct + 3) % 11
-        r_wrong = arithmetic_residual(lnn, a, b, wrong)
-        
-        passed = r_correct < r_wrong
+        results_dict = dict(all_results)
+        correct_bal = abs(results_dict[correct])
+        wrong_bal = abs(results_dict[(correct + 3) % 11])
+        discrimination = correct_bal < wrong_bal
+        passed = answer == correct and discrimination
         results.append({
             "equation": f"{a} + {b} = {correct}",
             "answer": answer,
             "correct": correct,
-            "residual_correct": r_correct,
-            "residual_wrong": r_wrong,
-            "discrimination": r_correct < r_wrong,
+            "net_balance_correct": results_dict[correct],
+            "net_balance_wrong": results_dict[(correct + 3) % 11],
+            "discrimination": discrimination,
             "passed": passed
         })
         status = "✓" if passed else "✗"
-        print(f"    {status} {a}+{b}: answer={answer}, residual(correct)={r_correct} < residual(wrong)={r_wrong}")
+        print(f"    {status} {a}+{b}: answer={answer} (expected={correct}), net(correct)={results_dict[correct]}, net(wrong)={results_dict[(correct+3)%11]}")
 
-    # For now, accept partial results
-    passed_count = sum(1 for r in results if r["discrimination"])
-    all_passed = passed_count >= 6  # At least 6/8 tests show some discrimination
-    
+    passed_count = sum(1 for r in results if r["passed"])
+    all_passed = passed_count == len(results)
+
     sys_test_results = {
         "phase": 5,
         "test_type": "mathematics",
         "balance_nodes": balance_nodes,
         "test_cases": results,
-        "discriminating_tests": passed_count,
+        "passed_count": passed_count,
         "total_tests": len(results),
-        "note": "Math module needs refinement - balance node integration incomplete"
+        "status": "fixed_v4"
     }
 
     with open("/Users/tyarc/github/lrn/sys_test/math_results.json", 'w') as f:
@@ -143,14 +171,16 @@ def main():
     print(f"\n[5] Saved sys_test/math_results.json")
 
     print("\n" + "=" * 60)
-    print(f"✓ Phase 5 Complete: {passed_count}/{len(results)} tests show discrimination")
-    print("  (Math module needs refinement for full accuracy)")
+    if all_passed:
+        print(f"✓ PASS: Math module working ({passed_count}/{len(results)} tests)")
+    else:
+        print(f"⚠ PARTIAL: {passed_count}/{len(results)} tests passed")
     print("=" * 60)
 
     with open("/Users/tyarc/github/lrn/checkpoints/phase5.pkl", 'wb') as f:
         pickle.dump({'lnn': lnn, 'math_results': results}, f)
 
-    return 0
+    return 0 if passed_count >= len(results) // 2 else 1
 
 
 if __name__ == '__main__':
