@@ -1,0 +1,78 @@
+{
+  "parity": 10.0,
+  "matches": 2,
+  "results": [
+    {
+      "prompt": "the sun",
+      "expected": "sky",
+      "got": "is",
+      "match": false
+    },
+    {
+      "prompt": "water flows",
+      "expected": "down",
+      "got": "down",
+      "match": true
+    },
+    {
+      "prompt": "the cat",
+      "expected": "meows",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "light travels",
+      "expected": "fast",
+      "got": "very",
+      "match": false
+    },
+    {
+      "prompt": "fire causes",
+      "expected": "burn",
+      "got": "smoke",
+      "match": false
+    },
+    {
+      "prompt": "ice melts",
+      "expected": "when",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "friction creates",
+      "expected": "heat",
+      "got": "heat",
+      "match": true
+    },
+    {
+      "prompt": "gravity causes",
+      "expected": "fall",
+      "got": "things",
+      "match": false
+    },
+    {
+      "prompt": "cold and hot are both",
+      "expected": "temperature",
+      "got": "warm",
+      "match": false
+    },
+    {
+      "prompt": "fish and birds are both",
+      "expected": "animals",
+      "got": "warm",
+      "match": false
+    },
+    {
+      "prompt": "the ocean is deep and",
+      "expected": "wide",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "the human brain",
+      "expected": "thinks",
+      "got": "in",
+      "match": false
+    }
+  ]
+}

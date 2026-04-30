@@ -1,0 +1,93 @@
+{
+  "corpus_size": 312,
+  "nodes": 118,
+  "springs": 417,
+  "results": [
+    {
+      "prompt": "the sun",
+      "expected": "sky",
+      "got": "a",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "water flows",
+      "expected": "down",
+      "got": "down",
+      "score": 5,
+      "match": true
+    },
+    {
+      "prompt": "the cat",
+      "expected": "meows",
+      "got": "a",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "light travels",
+      "expected": "fast",
+      "got": "very",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "fire causes",
+      "expected": "burn",
+      "got": "smoke",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "ice melts",
+      "expected": "when",
+      "got": "in",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "friction creates",
+      "expected": "heat",
+      "got": "heat",
+      "score": 5,
+      "match": true
+    },
+    {
+      "prompt": "gravity causes",
+      "expected": "fall",
+      "got": "things",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "cold and hot are both",
+      "expected": "temperature",
+      "got": "fish",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "fish and birds are both",
+      "expected": "animals",
+      "got": "animals",
+      "score": 5,
+      "match": true
+    },
+    {
+      "prompt": "the ocean is deep and",
+      "expected": "wide",
+      "got": "a",
+      "score": 2,
+      "match": false
+    },
+    {
+      "prompt": "the human brain",
+      "expected": "thinks",
+      "got": "thinks",
+      "score": 5,
+      "match": true
+    }
+  ],
+  "total_score": 36,
+  "parity": 12.0
+}
