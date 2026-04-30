@@ -1,0 +1,9 @@
+{
+  "phase": 4,
+  "test_type": "performance",
+  "node_count": 179,
+  "spring_count": 1933,
+  "avg_degree": 21.6,
+  "prop_time_100nodes": 0.0233,
+  "status": "basic_pass"
+}
