@@ -39,19 +39,24 @@ def add_sentence(lnn: LatticeNN, sentence: str, reality: float = 1.0) -> None:
 
     WINDOW_SIZE = 5
 
+    # Scale stiffness by exposure count (Hebbian strengthening)
+    # On repetition, add to existing stiffness
+    base_k = 10
+    
     for i in range(n):
         for j in range(i + 1, min(i + WINDOW_SIZE + 1, n)):
             a, b = tokens[i], tokens[j]
             distance = j - i
 
-            k = max(1, 10 // distance)
+            k = max(1, base_k // distance)
 
             if roles[i] == roles[j]:
                 k += 3
 
             k = int(k * reality)
 
-            lnn.add_or_update_spring(a, b, stiffness=k, tau=4)
+            # Use "add" mode to accumulate stiffness on repetition
+            lnn.add_or_update_spring(a, b, stiffness=k, tau=4, mode="add")
 
     for size in [3, 4, 5]:
         for i in range(n - size + 1):

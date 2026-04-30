@@ -1,0 +1,82 @@
+{
+  "repetitions": 10,
+  "nodes": 179,
+  "springs": 1933,
+  "strong_springs": 1933,
+  "results": [
+    {
+      "prompt": "the sun",
+      "expected": "sky",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "water flows",
+      "expected": "down",
+      "got": "down",
+      "match": true
+    },
+    {
+      "prompt": "the cat",
+      "expected": "meows",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "light travels",
+      "expected": "fast",
+      "got": "us",
+      "match": false
+    },
+    {
+      "prompt": "fire causes",
+      "expected": "burn",
+      "got": "creates",
+      "match": false
+    },
+    {
+      "prompt": "ice melts",
+      "expected": "when",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "friction creates",
+      "expected": "heat",
+      "got": "smoke",
+      "match": false
+    },
+    {
+      "prompt": "gravity causes",
+      "expected": "fall",
+      "got": "us",
+      "match": false
+    },
+    {
+      "prompt": "cold and hot are both",
+      "expected": "temperature",
+      "got": "warm",
+      "match": false
+    },
+    {
+      "prompt": "fish and birds are both",
+      "expected": "animals",
+      "got": "warm",
+      "match": false
+    },
+    {
+      "prompt": "the ocean is deep and",
+      "expected": "wide",
+      "got": "in",
+      "match": false
+    },
+    {
+      "prompt": "the human brain",
+      "expected": "thinks",
+      "got": "in",
+      "match": false
+    }
+  ],
+  "total_score": 27,
+  "parity": 9.0
+}
