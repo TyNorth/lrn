@@ -1,0 +1,18 @@
+{
+  "negation": {
+    "passed": 4,
+    "total": 4
+  },
+  "necessary": {
+    "passed": 3,
+    "total": 3
+  },
+  "contradictions": {
+    "passed": 2,
+    "total": 2
+  },
+  "network": {
+    "nodes": 50,
+    "springs": 164
+  }
+}

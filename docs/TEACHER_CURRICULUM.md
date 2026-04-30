@@ -123,6 +123,25 @@ More epochs on exact doesn't help generalization. Sweet spot: exact 15x + divers
 | Language benchmark | 6/7 (86%) |
 | Logical reasoning | 5/5 (100%) |
 
+### Logical Reasoning Advanced (Lesson 4)
+| Pattern | Result |
+|---------|--------|
+| Negation ("not", "opposite") | 4/4 (100%) |
+| Necessary ("necessary for") | 3/3 (100%) |
+| Contradictions ("but", "however") | 2/2 (100%) |
+
+### Math + Language Combined
+| Component | Result |
+|-----------|--------|
+| Language (word associations) | 3/4 (75%) |
+| Math (word problems) | **5/5 (100%)** |
+| **Combined** | **8/9 (89%)** |
+
+**Key finding**: 
+- Math word problems work perfectly with number line traversal
+- Word-to-number bridge (one→1, two→2) enables language→math connection
+- LRN handles both pattern recognition and numeric computation
+
 **Key finding**: LRN learns logical patterns well - transitivity and causal chains work better than abstract sequences.
 
 ## Files
