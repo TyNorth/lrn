@@ -1,0 +1,93 @@
+{
+  "phase": 3,
+  "test_type": "language_generation",
+  "prompt_results": [
+    {
+      "prompt": "birds fly in the",
+      "expected": "sky",
+      "top": "sky",
+      "score": 795,
+      "match": true
+    },
+    {
+      "prompt": "fish swim in the",
+      "expected": "river",
+      "top": "sky",
+      "score": 752,
+      "match": false
+    },
+    {
+      "prompt": "fire burns hot and",
+      "expected": "bright",
+      "top": "bright",
+      "score": 90,
+      "match": true
+    },
+    {
+      "prompt": "the sun shines in",
+      "expected": "the",
+      "top": "sky",
+      "score": 135,
+      "match": false
+    }
+  ],
+  "additional_tests": [
+    {
+      "prompt": "the sun",
+      "top1": "always",
+      "top2": "is",
+      "top3": "sky",
+      "top1_score": 109,
+      "top1_activation": 58
+    },
+    {
+      "prompt": "water flows",
+      "top1": "down",
+      "top2": "schools",
+      "top3": "winter",
+      "top1_score": 50,
+      "top1_activation": 64
+    },
+    {
+      "prompt": "the cat",
+      "top1": "sky",
+      "top2": "always",
+      "top3": "is",
+      "top1_score": 83,
+      "top1_activation": 85
+    },
+    {
+      "prompt": "light travels",
+      "top1": "us",
+      "top2": "schools",
+      "top3": "gives",
+      "top1_score": 37,
+      "top1_activation": 94
+    },
+    {
+      "prompt": "fire causes",
+      "top1": "us",
+      "top2": "schools",
+      "top3": "gives",
+      "top1_score": 36,
+      "top1_activation": 94
+    },
+    {
+      "prompt": "ice melts when",
+      "top1": "it",
+      "top2": "us",
+      "top3": "schools",
+      "top1_score": 62,
+      "top1_activation": 49
+    },
+    {
+      "prompt": "cold and hot are both",
+      "top1": "warm",
+      "top2": "cool",
+      "top3": "soft",
+      "top1_score": 114,
+      "top1_activation": 73
+    }
+  ],
+  "match_rate": "2/4"
+}
