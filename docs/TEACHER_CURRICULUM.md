@@ -78,4 +78,24 @@ Adding new concepts reinforces existing ones:
 ## Files
 - `scripts/teacher_lesson*.py`: Each lesson
 - `checkpoints/lesson*.pkl`: Saved network states
+## Experiment Results
+
+### Exact vs Diverse Trade-off
+| Experiment | Description | Exact | Generalization | Total |
+|------------|-------------|-------|-----------------|-------|
+| L10 | Exact only (15x) | 12/12 | 1/13 | 13/25 (52%) |
+| L13 | Diverse only (3x) | 7/16 | ~50% | 7/16 (44%) |
+| Exp A | Diverse (5 epochs) | 8/15 | 53% | 8/15 (53%) |
+| Exp B | Exact + Diverse | 11/12 | 2/4 | 13/16 (81%) |
+| Exp B2 | B with more epochs | 11/12 | 2/6 | 13/18 (72%) |
+
+**Best: Experiment B (81%)** - exact first (15x), then diverse (3x), preserves exact while adding some generalization.
+
+### Key Finding
+More epochs on exact doesn't help generalization. Sweet spot: exact 15x + diverse 3x.
+
+## Files
+- `scripts/teacher_lesson*.py`: Each lesson
+- `scripts/experiment_*.py`: Experiments
+- `checkpoints/lesson*.pkl`: Saved network states
 - `sys_test/teacher_*.json`: Test results
