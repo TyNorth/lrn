@@ -207,6 +207,153 @@ class EquationSolver:
         balance_count = len([n for n in self.lnn.nodes if n.startswith("balance:")])
         print(f"  [Math] Installed {balance_count} balance nodes")
     
+    def install_multiplication_facts(self, max_val: int = 12):
+        """Install balance nodes for multiplication"""
+        K_BAL_POS = 50
+        K_BAL_NEG = -50
+        
+        for a in range(0, max_val + 1):
+            for b in range(0, max_val + 1):
+                c = a * b
+                if c > 100:  # Stay within number line range
+                    continue
+                bal = f"balance:{a}:x:{b}"
+                self.lnn.get_or_create(bal)
+                
+                # Operand springs (push positive)
+                self.lnn.add_or_update_spring(
+                    f"sensor:count:{a}", bal, stiffness=K_BAL_POS, tau=0
+                )
+                self.lnn.add_or_update_spring(
+                    f"sensor:count:{b}", bal, stiffness=K_BAL_POS, tau=0
+                )
+                self.lnn.add_or_update_spring(
+                    "op:times", bal, stiffness=K_BAL_POS // 2, tau=0
+                )
+                
+                # Correct answer (negative - cancellation)
+                self.lnn.add_or_update_spring(
+                    f"sensor:count:{c}", bal, stiffness=K_BAL_NEG, tau=0, mode="neg_override"
+                )
+                
+                # Wrong answers (positive - adds tension)
+                for wrong in range(0, 101):
+                    if wrong != c:
+                        self.lnn.add_or_update_spring(
+                            f"sensor:count:{wrong}", bal, stiffness=K_BAL_POS, tau=0
+                        )
+        
+        print(f"  [Math] Multiplication facts installed")
+    
+    def install_division_facts(self, max_val: int = 12):
+        """Install balance nodes for division"""
+        K_BAL_POS = 50
+        K_BAL_NEG = -50
+        
+        for dividend in range(1, max_val + 1):
+            for divisor in range(1, max_val + 1):
+                quotient = dividend // divisor
+                remainder = dividend % divisor
+                bal = f"balance:{dividend}:div:{divisor}"
+                self.lnn.get_or_create(bal)
+                
+                # Dividend and divisor push positive
+                self.lnn.add_or_update_spring(
+                    f"sensor:count:{dividend}", bal, stiffness=K_BAL_POS, tau=0
+                )
+                self.lnn.add_or_update_spring(
+                    f"sensor:count:{divisor}", bal, stiffness=K_BAL_POS, tau=0
+                )
+                self.lnn.add_or_update_spring(
+                    "op:divide", bal, stiffness=K_BAL_POS // 2, tau=0
+                )
+                
+                # Correct quotient (negative - cancellation)
+                self.lnn.add_or_update_spring(
+                    f"sensor:count:{quotient}", bal, stiffness=K_BAL_NEG, tau=0, mode="neg_override"
+                )
+                
+                # Wrong answers
+                for wrong in range(0, 101):
+                    if wrong != quotient:
+                        self.lnn.add_or_update_spring(
+                            f"sensor:count:{wrong}", bal, stiffness=K_BAL_POS, tau=0
+                        )
+        
+        print(f"  [Math] Division facts installed")
+    
+    def solve_algebraic_equation(self, eq_type: str, a: int, b: int, result: int, verbose: bool = False) -> int:
+        """
+        Solve algebraic equations via balance node tension minimization.
+        Returns the unknown value.
+        
+        Types:
+        - "add": a + x = result -> x = result - a
+        - "sub": x - a = result -> x = result + a  
+        - "mul": a * x = result -> x = result / a
+        - "div": x / a = result -> x = result * a
+        """
+        from lrn import propagate
+        
+        best_answer = 0
+        min_tension = float('inf')
+        
+        # Test each possible answer in range
+        for candidate in range(-100, 101):
+            self.lnn.reset()
+            
+            # Pin known values
+            if eq_type in ["add", "sub", "mul", "div"]:
+                if a is not None:
+                    self.lnn.add_node(f"sensor:count:{a}")
+                    self.lnn.nodes[f"sensor:count:{a}"].activation = 100
+                    self.lnn.nodes[f"sensor:count:{a}"].pinned = True
+                
+                if b is not None:
+                    self.lnn.add_node(f"sensor:count:{b}")
+                    self.lnn.nodes[f"sensor:count:{b}"].activation = 100
+                    self.lnn.nodes[f"sensor:count:{b}"].pinned = True
+            
+            # Pin result
+            self.lnn.add_node(f"sensor:count:{result}")
+            self.lnn.nodes[f"sensor:count:{result}"].activation = 100
+            self.lnn.nodes[f"sensor:count:{result}"].pinned = True
+            
+            # Candidate answer
+            self.lnn.add_node(f"sensor:count:{candidate}")
+            self.lnn.nodes[f"sensor:count:{candidate}"].activation = 80
+            
+            # Propagate
+            for _ in range(10):
+                propagate(self.lnn, n_steps=1)
+            
+            # Get tension from appropriate balance node
+            if eq_type == "add":
+                bal = f"balance:{a}:+:{b}"
+            elif eq_type == "sub":
+                bal = f"balance:{result}:-:b" if a is None else f"balance:{a}:-:b"
+            elif eq_type == "mul":
+                bal = f"balance:{a}:x:{b}"
+            elif eq_type == "div":
+                bal = f"balance:{result}:div:{b}"
+            else:
+                continue
+            
+            if bal in self.lnn.nodes:
+                tension = 0
+                for neighbor, sp in self.lnn.get_neighbors(bal):
+                    if neighbor in self.lnn.nodes:
+                        tension += sp.stiffness * self.lnn.nodes[neighbor].activation
+                
+                if abs(tension) < abs(min_tension):
+                    min_tension = tension
+                    best_answer = candidate
+        
+        if verbose:
+            print(f"  [Math] Solved {eq_type}: {a} ? {b} = {result} -> {best_answer}")
+        
+        return best_answer
+    
     def install_subtraction_facts(self, max_val: int = 20):
         """Install balance nodes for subtraction"""
         K_BAL_POS = 50

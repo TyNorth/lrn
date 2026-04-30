@@ -1,0 +1,80 @@
+{
+  "lesson": "5_fixed",
+  "results": [
+    {
+      "prompt": "the sun",
+      "expected": "sky",
+      "got": "sky",
+      "match": true
+    },
+    {
+      "prompt": "water flows",
+      "expected": "down",
+      "got": "down",
+      "match": true
+    },
+    {
+      "prompt": "the cat",
+      "expected": "meows",
+      "got": "sky",
+      "match": false
+    },
+    {
+      "prompt": "light travels",
+      "expected": "fast",
+      "got": "fast",
+      "match": true
+    },
+    {
+      "prompt": "fire causes",
+      "expected": "burn",
+      "got": "burn",
+      "match": true
+    },
+    {
+      "prompt": "ice melts",
+      "expected": "when",
+      "got": "when",
+      "match": true
+    },
+    {
+      "prompt": "friction creates",
+      "expected": "heat",
+      "got": "heat",
+      "match": true
+    },
+    {
+      "prompt": "gravity causes",
+      "expected": "fall",
+      "got": "fall",
+      "match": true
+    },
+    {
+      "prompt": "cold and hot are both",
+      "expected": "temperature",
+      "got": "animals",
+      "match": false
+    },
+    {
+      "prompt": "fish and birds are both",
+      "expected": "animals",
+      "got": "animals",
+      "match": true
+    },
+    {
+      "prompt": "the ocean is deep and",
+      "expected": "wide",
+      "got": "wide",
+      "match": true
+    },
+    {
+      "prompt": "the human brain",
+      "expected": "thinks",
+      "got": "thinks",
+      "match": true
+    }
+  ],
+  "passed": 10,
+  "total": 12,
+  "parity": 83.3
+}

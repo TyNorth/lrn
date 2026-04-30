@@ -1,0 +1,93 @@
+{
+  "lesson": 5,
+  "training_examples": 42,
+  "results": [
+    {
+      "prompt": "the sun",
+      "expected": "sky",
+      "got": "rises",
+      "match": false,
+      "alternatives": "rises, moves, sky"
+    },
+    {
+      "prompt": "water flows",
+      "expected": "down",
+      "got": "down",
+      "match": true,
+      "alternatives": "down, types, measures"
+    },
+    {
+      "prompt": "the cat",
+      "expected": "meows",
+      "got": "sky",
+      "match": false,
+      "alternatives": "sky, meows, blue"
+    },
+    {
+      "prompt": "light travels",
+      "expected": "fast",
+      "got": "fast",
+      "match": true,
+      "alternatives": "fast, types, measures"
+    },
+    {
+      "prompt": "fire causes",
+      "expected": "burn",
+      "got": "burn",
+      "match": true,
+      "alternatives": "burn, freeze, fall"
+    },
+    {
+      "prompt": "ice melts",
+      "expected": "when",
+      "got": "when",
+      "match": true,
+      "alternatives": "when, types, measures"
+    },
+    {
+      "prompt": "friction creates",
+      "expected": "heat",
+      "got": "heat",
+      "match": true,
+      "alternatives": "heat, types, measures"
+    },
+    {
+      "prompt": "gravity causes",
+      "expected": "fall",
+      "got": "fall",
+      "match": true,
+      "alternatives": "fall, burn, freeze"
+    },
+    {
+      "prompt": "cold and hot are both",
+      "expected": "temperature",
+      "got": "temperature",
+      "match": true,
+      "alternatives": "temperature, about, types"
+    },
+    {
+      "prompt": "fish and birds are both",
+      "expected": "animals",
+      "got": "temperature",
+      "match": false,
+      "alternatives": "temperature, about, types"
+    },
+    {
+      "prompt": "the ocean is deep and",
+      "expected": "wide",
+      "got": "wide",
+      "match": true,
+      "alternatives": "wide, sky, orange"
+    },
+    {
+      "prompt": "the human brain",
+      "expected": "thinks",
+      "got": "thinks",
+      "match": true,
+      "alternatives": "thinks, sky, blue"
+    }
+  ],
+  "passed": 9,
+  "total": 12,
+  "parity": 75.0
+}
