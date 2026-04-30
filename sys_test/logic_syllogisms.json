@@ -1,0 +1,62 @@
+{
+  "lesson": "logic_syllogisms",
+  "training": 70,
+  "results": [
+    {
+      "prompt": "all dogs are",
+      "got": "animals",
+      "expected": "animals",
+      "match": true
+    },
+    {
+      "prompt": "birds are",
+      "got": "animals",
+      "expected": "animals",
+      "match": true
+    },
+    {
+      "prompt": "the dog is an",
+      "got": "animal",
+      "expected": "animal",
+      "match": true
+    },
+    {
+      "prompt": "a bird is an",
+      "got": "animal",
+      "expected": "animal",
+      "match": true
+    },
+    {
+      "prompt": "humans are",
+      "got": "animals",
+      "expected": "animals",
+      "match": true
+    },
+    {
+      "prompt": "roses are",
+      "got": "animals",
+      "expected": "flowers",
+      "match": false
+    },
+    {
+      "prompt": "apples are",
+      "got": "animals",
+      "expected": "fruit",
+      "match": false
+    },
+    {
+      "prompt": "all elephants are",
+      "got": "animals",
+      "expected": "unknown"
+    },
+    {
+      "prompt": "the elephant is an",
+      "got": "animal",
+      "expected": "unknown"
+    }
+  ],
+  "network": {
+    "nodes": 20,
+    "springs": 47
+  }
+}

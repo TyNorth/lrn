@@ -1,0 +1,14 @@
+{
+  "if_then": {
+    "passed": 5,
+    "total": 6
+  },
+  "comparisons": {
+    "passed": 2,
+    "total": 3
+  },
+  "network": {
+    "nodes": 49,
+    "springs": 155
+  }
+}

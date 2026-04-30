@@ -1,0 +1,14 @@
+{
+  "language": {
+    "passed": 6,
+    "total": 7
+  },
+  "logic": {
+    "passed": 5,
+    "total": 5
+  },
+  "network": {
+    "nodes": 75,
+    "springs": 159
+  }
+}

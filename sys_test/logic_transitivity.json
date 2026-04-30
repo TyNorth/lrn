@@ -1,0 +1,9 @@
+{
+  "transitivity": 3,
+  "causal": 3,
+  "sequence": 1,
+  "network": {
+    "nodes": 43,
+    "springs": 103
+  }
+}

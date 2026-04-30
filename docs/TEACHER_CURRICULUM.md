@@ -95,7 +95,40 @@ Adding new concepts reinforces existing ones:
 More epochs on exact doesn't help generalization. Sweet spot: exact 15x + diverse 3x.
 
 ## Files
+## Logical Reasoning Results
+
+### Lesson 1: Syllogisms (All A are B → X is B)
+| Pattern | Result |
+|---------|--------|
+| "all dogs are animals" → animals | ✓ |
+| "birds are animals" → animals | ✓ |
+| "the dog is an animal" | ✓ (inference) |
+
+### Lesson 2: If-Then & Comparisons
+| Pattern | Result |
+|---------|--------|
+| If-Then ("if rain then wet") | 5/6 (83%) |
+| Comparisons ("bigger than small") | 2/3 (67%) |
+
+### Lesson 3: Transitivity & Chains
+| Pattern | Result |
+|---------|--------|
+| Transitivity (A>B, B>C → A>C) | 3/3 (100%) |
+| Causal chains (rain→wet→cold) | 3/3 (100%) |
+| Sequences (morning→noon→night) | 1/2 (50%) |
+
+### Combined: Language + Logic
+| Feature | Result |
+|---------|--------|
+| Language benchmark | 6/7 (86%) |
+| Logical reasoning | 5/5 (100%) |
+
+**Key finding**: LRN learns logical patterns well - transitivity and causal chains work better than abstract sequences.
+
+## Files
 - `scripts/teacher_lesson*.py`: Each lesson
+- `scripts/logic_lesson*.py`: Logical reasoning lessons
 - `scripts/experiment_*.py`: Experiments
-- `checkpoints/lesson*.pkl`: Saved network states
-- `sys_test/teacher_*.json`: Test results
+- `scripts/combined_*.py`: Combined language + logic
+- `checkpoints/`: Saved network states
+- `sys_test/`: Test results
