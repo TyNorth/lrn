@@ -1,0 +1,67 @@
+{
+  "phase": 6,
+  "test_type": "advanced_features",
+  "subword_tests": [
+    {
+      "word": "unhappiness",
+      "fragments": [
+        "un",
+        "happi",
+        "ness"
+      ],
+      "integrated": true
+    },
+    {
+      "word": "replay",
+      "fragments": [
+        "re",
+        "play"
+      ],
+      "integrated": true
+    },
+    {
+      "word": "disconnect",
+      "fragments": [
+        "dis",
+        "connect"
+      ],
+      "integrated": true
+    },
+    {
+      "word": "mistrust",
+      "fragments": [
+        "mis",
+        "trust"
+      ],
+      "integrated": true
+    },
+    {
+      "word": "preheat",
+      "fragments": [
+        "pre",
+        "heat"
+      ],
+      "integrated": true
+    }
+  ],
+  "tensegrity": {
+    "unit_id": "hot_cold",
+    "activated": "hot",
+    "energy_contributions": {
+      "warm": 20,
+      "heat": 20,
+      "cold": -50,
+      "cool": -50,
+      "freeze": -50
+    },
+    "repulsion_to_neg_pole": true
+  },
+  "governor": {
+    "e_threshold": 48,
+    "harden_amount": 1,
+    "surprise_yield": 200,
+    "trigram_boost": 50,
+    "role_match_boost": 30,
+    "batch_size": 20
+  }
+}
