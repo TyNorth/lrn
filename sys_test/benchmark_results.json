@@ -1,0 +1,146 @@
+{
+  "phase": 7,
+  "test_type": "benchmark",
+  "prompts": [
+    [
+      "the sun",
+      "sky"
+    ],
+    [
+      "water flows",
+      "down"
+    ],
+    [
+      "the cat",
+      "meows"
+    ],
+    [
+      "light travels",
+      "fast"
+    ],
+    [
+      "fire causes",
+      "burn"
+    ],
+    [
+      "ice melts",
+      "when"
+    ],
+    [
+      "friction creates",
+      "heat"
+    ],
+    [
+      "gravity causes",
+      "fall"
+    ],
+    [
+      "cold and hot are both",
+      "temperature"
+    ],
+    [
+      "fish and birds are both",
+      "animals"
+    ],
+    [
+      "the ocean is deep and",
+      "wide"
+    ],
+    [
+      "the human brain",
+      "thinks"
+    ]
+  ],
+  "results": [
+    {
+      "prompt": "the sun",
+      "expected": "sky",
+      "score": 16,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "water flows",
+      "expected": "down",
+      "score": 17,
+      "max_25": 25,
+      "match": true
+    },
+    {
+      "prompt": "the cat",
+      "expected": "meows",
+      "score": 15,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "light travels",
+      "expected": "fast",
+      "score": 12,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "fire causes",
+      "expected": "burn",
+      "score": 12,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "ice melts",
+      "expected": "when",
+      "score": 12,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "friction creates",
+      "expected": "heat",
+      "score": 13,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "gravity causes",
+      "expected": "fall",
+      "score": 12,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "cold and hot are both",
+      "expected": "temperature",
+      "score": 16,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "fish and birds are both",
+      "expected": "animals",
+      "score": 16,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "the ocean is deep and",
+      "expected": "wide",
+      "score": 14,
+      "max_25": 25,
+      "match": false
+    },
+    {
+      "prompt": "the human brain",
+      "expected": "thinks",
+      "score": 14,
+      "max_25": 25,
+      "match": false
+    }
+  ],
+  "total_score": 169,
+  "max_score": 300,
+  "parity_percent": 56.3,
+  "exact_matches": 1,
+  "total_prompts": 12,
+  "target_parity": 79
+}
