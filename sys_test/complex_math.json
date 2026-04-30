@@ -1,0 +1,22 @@
+{
+  "fractions": {
+    "passed": 11,
+    "total": 11
+  },
+  "scales": {
+    "passed": 8,
+    "total": 8
+  },
+  "decimals": {
+    "passed": 5,
+    "total": 5
+  },
+  "percentages": {
+    "passed": 8,
+    "total": 8
+  },
+  "total": {
+    "passed": 32,
+    "total": 32
+  }
+}
