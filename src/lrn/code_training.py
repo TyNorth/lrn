@@ -263,8 +263,34 @@ ALL_LOGIC_PATTERNS = {
 }
 
 
-def train_language(lnn, language: str, repetitions: int = 60) -> dict:
-    """Train grammar for a specific language."""
+def train_language(lnn, language: str, repetitions: int = 60, use_native: bool = True) -> dict:
+    """
+    Train grammar for a specific language NATIVELY.
+    Grammar emerges from raw code exposure - no hardcoded patterns.
+    
+    After repetition, springs between character sequences become τ=0 (rigid syntax).
+    """
+    stats = {"samples": 0, "char_ngrams": 0, "springs": 0, "tokens_discovered": 0, "promoted": 0}
+    
+    samples = NATIVE_CODE_SAMPLES.get(language, [])
+    
+    for _ in range(repetitions):
+        for code in samples:
+            result = learn_from_code(lnn, code, repetitions=1)
+            stats["samples"] += 1
+            stats["char_ngrams"] += result["char_ngrams"]
+            stats["springs"] += result["springs"]
+    
+    stats["promoted"] = promote_code_springs(lnn, threshold=50)
+    
+    tokens = discover_tokens(lnn, samples, min_frequency=2)
+    stats["tokens_discovered"] = len(tokens)
+    
+    return stats
+
+
+def train_language_patterns(lnn, language: str, repetitions: int = 60) -> dict:
+    """Legacy: Train grammar using hardcoded patterns (NOT native)."""
     stats = {"patterns": 0, "tokens": 0, "springs": 0, "ngrams": 0, "promoted": 0}
     
     patterns = ALL_LANGUAGE_PATTERNS.get(language, [])
@@ -282,18 +308,24 @@ def train_language(lnn, language: str, repetitions: int = 60) -> dict:
     return stats
 
 
-def train_all_languages(lnn, repetitions_per_lang: int = 40) -> dict:
-    """Train grammar for all 7 languages."""
-    stats = {"languages": 0, "patterns": 0, "tokens": 0, "springs": 0, "ngrams": 0, "promoted": 0}
+def train_all_languages(lnn, repetitions_per_lang: int = 60, use_native: bool = True) -> dict:
+    """
+    Train grammar for all 7 languages NATIVELY.
+    Grammar emerges from raw code - no hardcoded patterns.
+    """
+    stats = {"languages": 0, "samples": 0, "char_ngrams": 0, "springs": 0, "promoted": 0, "tokens": {}}
     
-    for lang in ALL_LANGUAGE_PATTERNS.keys():
-        lang_stats = train_language(lnn, lang, repetitions=repetitions_per_lang)
+    for lang in NATIVE_CODE_SAMPLES.keys():
+        lang_stats = train_language(lnn, lang, repetitions=repetitions_per_lang, use_native=use_native)
         stats["languages"] += 1
-        stats["patterns"] += lang_stats["patterns"]
-        stats["tokens"] += lang_stats["tokens"]
+        stats["samples"] += lang_stats["samples"]
+        stats["char_ngrams"] += lang_stats["char_ngrams"]
         stats["springs"] += lang_stats["springs"]
-        stats["ngrams"] += lang_stats["ngrams"]
         stats["promoted"] += lang_stats["promoted"]
+        
+        samples = NATIVE_CODE_SAMPLES[lang]
+        tokens = discover_tokens(lnn, samples, min_frequency=2)
+        stats["tokens"][lang] = list(tokens.keys())[:10]
     
     return stats
 
