@@ -119,46 +119,179 @@ def initialize_scope_axis(lnn: LatticeNN) -> None:
         )
 
 
-# --- Code Curriculum: Grammar patterns, not spec ---
-# Grammar learned through repetition, not language specification
+# --- Multi-Language Grammar Patterns ---
+# Each language has distinct syntax - all learned through springs
 
-GRAMMAR_PATTERNS = [
+PYTHON_PATTERNS = [
     # Function definitions
     "code:kw:def code:var:add code:sym:lparen code:var:a code:sym:comma code:var:b code:sym:rparen code:sym:colon code:kw:return code:var:a code:op:plus code:var:b",
     "code:kw:def code:var:foo code:sym:lparen code:sym:rparen code:sym:colon code:kw:return code:lit:int",
     "code:kw:def code:var:hello code:sym:lparen code:var:name code:sym:rparen code:sym:colon code:kw:return code:lit:str",
-    "code:kw:def code:var:identity code:sym:lparen code:var:x code:sym:rparen code:sym:colon code:kw:return code:var:x",
-    "code:kw:def code:var:square code:sym:lparen code:var:x code:sym:rparen code:sym:colon code:kw:return code:var:x code:op:star code:var:x",
-    
     # Conditionals
     "code:kw:if code:var:condition code:sym:colon",
     "code:kw:if code:var:x code:op:gt code:lit:int code:sym:colon code:kw:return code:lit:int",
-    "code:kw:if code:var:n code:sym:lte code:lit:int code:sym:colon code:kw:return code:lit:int code:kw:else code:kw:return code:var:x code:op:star code:var:x",
-    
     # Loops
     "code:kw:for code:var:i code:kw:in code:var:range code:sym:lparen code:var:n code:sym:rparen code:sym:colon",
-    "code:kw:while code:var:condition code:sym:colon",
-    
     # Assignments
     "code:var:x code:sym:assign code:lit:int",
-    "code:var:result code:sym:assign code:var:x code:op:plus code:var:y",
-    
-    # Return statements
-    "code:kw:return code:var:x",
-    "code:kw:return code:var:a code:op:plus code:var:b",
-    "code:kw:return code:lit:int",
-    "code:kw:return code:lit:str",
-    
-    # Class definitions
-    "code:kw:class code:var:MyClass code:sym:colon code:kw:def code:sym:lparen code:var:self code:sym:rparen code:sym:colon",
-    "code:kw:class code:var:MyClass code:sym:colon code:kw:def code:var:get_value code:sym:lparen code:var:self code:sym:rparen code:sym:colon code:kw:return code:var:self code:sym:dot code:var:value",
-    
-    # Method calls
-    "code:func:print code:sym:lparen code:var:x code:sym:rparen",
-    "code:func:len code:sym:lparen code:var:x code:sym:rparen",
 ]
 
-OLD_SYLLABUS = []  # Deprecated - spec text no longer needed
+RUST_PATTERNS = [
+    # Function definitions with types and return type
+    "code:kw:fn code:var:add code:sym:lparen code:var:a code:sym:: code:type:i32 code:sym:, code:var:b code:sym:: code:type:i32 code:sym:rparen code:sym:-> code:type:i32 code:sym:lbrace code:kw:return code:var:a code:op:+ code:var:b code:sym:rbrace",
+    "code:kw:fn code:var:main code:sym:lparen code:sym:rparen code:sym:-> code:type:i32 code:sym:lbrace code:kw:return code:literal:0 code:sym:rbrace",
+    # Conditionals
+    "code:kw:if code:var:x code:op:gt code:literal:0 code:sym:lbrace code:kw:return code:literal:1 code:sym:rbrace",
+    "code:kw:if code:var:x code:op:gt code:literal:0 code:sym:lbrace code:kw:return code:literal:1 code:sym:rbrace code:kw:else code:sym:lbrace code:kw:return code:literal:0 code:sym:rbrace",
+    # Let binding
+    "code:kw:let code:kw:mut code:var:x code:sym::= code:literal:5",
+]
+
+JAVASCRIPT_PATTERNS = [
+    # Function definitions
+    "code:kw:function code:var:add code:sym:lparen code:var:a code:sym:, code:var:b code:sym:rparen code:sym:lbrace code:kw:return code:var:a code:op:+ code:var:b code:sym:rbrace",
+    # Arrow function
+    "code:kw:const code:var:add code:sym::= code:sym:lparen code:var:a code:sym:, code:var:b code:sym:rparen code:op:=> code:sym:lbrace code:kw:return code:var:a code:op:+ code:var:b code:sym:rbrace",
+    # Conditionals
+    "code:kw:if code:sym:lparen code:var:x code:op:gt code:literal:0 code:sym:rparen code:sym:lbrace code:kw:return code:literal:1 code:sym:rbrace",
+    # Variable declarations
+    "code:kw:let code:var:x code:sym::= code:literal:5",
+]
+
+GO_PATTERNS = [
+    # Function definitions - no type in param after name
+    "code:kw:func code:var:add code:sym:lparen code:var:a code:var:int code:sym:, code:var:b code:var:int code:sym:rparen code:var:int code:sym:lbrace code:kw:return code:var:a code:op:+ code:var:b code:sym:rbrace",
+    "code:kw:func code:var:main code:sym:lparen code:sym:rparen code:sym:lbrace code:kw:return code:sym:rbrace",
+    # Conditionals
+    "code:kw:if code:var:x code:op:gt code:literal:0 code:sym:lbrace code:kw:return code:literal:1 code:sym:rbrace",
+    # Short variable declaration
+    "code:var:x code:sym::= code:literal:5",
+]
+
+RUBY_PATTERNS = [
+    # Function definitions - no braces, inline params, end keyword
+    "code:kw:def code:var:add code:var:a code:sym:, code:var:b code:kw:return code:var:a code:op:+ code:var:b code:kw:end",
+    "code:kw:def code:var:main code:kw:return code:sym:nil code:kw:end",
+    # Conditionals
+    "code:kw:if code:var:x code:op:gt code:literal:0 code:kw:return code:literal:1 code:kw:end",
+    "code:kw:if code:var:x code:op:gt code:literal:0 code:kw:then code:kw:return code:literal:1 code:kw:else code:kw:return code:literal:0 code:kw:end",
+]
+
+COBOL_PATTERNS = [
+    # COBOL - column-based, verbose, uppercase keywords
+    "code:kw:IDENTIFICATION code:kw:DIVISION code:kw:PROGRAM-ID code:sym:. code:var:PROGNAME",
+    "code:kw:PROCEDURE code:kw:DIVISION code:sym:.",
+    "code:kw:IF code:var:X code:op:gt code:literal:ZERO code:kw:THEN code:kw:DISPLAY code:literal:HELLO code:kw:END-IF",
+    "code:kw:MOVE code:var:VALUE code:kw:TO code:var:TARGET",
+    "code:kw:DISPLAY code:literal:HELLO",
+    "code:kw:PERFORM code:var:ROUTINE code:kw:UNTIL code:var:DONE",
+]
+
+ZIG_PATTERNS = [
+    # Function definitions - explicit error handling
+    "code:kw:fn code:var:add code:sym:lparen code:var:a code:sym:: code:type:i32 code:sym:, code:var:b code:sym:: code:type:i32 code:sym:rparen code:sym:! code:type:error code:sym:-> code:type:i32 code:sym:lbrace code:kw:return code:var:a code:op:+ code:var:b code:sym:rbrace",
+    # Main function
+    "code:kw:pub code:kw:fn code:var:main code:sym:lparen code:sym:rparen code:type:void code:sym:lbrace code:kw:return code:sym:rbrace",
+    # Conditionals with parentheses required
+    "code:kw:if code:sym:lparen code:var:x code:op:> code:literal:0 code:sym:rparen code:sym:lbrace code:kw:return code:var:x code:sym:rbrace code:kw:else code:sym:lbrace code:kw:return code:literal:0 code:sym:rbrace",
+    # Variable declarations
+    "code:kw:const code:var:x code:sym::= code:literal:5",
+    "code:kw:var code:var:y code:sym::= code:literal:10",
+]
+
+
+# Logic patterns per language (boolean operators differ)
+PYTHON_LOGIC = [
+    "code:kw:if code:var:x code:op:gt code:lit:int code:kw:and code:var:y code:op:lt code:lit:int code:sym:colon",
+    "code:kw:if code:var:x code:op:eq code:lit:int code:kw:or code:var:y code:op:neq code:lit:int code:sym:colon",
+]
+
+RUST_LOGIC = [
+    "code:kw:if code:var:x code:op:> code:literal:0 code:kw:&& code:var:y code:op:< code:literal:10 code:sym:lbrace code:sym:rbrace",
+    "code:kw:match code:var:x code:sym:lbrace code:kw:Some code:sym:lparen code:var:v code:sym:rparen code:op:=> code:var:v code:sym:, code:kw:None code:op:=> code:literal:0 code:sym:rbrace",
+]
+
+JAVASCRIPT_LOGIC = [
+    "code:kw:if code:sym:lparen code:var:x code:op:> code:literal:0 code:op:&& code:var:y code:op:< code:literal:10 code:sym:rparen code:sym:lbrace code:sym:rbrace",
+    "code:kw:if code:var:x code:op:=== code:literal:5 code:sym:lbrace code:sym:rbrace",
+]
+
+GO_LOGIC = [
+    "code:kw:if code:var:x code:op:> code:literal:0 code:op:&& code:var:y code:op:< code:literal:10 code:sym:lbrace code:sym:rbrace",
+    "code:kw:switch code:var:x code:sym:lbrace code:kw:case code:literal:1 code:sym:: code:kw:return code:literal:1 code:sym:, code:kw:default code:sym:: code:kw:return code:literal:0 code:sym:rbrace",
+]
+
+RUBY_LOGIC = [
+    "code:kw:if code:var:x code:op:> code:literal:0 code:kw:and code:var:y code:op:< code:literal:10 code:kw:then code:kw:end",
+    "code:kw:if code:var:x code:op:== code:literal:5 code:kw:unless code:var:y code:op:!= code:literal:0 code:kw:end",
+]
+
+COBOL_LOGIC = [
+    "code:kw:IF code:var:X code:op:GT code:literal:ZERO code:kw:AND code:var:Y code:op:LESS code:literal:TEN code:kw:THEN code:kw:DISPLAY code:literal:YES code:kw:END-IF",
+    "code:kw:IF code:var:X code:op:EQ code:literal:FIVE code:kw:OR code:var:Y code:op:NE code:literal:ZERO code:kw:THEN code:kw:SET code:var:RESULT code:kw:TO code:literal:TRUE code:kw:END-IF",
+]
+
+ZIG_LOGIC = [
+    "code:kw:if code:sym:lparen code:var:x code:op:> code:literal:0 code:op:and code:var:y code:op:< code:literal:10 code:sym:rparen code:sym:lbrace code:kw:return code:var:x code:sym:rbrace",
+    "code:kw:switch code:sym:lparen code:var:x code:sym:rparen code:sym:lbrace code:kw:case code:literal:1 code:sym:=> code:kw:return code:literal:1 code:sym:, code:kw:else code:sym:=> code:kw:return code:literal:0 code:sym:rbrace",
+]
+
+
+# All patterns combined
+ALL_LANGUAGE_PATTERNS = {
+    "python": PYTHON_PATTERNS,
+    "rust": RUST_PATTERNS,
+    "javascript": JAVASCRIPT_PATTERNS,
+    "go": GO_PATTERNS,
+    "ruby": RUBY_PATTERNS,
+    "cobol": COBOL_PATTERNS,
+    "zig": ZIG_PATTERNS,
+}
+
+ALL_LOGIC_PATTERNS = {
+    "python": PYTHON_LOGIC,
+    "rust": RUST_LOGIC,
+    "javascript": JAVASCRIPT_LOGIC,
+    "go": GO_LOGIC,
+    "ruby": RUBY_LOGIC,
+    "cobol": COBOL_LOGIC,
+    "zig": ZIG_LOGIC,
+}
+
+
+def train_language(lnn, language: str, repetitions: int = 60) -> dict:
+    """Train grammar for a specific language."""
+    stats = {"patterns": 0, "tokens": 0, "springs": 0, "ngrams": 0, "promoted": 0}
+    
+    patterns = ALL_LANGUAGE_PATTERNS.get(language, [])
+    logic_patterns = ALL_LOGIC_PATTERNS.get(language, [])
+    
+    for _ in range(repetitions):
+        for pattern in patterns + logic_patterns:
+            result = add_code_file(lnn, pattern)
+            stats["patterns"] += 1
+            stats["tokens"] += result["tokens"]
+            stats["springs"] += result["springs"]
+            stats["ngrams"] += result["ngrams"]
+    
+    stats["promoted"] = promote_code_springs(lnn, threshold=50)
+    return stats
+
+
+def train_all_languages(lnn, repetitions_per_lang: int = 40) -> dict:
+    """Train grammar for all 7 languages."""
+    stats = {"languages": 0, "patterns": 0, "tokens": 0, "springs": 0, "ngrams": 0, "promoted": 0}
+    
+    for lang in ALL_LANGUAGE_PATTERNS.keys():
+        lang_stats = train_language(lnn, lang, repetitions=repetitions_per_lang)
+        stats["languages"] += 1
+        stats["patterns"] += lang_stats["patterns"]
+        stats["tokens"] += lang_stats["tokens"]
+        stats["springs"] += lang_stats["springs"]
+        stats["ngrams"] += lang_stats["ngrams"]
+        stats["promoted"] += lang_stats["promoted"]
+    
+    return stats
 
 
 def train_code_grammar(lnn: LatticeNN, repetitions: int = 80) -> dict:
