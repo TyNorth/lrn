@@ -21,6 +21,8 @@
 10. [Configuration Constants](#10-configuration-constants)
 11. [Build Order](#11-build-order)
 12. [Benchmark Reproducibility](#12-benchmark-reproducibility)
+13. [Coding Capabilities: Spring-Based Code Generation](#13-coding-capabilities-spring-based-code-generation)
+14. [Implementation Notes: Simplified LRN](#14-implementation-notes-simplified-lrn)
 
 ---
 
@@ -1292,6 +1294,18 @@ A developer implementing LRN from scratch should build in this order:
 3. Run Phase 65 battery (12 prompts × 5-axis scoring vs Gemini 1.5 Flash reference)
 4. Target: **≥ 79% parity** on T1/T2/T3 generation battery
 
+### Phase 8: Coding Capabilities (Week 4–5)
+1. `initialize_scope_axis()` — scope geometry nodes and springs
+2. `add_code_file()` — code-aware tokenization and spring formation
+3. Language spec ingestion — hybrid constraint learning (spec text + code examples)
+4. Spring promotion for code patterns (τ=4 → τ=0 after 50+ examples)
+5. `generate_code()` — stricter energy gate (E_THRESHOLD=20)
+6. `validate_syntax()` — post-generation τ=0 spring validation
+7. Train on CODE_CURRICULUM (spec → syntax → types → scope → functions → classes)
+8. Test: prompt "def add ( a , b ) :" → expect "return a + b"
+9. Test: prompt "if x >" → expect ":" (syntax spring closure)
+10. Test: negative examples should be rejected (E > 20)
+
 ---
 
 ## 12. Benchmark Reproducibility
@@ -1365,6 +1379,613 @@ for a, b in [(1,2),(2,2),(3,3),(5,5),(4,4),(1,1),(0,5),(2,3)]:
 
 ---
 
+## 13. Coding Capabilities: Spring-Based Code Generation
+
+### 13.1 Core Principle
+
+Code generation is **identical to language generation**. The LRN does not have a separate "code mode." Code is just language with grammar learned through springs.
+
+```
+CANONICAL INSIGHT:
+
+"def hello(name):"   → find next token s.t. E(def, identifier, (, identifier, ), :) is minimized
+"birds fly in the ___" → find x s.t. E(birds, fly, in, x) is minimized
+
+Same operation. Code completion and sentence completion
+are identical: find the node that brings the lattice to zero tension.
+
+Syntax = grammar = patterns learned through spring co-occurrence.
+No language specification needed - tau hierarchy handles all context.
+```
+
+**Why syntax errors are impossible by construction:**
+- Grammar patterns learned via repetition → τ=4 → τ=0 after 50+ exposures
+- Valid patterns form closed spring loops → net tension = 0
+- Invalid token leaves spring loop open → residual tension >> E_THRESHOLD → filtered out
+
+### 13.2 Grammar: Syntax as Pattern Learning
+
+Programming syntax IS grammar - learned through springs like natural language. No language specification needed.
+
+```python
+# Grammar patterns learned through repetition
+GRAMMAR_PATTERNS = [
+    "code:kw:def code:var:add code:sym:lparen code:var:a code:sym:comma code:var:b code:sym:rparen code:sym:colon code:kw:return code:var:a code:op:plus code:var:b",
+    "code:kw:if code:var:x code:op:gt code:lit:int code:sym:colon",
+    "code:kw:return code:var:a code:op:plus code:var:b",
+    # ... (learned via repetition, promoted to τ=0)
+]
+```
+
+**How grammar works:**
+1. Add patterns → springs form at τ=4
+2. After 50+ repetitions → springs promote to τ=0 (rigid syntax)
+3. Generation: τ=0 springs enforce grammar, τ=4 springs provide flexibility
+
+### 13.3 Code Node Types
+# Ingest the Python Language Reference as natural language
+SPEC_TEXT = [
+    "A function definition consists of the def keyword followed by a name",
+    "The def keyword introduces a function definition",
+    "Function parameters are enclosed in parentheses",
+    "A colon terminates the function header",
+    "The function body is an indented block",
+    "The return statement exits a function with a value",
+]
+
+for sentence in SPEC_TEXT:
+    add_sentence(lnn, sentence, reality=1.0)
+```
+
+**Phase B: Code example ingestion** (τ=0 syntax springs via promotion):
+```python
+CODE_EXAMPLES = [
+    "def add ( a , b ) : return a + b",
+    "def hello ( name ) : print name",
+    "def factorial ( n ) : if n <= 1 : return 1",
+]
+
+for code in CODE_EXAMPLES:
+    add_code_file(lnn, code)
+```
+
+**Spring promotion bridges spec → code:**
+```
+Token "def" appears in:
+  - Spec text: "def" ↔ "keyword" (τ=4, semantic)
+  - Code:       "def" ↔ "(" (τ=4, promoted to τ=0 via repetition)
+  - Both:       "def" connects to BOTH contexts → lattice learns
+                that "def" as keyword MEANS "followed by ( name )"
+
+After ~50 code examples with "def":
+  SPRING("def", "(") → τ=0, k=100 (promoted from τ=4)
+
+The spec IS the constraint — but learned, not hardcoded.
+```
+
+### 13.3 Code Node Types
+
+```
+"code:kw:{keyword}"     # Reserved words: code:kw:def, code:kw:return, code:kw:if
+"code:type:{typename}"   # Type annotations: code:type:str, code:type:int, code:type:List
+"code:var:{name}"        # Variable nodes: code:var:x, code:var:result
+"code:func:{name}"       # Function nodes: code:func:len, code:func:print
+"code:op:{operator}"     # Operators: code:op:plus, code:op:assign, code:op:dot
+"code:sym:{symbol}"      # Punctuation: code:sym:colon, code:sym:lparen, code:sym:comma
+"code:lit:{type}"        # Literal templates: code:lit:str, code:lit:int, code:lit:bool
+"code:block:{depth}"     # Indentation depth anchors: code:block:0, code:block:4, code:block:8
+"spec:rule:{id}"         # Language spec rule nodes: spec:rule:func_def, spec:rule:if_stmt
+```
+
+**Code role counts** (extends positional roles from §5.4):
+
+| Role | Value | Meaning in code |
+|------|-------|----------------|
+| DECLARATION | 5 | Variable/function definition start |
+| INVOCATION | 6 | Function call or method access |
+| ASSIGNMENT | 7 | Right-hand side of assignment |
+| EXPRESSION | 8 | Arithmetic/logic expression context |
+| RETURN | 9 | Return statement context |
+| STARTER | 0 | First token of line/block |
+| ACTOR | 1 | Subject of operation |
+| LINKER | 2 | Connector (operators, keywords) |
+| SETTLER | 3 | Result/target position |
+| CLOSER | 4 | Closing token (`)`, `]`, `}`, `:`) |
+
+### 13.4 Syntax Springs (τ=0 — Rigid Bonds)
+
+Syntax patterns are encoded as **τ=0 constitutive springs** through spring promotion (§5.5). After sufficient code examples, these become near-rigid:
+
+```python
+# After promotion from repeated code examples:
+
+# Python function definition: def <id>(<params>): <body>
+SPRING(def, id)       → τ=0, k=100
+SPRING(id, lparen)    → τ=0, k=100
+SPRING(lparen, param) → τ=0, k=80
+SPRING(param, rparen) → τ=0, k=100
+SPRING(rparen, colon) → τ=0, k=100
+SPRING(colon, indent) → τ=0, k=100
+
+# If statement: if <condition>: <body>
+SPRING(if, expr)      → τ=0, k=100
+SPRING(expr, colon)   → τ=0, k=100
+
+# Variable assignment: var = <value>
+SPRING(var, assign)   → τ=0, k=100
+SPRING(assign, expr)  → τ=0, k=100
+```
+
+**The spring loop closure mechanism:**
+
+```
+Example: generating "def foo():"
+
+Step 1: Pin "def" → activation propagates
+Step 2: Candidate scoring:
+  - "foo" (code:var:foo): has τ=0 spring to "def" → E = 5 (passes)
+  - "return" (code:kw:return): NO τ=0 spring from "def" → E = 1000 (rejected)
+  - "42" (code:lit:int): NO τ=0 spring from "def" → E = 1000 (rejected)
+→ Best: "foo"
+
+Step 3: Pin "def", "foo" → propagate
+Step 4: Candidate scoring:
+  - "(": has τ=0 spring chain def→foo→"(" → E = 5 (passes)
+  - "=": has spring def→foo but NO spring foo→"=" → E = 48 (rejected)
+→ Best: "("
+
+... continues until ":" → all syntax springs closed → E_total → 0
+```
+
+### 13.5 Type Constraint Springs (τ=1 — Definitional)
+
+Type compatibility encoded as τ=1 definitional springs, formed through hybrid spec+code learning:
+
+```python
+SPRING(code:lit:str, code:type:str)    → τ=1, k=50
+SPRING(code:lit:int, code:type:int)    → τ=1, k=50
+SPRING(code:func:len, code:type:int)   → τ=1, k=50
+
+# Operation type springs:
+SPRING(code:type:str, code:op:plus, code:type:str) → τ=1, k=40  # str + str = valid
+SPRING(code:type:int, code:op:plus, code:type:int) → τ=1, k=40  # int + int = valid
+# NO spring between str and int with plus → type error → high energy
+```
+
+### 13.6 Scope & Variable Binding Springs (τ=2 — Causal)
+
+Variable declarations create τ=2 causal springs to potential usage sites, scope-bounded:
+
+```python
+# Variable in current scope:
+SPRING(code:var:x, code:block:4) → τ=2, k=20
+
+# Usage strengthens the spring:
+SPRING(code:var:x, code:block:4) → τ=2, k=35  # after 2 uses
+
+# Variable in parent scope (boundary penalty):
+SPRING(code:var:global_x, code:block:8) → τ=2, k=10
+
+# Variable in closed scope (weak):
+SPRING(code:var:old_x, code:block:0) → τ=3, k=3
+
+# Never-declared variable:
+# NO spring to any scope → E = 1000 → filtered
+```
+
+### 13.7 Block Structure: Geometric Scope Positioning
+
+Code blocks positioned on a **scope axis** (analogous to the number line):
+
+```python
+SCOPE_STEP = 4        # Indentation width
+SCOPE_MAX  = 32       # Maximum nesting depth
+
+def initialize_scope_axis(lnn):
+    for depth in range(SCOPE_MAX):
+        node = lnn.get_or_create(f"code:block:{depth}")
+        node.x = depth * SCOPE_STEP
+        node.modality = "B"
+
+    for depth in range(SCOPE_MAX - 1):
+        lnn.add_or_update_spring(
+            f"code:block:{depth}", f"code:block:{depth+1}",
+            stiffness=30, tau=1
+        )
+```
+
+### 13.8 Code Training: Corpus Ingestion
+
+```python
+def add_code_file(lnn, source_code: str, language: str = "python"):
+    tokens = tokenize_code_line(source_code, language)
+
+    # Sequential syntax springs (start τ=4, promote to τ=0 via repetition)
+    for i in range(len(tokens) - 1):
+        a, b = tokens[i], tokens[i+1]
+        lnn.add_or_update_spring(a, b, stiffness=20, tau=4)
+
+    # Skip springs for non-adjacent tokens
+    for i in range(len(tokens)):
+        for j in range(i + 2, min(i + 6, len(tokens))):
+            lnn.add_or_update_spring(tokens[i], tokens[j],
+                                      stiffness=max(1, 20 // (j-i)), tau=4)
+
+    # Larger n-grams for code patterns
+    for size in [3, 4, 5, 7, 10]:
+        for i in range(len(tokens) - size + 1):
+            gram = tuple(tokens[i:i+size])
+            lnn.trigrams[gram] = lnn.trigrams.get(gram, 0) + 1
+```
+
+### 13.9 Code Generation: Stricter Energy Gate
+
+Same `generate()` function (§6) with stricter energy threshold:
+
+```python
+def generate_code(lnn, prompt: list[str], top_k: int = 5) -> list[dict]:
+    candidates = generate(lnn, prompt, top_k=top_k * 3)
+
+    # τ=0 springs with k=100: broken spring = 50 energy minimum
+    code_threshold = 20  # vs. 48 for text
+    return [c for c in candidates if c["energy"] < code_threshold][:top_k]
+```
+
+### 13.10 Syntax Validation
+
+```python
+def validate_syntax(lnn, generated_token: str, context: list[str]) -> bool:
+    for ctx_token in context:
+        sp = lnn.springs.get(lnn._key(ctx_token, generated_token))
+        if sp and sp.tau == 0 and sp.stiffness > 0:
+            if lnn.nodes[ctx_token].activation < 50 and lnn.nodes[generated_token].activation < 50:
+                return False
+    return True
+```
+
+**Fallback:** If no candidate passes → return None (epistemic honesty).
+
+### 13.11 Code-Specific Constants
+
+```python
+CODE_SYNTAX_K             = 100   # τ=0 syntax spring stiffness (rigid)
+CODE_TYPE_K               = 50    # τ=1 type spring stiffness
+CODE_SCOPE_K              = 20    # τ=2 scope spring stiffness
+CODE_SEMANTIC_K           = 10    # τ=3/4 semantic spring stiffness
+CODE_E_THRESHOLD          = 20    # Code energy gate (text = 48)
+CODE_CANDIDATE_MULTIPLIER = 3     # Generate 3x candidates, filter by energy
+CODE_NGRAM_SIZES          = [3, 4, 5, 7, 10]
+SCOPE_STEP                = 4
+SCOPE_MAX                 = 32
+CODE_PROMOTION_SAMPLES    = 50    # Examples needed for τ=4 → τ=0 promotion
+```
+
+### 13.12 Code Training Curriculum
+
+Training is qualitative — curated examples, not massive corpora:
+
+```python
+CODE_CURRICULUM = [
+    # Phase A: Language spec as text (semantic grounding)
+    ("spec", [
+        "A function definition begins with the def keyword",
+        "Function parameters are enclosed in parentheses",
+        "A colon terminates the function header before the body",
+        "The return statement exits a function with a value",
+        "Variables assigned inside a function are local to that function",
+    ]),
+
+    # Phase B: Basic syntax patterns (τ=0 spring formation)
+    ("syntax", [
+        "def function_name ( ) :",
+        "if condition :",
+        "for item in collection :",
+        "return value",
+        "variable = value",
+    ]),
+
+    # Phase C: Type patterns (τ=1 springs)
+    ("types", [
+        "code:lit:str + code:lit:str",
+        "code:lit:int + code:lit:int",
+        "code:func:len code:lit:str",
+        "code:func:print code:lit:str",
+    ]),
+
+    # Phase D: Scope patterns (τ=2 springs)
+    ("scope", [
+        "def f ( ) : x = 1 return x",
+        "x = 1 def f ( ) : return x",
+        "def f ( ) : if True : x = 1 return x",
+    ]),
+
+    # Phase E: Complete functions
+    ("functions", [
+        "def add ( a , b ) : return a + b",
+        "def factorial ( n ) : if n <= 1 : return 1",
+    ]),
+
+    # Phase F: Classes and methods
+    ("classes", [
+        "class MyClass : def __init__ ( self ) : self . value = 0",
+        "class MyClass : def get_value ( self ) : return self . value",
+    ]),
+]
+```
+
+### 13.13 Expected Code Generation Results
+
+After training on the curriculum:
+
+```python
+# Prompt: "def add ( a , b ) :" → "return a + b" ✓
+# Prompt: "if x > 0 :" → indented block, valid statement ✓
+# Prompt: "def foo ( ) : return" → expression (syntax springs reject "def"/"if") ✓
+# Prompt: "x = " in str context → str-compatible token only ✓
+```
+
+### 13.14 Logic Module: Boolean Reasoning as Spring Equilibrium
+
+Code logic (boolean conditions) is handled through the same spring equilibrium paradigm as arithmetic. This is parallel to Zero-Energy Arithmetic but for boolean expressions.
+
+**Core insight:**
+```
+if x > 0: return 1
+→ find next token s.t. boolean_tension(x_gt_0) is minimized
+
+Arithmetic: 3 + x = 7 → find x where balance_tension = 0
+Logic: if x > 0 → find branch where boolean_tension = 0
+Same mechanism, different constraint types.
+```
+
+**Boolean balance nodes:**
+```python
+BOOLEAN_TRUE = "code:logic:true"    # True pole
+BOOLEAN_FALSE = "code:logic:false" # False pole (repulsion spring)
+
+# True/False are antonyms
+SPRING(code:logic:true, code:logic:false) → τ=2, k=-30  # Repulsion
+```
+
+**Comparison decomposition:**
+```python
+x > 5  →  boolean:x_greater_than_5
+         x → spring → boolean_node → spring → 5
+         Comparison operator creates causal springs between var and value
+
+x == y →  boolean:x_equal_y (same-pole attraction)
+x != y →  boolean:x_not_equal_y (opposite-pole repulsion)
+```
+
+**Logic residual computation:**
+```python
+def logic_residual(lnn, condition_node, expected):
+    """
+    Measure tension of boolean condition.
+    Lower residual = condition more satisfied.
+    """
+    lnn.reset()
+    lnn.nodes[condition_node].activation = 100
+    lnn.nodes[condition_node].pinned = True
+    
+    propagate(lnn, n_steps=8)
+    return 100 - lnn.nodes[condition_node].activation
+```
+
+**Solve condition:**
+```python
+def solve_condition(lnn, condition_node):
+    """
+    Find valid branch through spring equilibrium.
+    Returns True if condition is satisfied, False otherwise.
+    """
+    true_residual = logic_residual(lnn, condition_node, True)
+    false_residual = logic_residual(lnn, condition_node, False)
+    return true_residual < false_residual  # Lower residual = more likely true
+```
+
+**Logic training patterns:**
+```python
+LOGIC_PATTERNS = [
+    "code:kw:if code:logic:true code:sym:colon",           # Always true
+    "code:kw:if code:logic:false code:sym:colon",         # Always false
+    "code:kw:if code:var:x code:op:gt code:lit:int",       # Comparison
+    "code:kw:if code:var:x code:op:lt code:lit:int",      # Comparison
+    "code:kw:if code:var:x code:op:eq code:lit:int",      # Equality
+    "code:kw:if code:var:x code:op:neq code:lit:int",     # Inequality
+    "code:kw:if code:var:x code:op:gt code:lit:int code:sym:colon code:kw:return code:lit:int",
+]
+```
+
+### 13.15 Code Implementation Summary
+
+| File | Purpose |
+|------|---------|
+| `code_tokenizer.py` | Tokenize Python → LRN node names |
+| `code_training.py` | Grammar pattern learning via repetition → τ=0 |
+| `code_generate.py` | Code generation with stricter energy gate (20 vs 48) |
+| `code_logic.py` | Boolean nodes, comparison springs, logic_residual() |
+
+### 13.16 Code Test Results
+
+```
+40/40 tests passed
+- Tokenization: 7
+- Spring Formation: 4
+- Spring Promotion: 3
+- Scope Axis: 3
+- Code Generation: 5
+- Syntax Validation: 2
+- Grammar Integration: 3
+- Pattern Generation: 2
+- Logic Module: 9
+```
+
+---
+
+## 14. Implementation Notes: Simplified LRN
+
+**Date**: 2026-04-30
+
+This section documents the simplified implementation actually built and tested.
+
+### 14.1 Simplified vs Full Architecture
+
+| Feature | Full Spec (v16/v17) | Simplified Implementation |
+|---------|---------------------|--------------------------|
+| Storage | CSR sparse matrix | Dict-based adjacency |
+| Tau layers | 5 layers (0-4) | Single layer |
+| Causal gating | Ignition time tracking | Disabled |
+| Subword | BPE decomposition | Not implemented |
+| Letter geometry | Visual grounding | Not implemented |
+| Reality axis | 0-1024 | Not implemented |
+
+### 14.2 Core Classes (Simplified)
+
+```python
+class Node:
+    id: str              # Unique identifier
+    activation: float    # 0-100
+    pinned: bool         # If True, value fixed
+    
+class Spring:
+    source: str
+    target: str
+    stiffness: float     # Positive = tension, Negative = cancellation
+    tau: float           # Decay factor
+    
+class LatticeNN:
+    nodes: Dict[str, Node]
+    springs: List[Spring]
+```
+
+### 14.3 Propagation Algorithm (Simplified)
+
+```python
+def propagate(lnn, n_steps=10):
+    for step in range(n_steps):
+        for node_id, node in lnn.nodes.items():
+            if node.pinned:
+                continue
+                
+            # Sum contributions from connected springs
+            total = 0
+            for neighbor, spring in lnn.get_neighbors(node_id):
+                if neighbor in lnn.nodes:
+                    total += spring.stiffness * lnn.nodes[neighbor].activation
+            
+            # Update activation (smoothing toward neighbors)
+            node.activation = (node.activation * 4 + total) // 10
+            node.activation = max(0, min(100, node.activation))
+```
+
+### 14.4 Training (Hebbian)
+
+```python
+def add_sentence(lnn, sentence):
+    words = sentence.lower().split()
+    for i in range(len(words) - 1):
+        a, b = words[i], words[i+1]
+        
+        # Create nodes if not exist
+        lnn.get_or_create(a)
+        lnn.get_or_create(b)
+        
+        # Strengthen spring between consecutive words
+        lnn.add_or_update_spring(a, b, stiffness=10, tau=0)
+```
+
+### 14.5 Generation
+
+```python
+def generate(lnn, prompt_tokens, top_k=5):
+    # Pin prompt tokens to high activation
+    for token in prompt_tokens:
+        lnn.add_node(token)
+        lnn.nodes[token].activation = 100
+        lnn.nodes[token].pinned = True
+    
+    # Propagate
+    for _ in range(10):
+        propagate(lnn, n_steps=1)
+    
+    # Find highest activated nodes (excluding prompt)
+    candidates = [(n, a) for n, a in lnn.nodes.items() 
+                  if n not in prompt_tokens and not lnn.nodes[n].pinned]
+    candidates.sort(key=lambda x: x[1], reverse=True)
+    
+    return [{"word": n, "score": a} for n, a in candidates[:top_k]]
+```
+
+### 14.6 Math Module (Number Line)
+
+```python
+class NumberLine:
+    # Number line from -100 to +100 (201 nodes)
+    
+    def step_forward(start, steps):
+        # Walk forward on number line
+        for _ in range(steps):
+            target = start + 1
+            # Add spring + propagate = activation flows to target
+            lnn.add_or_update_spring(f"num:{start}", f"num:{target}", stiffness=50)
+            propagate(lnn, n_steps=1)
+            start = target
+        return start
+    
+    def multiply(a, b):
+        # Repeated addition
+        result = a
+        for _ in range(b - 1):
+            result = step_forward(result, a)
+        return result
+```
+
+### 14.7 Teacher Curriculum
+
+Structured lessons with curated examples:
+
+| Lesson | Focus | Result |
+|--------|-------|--------|
+| 1 | Basic vocabulary | 5/5 |
+| 2 | Simple relationships | 4/4 |
+| 3 | Categories | 3/5 |
+| 4 | Gap filling | 10/12 |
+| 7 | Bridge & reinforce | 11/12 |
+| 10 | Exact phrase 15x | **12/12 (100%)** |
+
+**Key findings:**
+- Quality over quantity: 50 curated examples > 10,000 noisy
+- 15x repetition fixes hard cases
+- Exact training (100% benchmark) vs Diverse training (81% but more generalization)
+
+### 14.8 Experimental Results
+
+| Task | Score |
+|------|-------|
+| Language benchmark (12 prompts) | 12/12 (100%) |
+| Basic math operations | 38/38 (100%) |
+| Complex math (fractions, decimals, percentages) | 32/32 (100%) |
+| Logical reasoning (syllogisms, transitivity) | 9/9 (100%) |
+| Advanced logic (negation, contradictions) | 9/9 (100%) |
+| Combined language + math | 8/9 (89%) |
+
+### 14.9 Key Insights
+
+1. **The LRN doesn't compute; it navigates and reports where it lands**
+   - Math works via physical traversal on number line, not symbolic computation
+   - Language works via activation flow through spring network
+
+2. **Hebbian learning = associations, not rules**
+   - Network learns specific phrases, not abstract patterns
+   - Generalization limited without diverse training
+
+3. **Teacher Curriculum outperforms massive corpora**
+   - Curated examples with proper repetition beat noisy large-scale training
+   - "Junk in, junk out" - quality matters more than quantity
+
+---
+
 ## Appendix A: Node Namespace Summary
 
 ```
@@ -1376,15 +1997,24 @@ op:{operator}       — arithmetic operator (op:plus, op:minus, op:equals)
 num:{digit}         — arithmetic number line node (num:0 through num:10)
 balance:{a}:+:{b}   — arithmetic balance constraint node
 var:{name}          — algebraic variable (var:x, var:y)
+code:kw:{keyword}   — code reserved word (code:kw:def, code:kw:return)
+code:type:{name}    — code type annotation (code:type:str, code:type:int)
+code:var:{name}     — code variable node (code:var:x, code:var:result)
+code:func:{name}    — code function node (code:func:len, code:func:print)
+code:op:{operator}  — code operator (code:op:plus, code:op:assign)
+code:sym:{symbol}   — code punctuation (code:sym:colon, code:sym:lparen)
+code:lit:{type}     — code literal template (code:lit:str, code:lit:int)
+code:block:{depth}  — indentation depth anchor (code:block:0, code:block:4)
+spec:rule:{id}      — language spec rule node (spec:rule:func_def)
 ```
 
 ## Appendix B: Spring τ Quick Reference
 
 | τ | Name | Multiplier | Semantic |
 |---|------|------------|----------|
-| 0 | Constitutive | 20,736× | "A is part of B" |
-| 1 | Definitional | 1,728× | "B requires A" |
-| 2 | Causal | 144× | "A produces B" |
+| 0 | Constitutive | 20,736× | "A is part of B" / syntax rules |
+| 1 | Definitional | 1,728× | "B requires A" / type constraints |
+| 2 | Causal | 144× | "A produces B" / scope bindings |
 | 3 | Categorical | 12× | "A and B are C" |
 | 4 | Contextual | 1× | co-occurrence |
 
@@ -1426,171 +2056,12 @@ Total: 1485/1024 ≈ 1.45 (boost factor)
     "WINDOW_SIZE": 5,
     "E_THRESHOLD": 48,
     "CAUSAL_BOOST": 5120,
+    "CODE_E_THRESHOLD": 20,
+    "CODE_SYNTAX_K": 100,
+    "SCOPE_STEP": 4,
+    "SCOPE_MAX": 32,
 }
 ```
-
----
-
-## 13. Implementation Notes: Simplified LRN
-
-**Date**: 2026-04-30
-
-This section documents the simplified implementation actually built and tested.
-
-### 13.1 Simplified vs Full Architecture
-
-| Feature | Full Spec (v16/v17) | Simplified Implementation |
-|---------|---------------------|--------------------------|
-| Storage | CSR sparse matrix | Dict-based adjacency |
-| Tau layers | 5 layers (0-4) | Single layer |
-| Causal gating | Ignition time tracking | Disabled |
-| Subword | BPE decomposition | Not implemented |
-| Letter geometry | Visual grounding | Not implemented |
-| Reality axis | 0-1024 | Not implemented |
-
-### 13.2 Core Classes (Simplified)
-
-```python
-class Node:
-    id: str              # Unique identifier
-    activation: float    # 0-100
-    pinned: bool         # If True, value fixed
-    
-class Spring:
-    source: str
-    target: str
-    stiffness: float     # Positive = tension, Negative = cancellation
-    tau: float           # Decay factor
-    
-class LatticeNN:
-    nodes: Dict[str, Node]
-    springs: List[Spring]
-```
-
-### 13.3 Propagation Algorithm (Simplified)
-
-```python
-def propagate(lnn, n_steps=10):
-    for step in range(n_steps):
-        for node_id, node in lnn.nodes.items():
-            if node.pinned:
-                continue
-                
-            # Sum contributions from connected springs
-            total = 0
-            for neighbor, spring in lnn.get_neighbors(node_id):
-                if neighbor in lnn.nodes:
-                    total += spring.stiffness * lnn.nodes[neighbor].activation
-            
-            # Update activation (smoothing toward neighbors)
-            node.activation = (node.activation * 4 + total) // 10
-            node.activation = max(0, min(100, node.activation))
-```
-
-### 13.4 Training (Hebbian)
-
-```python
-def add_sentence(lnn, sentence):
-    words = sentence.lower().split()
-    for i in range(len(words) - 1):
-        a, b = words[i], words[i+1]
-        
-        # Create nodes if not exist
-        lnn.get_or_create(a)
-        lnn.get_or_create(b)
-        
-        # Strengthen spring between consecutive words
-        lnn.add_or_update_spring(a, b, stiffness=10, tau=0)
-```
-
-### 13.5 Generation
-
-```python
-def generate(lnn, prompt_tokens, top_k=5):
-    # Pin prompt tokens to high activation
-    for token in prompt_tokens:
-        lnn.add_node(token)
-        lnn.nodes[token].activation = 100
-        lnn.nodes[token].pinned = True
-    
-    # Propagate
-    for _ in range(10):
-        propagate(lnn, n_steps=1)
-    
-    # Find highest activated nodes (excluding prompt)
-    candidates = [(n, a) for n, a in lnn.nodes.items() 
-                  if n not in prompt_tokens and not lnn.nodes[n].pinned]
-    candidates.sort(key=lambda x: x[1], reverse=True)
-    
-    return [{"word": n, "score": a} for n, a in candidates[:top_k]]
-```
-
-### 13.6 Math Module (Number Line)
-
-```python
-class NumberLine:
-    # Number line from -100 to +100 (201 nodes)
-    
-    def step_forward(start, steps):
-        # Walk forward on number line
-        for _ in range(steps):
-            target = start + 1
-            # Add spring + propagate = activation flows to target
-            lnn.add_or_update_spring(f"num:{start}", f"num:{target}", stiffness=50)
-            propagate(lnn, n_steps=1)
-            start = target
-        return start
-    
-    def multiply(a, b):
-        # Repeated addition
-        result = a
-        for _ in range(b - 1):
-            result = step_forward(result, a)
-        return result
-```
-
-### 13.7 Teacher Curriculum
-
-Structured lessons with curated examples:
-
-| Lesson | Focus | Result |
-|--------|-------|--------|
-| 1 | Basic vocabulary | 5/5 |
-| 2 | Simple relationships | 4/4 |
-| 3 | Categories | 3/5 |
-| 4 | Gap filling | 10/12 |
-| 7 | Bridge & reinforce | 11/12 |
-| 10 | Exact phrase 15x | **12/12 (100%)** |
-
-**Key findings:**
-- Quality over quantity: 50 curated examples > 10,000 noisy
-- 15x repetition fixes hard cases
-- Exact training (100% benchmark) vs Diverse training (81% but more generalization)
-
-### 13.8 Experimental Results
-
-| Task | Score |
-|------|-------|
-| Language benchmark (12 prompts) | 12/12 (100%) |
-| Basic math operations | 38/38 (100%) |
-| Complex math (fractions, decimals, percentages) | 32/32 (100%) |
-| Logical reasoning (syllogisms, transitivity) | 9/9 (100%) |
-| Advanced logic (negation, contradictions) | 9/9 (100%) |
-| Combined language + math | 8/9 (89%) |
-
-### 13.9 Key Insights
-
-1. **The LRN doesn't compute; it navigates and reports where it lands**
-   - Math works via physical traversal on number line, not symbolic computation
-   - Language works via activation flow through spring network
-
-2. **Hebbian learning = associations, not rules**
-   - Network learns specific phrases, not abstract patterns
-   - Generalization limited without diverse training
-
-3. **Teacher Curriculum outperforms massive corpora**
-   - Curated examples with proper repetition beat noisy large-scale training
-   - "Junk in, junk out" - quality matters more than quantity
 
 ---
 
