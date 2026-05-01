@@ -7,7 +7,7 @@ Trains the LRN through developmental stages:
 9. Sentences → 10. Pragmatics
 
 Each stage trains until its developmental gate passes.
-If a gate stalls, more training data is added.
+After each sentence: REM synthesis forms τ=3 categorical bridges (gravity effect).
 """
 import sys
 sys.path.insert(0, '/Users/tyarc/github/lrn/src')
@@ -17,20 +17,21 @@ from lrn.natural_tokenize import learn_from_text, TAU_BY_TYPE
 from lrn.inference import add_word_nodes
 from lrn.english_corpus import ALL_STAGES
 from lrn.english_gates import DevelopmentalGate
+from lrn.rem_synthesis import REMSleep
 
 
 # Tau assignment per stage
 STAGE_TAU = {
-    "sensory": 0,      # Letters - rigid
-    "babbling": 1,     # Sound exploration
-    "phonics": 1,      # Letter→sound mapping
-    "morphology": 1,   # Word parts
-    "sight_words": 2,  # Instant recognition
-    "vocabulary": 2,   # Word meanings
-    "grammar": 2,      # POS, word order
-    "syntax": 3,       # Hierarchical structure
-    "sentences": 3,    # Full comprehension
-    "pragmatics": 4,   # Social context
+    "sensory": 0,      # Letters - constitutive
+    "babbling": 1,     # Sound exploration - definitional
+    "phonics": 1,      # Letter→sound mapping - definitional
+    "morphology": 1,   # Word parts - definitional
+    "sight_words": 2,  # Instant recognition - causal
+    "vocabulary": 2,   # Word meanings - causal
+    "grammar": 2,      # POS, word order - causal
+    "syntax": 3,       # Hierarchical structure - categorical
+    "sentences": 3,    # Full comprehension - categorical
+    "pragmatics": 4,   # Social context - contextual
 }
 
 
@@ -44,6 +45,7 @@ class SequentialTrainer:
         self.max_reps = max_reps_per_stage
         self.max_stall = max_stall_rounds
         self.stage_results = {}
+        self.wake_buffer = []  # Last 5 sentences for REM wake context
     
     def train_all_stages(self):
         """Train through all developmental stages sequentially."""
@@ -83,14 +85,12 @@ class SequentialTrainer:
         prev_metric = 0
         total_reps = 0
         data_added = False
+        gate_result = {"passed": False, "metric": "N/A", "actual": 0}
         
         while reps <= self.max_reps:
-            # Train
-            trained = self._train_corpus(corpus, reps, learn_type)
+            # Train with REM synthesis after each sentence
+            trained = self._train_corpus_with_rem(corpus, reps, learn_type, stage)
             total_reps += reps
-            
-            # Add word nodes after training
-            self._add_stage_word_nodes(stage, corpus)
             
             # Check gate
             gate_result = self.gates.check_gate(stage, self.lnn)
@@ -134,24 +134,64 @@ class SequentialTrainer:
             "data_added": data_added,
         }
     
-    def _train_corpus(self, corpus, reps: int, learn_type: str):
-        """Train on a corpus."""
-        if isinstance(corpus, list):
-            for _ in range(reps):
-                for text in corpus:
-                    learn_from_text(self.lnn, text, repetitions=1, learn_type=learn_type)
-        elif isinstance(corpus, dict):
-            for category, texts in corpus.items():
-                if isinstance(texts, list):
-                    for _ in range(reps):
-                        for text in texts:
-                            learn_from_text(self.lnn, text, repetitions=1, learn_type=learn_type)
-                elif isinstance(texts, str):
-                    for _ in range(reps):
-                        learn_from_text(self.lnn, texts, repetitions=1, learn_type=learn_type)
+    def _train_corpus_with_rem(self, corpus, reps: int, learn_type: str, stage: str):
+        """Train on a corpus with REM synthesis after full corpus passes."""
+        sentences = self._flatten_corpus(corpus)
+        sentence_count = 0
+        
+        for rep in range(reps):
+            for sentence in sentences:
+                # 1. Train sentence
+                learn_from_text(self.lnn, sentence, repetitions=1, learn_type=learn_type)
+                
+                # 2. Add word nodes for this sentence
+                add_word_nodes(self.lnn, [sentence])
+                
+                sentence_count += 1
+            
+            # REM synthesis after each full corpus pass
+            if sentences:
+                self._run_rem_synthesis(sentences[-1])
+                propagate(self.lnn, n_steps=3)
+        
+        # Final REM and relaxation
+        if sentences:
+            self._run_rem_synthesis(sentences[-1])
+            propagate(self.lnn, n_steps=3)
     
-    def _add_stage_word_nodes(self, stage: str, corpus):
-        """Add word-level nodes for a stage."""
+    def _run_rem_synthesis(self, current_sentence: str):
+        """Run lightweight REM synthesis - forms τ=3 bridges between co-occurring words."""
+        # Update wake buffer
+        self.wake_buffer.append(current_sentence)
+        if len(self.wake_buffer) > 5:
+            self.wake_buffer = self.wake_buffer[-5:]
+        
+        # Get words from recent sentences
+        recent_words = set()
+        for sentence in self.wake_buffer:
+            for word in sentence.lower().split():
+                recent_words.add(f"word:{word}")
+        
+        # Form τ=3 categorical bridges between all co-occurring words
+        # This creates the "gravity" effect - words in same context cluster together
+        word_list = list(recent_words)
+        for i in range(len(word_list)):
+            for j in range(i + 1, len(word_list)):
+                a, b = word_list[i], word_list[j]
+                key = self.lnn._key(a, b)
+                
+                if key in self.lnn.springs:
+                    # Promote existing spring to τ=3 (categorical)
+                    existing = self.lnn.springs[key]
+                    if existing.tau > 2:
+                        existing.tau = 3
+                        existing.stiffness = max(existing.stiffness, 10)
+                else:
+                    # Create new τ=3 categorical bridge
+                    self.lnn.add_or_update_spring(a, b, stiffness=10, tau=3, mode="add")
+    
+    def _flatten_corpus(self, corpus) -> list:
+        """Flatten corpus into list of sentences."""
         sentences = []
         if isinstance(corpus, list):
             sentences = corpus
@@ -161,7 +201,11 @@ class SequentialTrainer:
                     sentences.extend(texts)
                 elif isinstance(texts, str):
                     sentences.append(texts)
-        
+        return sentences
+    
+    def _add_stage_word_nodes(self, stage: str, corpus):
+        """Add word-level nodes for a stage."""
+        sentences = self._flatten_corpus(corpus)
         if sentences:
             add_word_nodes(self.lnn, sentences)
     
@@ -169,7 +213,6 @@ class SequentialTrainer:
         """Add more training data when gate stalls."""
         # Double the corpus by repeating with variations
         if isinstance(corpus, list):
-            # Add reversed versions
             for text in corpus[:]:
                 reversed_text = text[::-1]
                 corpus.append(reversed_text)
