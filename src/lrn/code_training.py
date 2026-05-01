@@ -2,6 +2,9 @@
 Code training for LRN.
 Programming syntax IS grammar - learned through springs like natural language.
 No language specification needed - tau hierarchy handles context naturally.
+
+NATIVE TOKENIZATION: Keywords like "def", "fn" are learned from raw code,
+NOT hardcoded. Tokens emerge from repetition - same as natural language.
 """
 import sys
 sys.path.insert(0, '/Users/tyarc/github/lrn/src')
@@ -9,6 +12,7 @@ sys.path.insert(0, '/Users/tyarc/github/lrn/src')
 from lrn import LatticeNN
 from lrn.training import add_sentence
 from lrn.code_tokenizer import tokenize_code_line, assign_code_roles
+from lrn.native_tokenize import learn_from_code, discover_tokens, TAU_THRESHOLD
 
 # Code-specific constants
 CODE_SYNTAX_K = 100
@@ -303,7 +307,7 @@ def train_code_grammar(lnn: LatticeNN, repetitions: int = 80) -> dict:
     stats = {"patterns": 0, "tokens": 0, "springs": 0, "ngrams": 0}
     
     for _ in range(repetitions):
-        for pattern in GRAMMAR_PATTERNS:
+        for pattern in PYTHON_PATTERNS:  # Use Python patterns for now
             result = add_code_file(lnn, pattern)
             stats["patterns"] += 1
             stats["tokens"] += result["tokens"]
@@ -311,4 +315,131 @@ def train_code_grammar(lnn: LatticeNN, repetitions: int = 80) -> dict:
             stats["ngrams"] += result["ngrams"]
     
     stats["promoted"] = promote_code_springs(lnn, threshold=50)
+    return stats
+
+
+# --- NATIVE CODE TRAINING (No Hardcoded Keywords) ---
+# Tokens like "def", "fn" are LEARNED from raw code, not hardcoded
+
+NATIVE_CODE_SAMPLES = {
+    "python": [
+        "def add(a, b): return a + b",
+        "def sub(a, b): return a - b",
+        "def mul(a, b): return a * b",
+        "def div(a, b): return a / b",
+        "def hello(name): return 'Hello ' + name",
+        "def factorial(n): if n <= 1: return 1 else: return n * factorial(n-1)",
+        "class MyClass: def __init__(self): self.value = 0",
+        "if x > 0: return x else: return -x",
+        "for i in range(n): print(i)",
+        "while x > 0: x = x - 1",
+        "return x + y",
+        "return True",
+        "return False",
+        "def test(): return 0",
+        "def run(): return None",
+    ],
+    "rust": [
+        "fn add(a: i32, b: i32) -> i32 { return a + b; }",
+        "fn sub(a: i32, b: i32) -> i32 { return a - b; }",
+        "fn mul(a: i32, b: i32) -> i32 { return a * b; }",
+        "fn div(a: i32, b: i32) -> i32 { return a / b; }",
+        "fn main() { println!(\"Hello\"); }",
+        "fn init() -> Self { Self }",
+        "struct Point { x: i32, y: i32 }",
+        "if x > 0 { return x; } else { return -x; }",
+        "let mut x = 5;",
+        "for i in 0..10 { println!(\"{}\", i); }",
+        "return x + y;",
+        "return true;",
+        "return false;",
+    ],
+    "javascript": [
+        "function add(a, b) { return a + b; }",
+        "function sub(a, b) { return a - b; }",
+        "function mul(a, b) { return a * b; }",
+        "const x = 5;",
+        "const y = 10;",
+        "if (x > 0) { return x; }",
+        "if (x > 0) { return true; } else { return false; }",
+        "for (let i = 0; i < n; i++) { console.log(i); }",
+        "return x + y;",
+    ],
+    "go": [
+        "func add(a int, b int) int { return a + b }",
+        "func sub(a int, b int) int { return a - b }",
+        "func mul(a int, b int) int { return a * b }",
+        "func main() { fmt.Println(\"Hello\") }",
+        "if x > 0 { return x }",
+        "if x > 0 { return true } else { return false }",
+        "x := 5",
+        "for i := 0; i < 10; i++ { fmt.Println(i) }",
+    ],
+    "ruby": [
+        "def add(a, b); a + b; end",
+        "def sub(a, b); a - b; end",
+        "def mul(a, b); a * b; end",
+        "def main; nil; end",
+        "def test; 0; end",
+        "if x > 0 then x else -x end",
+        "x = 5",
+        "return x + y",
+        "return true",
+        "return false",
+    ],
+    "cobol": [
+        "IF X GREATER THAN ZERO DISPLAY 'YES' END-IF",
+        "IF X LESS THAN ZERO DISPLAY 'NO' END-IF",
+        "MOVE VALUE TO TARGET",
+        "MOVE ZERO TO RESULT",
+        "DISPLAY 'HELLO'",
+        "DISPLAY 'WORLD'",
+    ],
+    "zig": [
+        "fn add(a: i32, b: i32) i32 { return a + b; }",
+        "fn sub(a: i32, b: i32) i32 { return a - b; }",
+        "fn mul(a: i32, b: i32) i32 { return a * b; }",
+        "pub fn main() void { return; }",
+        "pub fn init() Self { Self }",
+        "if (x > 0) { return x; } else { return 0; }",
+        "const x: i32 = 5;",
+        "var y: u32 = 10;",
+    ],
+}
+
+
+def train_native_code(lnn: LatticeNN, language: str, repetitions: int = 60) -> dict:
+    """Train code grammar NATIVELY - tokens learned from raw code."""
+    stats = {"samples": 0, "char_ngrams": 0, "springs": 0, "tokens_discovered": 0}
+    
+    samples = NATIVE_CODE_SAMPLES.get(language, [])
+    
+    for _ in range(repetitions):
+        for code in samples:
+            result = learn_from_code(lnn, code, repetitions=1)
+            stats["samples"] += 1
+            stats["char_ngrams"] += result["char_ngrams"]
+            stats["springs"] += result["springs"]
+    
+    tokens = discover_tokens(lnn, samples, min_frequency=3)
+    stats["tokens_discovered"] = len(tokens)
+    
+    return stats
+
+
+def train_all_languages_native(lnn: LatticeNN, repetitions_per_lang: int = 60) -> dict:
+    """Train all languages NATIVELY - no hardcoded keywords."""
+    stats = {"languages": 0, "samples": 0, "char_ngrams": 0, "springs": 0, "tokens": {}}
+    
+    for lang in NATIVE_CODE_SAMPLES.keys():
+        lang_stats = train_native_code(lnn, lang, repetitions=repetitions_per_lang)
+        stats["languages"] += 1
+        stats["samples"] += lang_stats["samples"]
+        stats["char_ngrams"] += lang_stats["char_ngrams"]
+        stats["springs"] += lang_stats["springs"]
+        
+        samples = NATIVE_CODE_SAMPLES[lang]
+        tokens = discover_tokens(lnn, samples, min_frequency=3)
+        stats["tokens"][lang] = tokens
+    
     return stats

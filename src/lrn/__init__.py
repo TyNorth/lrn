@@ -9,9 +9,15 @@ from lrn.code_tokenizer import tokenize_code_line, assign_code_roles as assign_c
 from lrn.code_training import (
     add_code_file, initialize_scope_axis, promote_code_springs,
     train_code_grammar, train_all_languages, train_language,
+    train_native_code, train_all_languages_native,
     PYTHON_PATTERNS, RUST_PATTERNS, JAVASCRIPT_PATTERNS, GO_PATTERNS,
     RUBY_PATTERNS, COBOL_PATTERNS, ZIG_PATTERNS,
     ALL_LANGUAGE_PATTERNS, ALL_LOGIC_PATTERNS,
+    NATIVE_CODE_SAMPLES,
+)
+from lrn.native_tokenize import (
+    learn_from_code, discover_tokens, native_tokenize,
+    CHAR_NGRAM_SIZES, TAU_THRESHOLD,
 )
 from lrn.code_logic import (
     initialize_logic_nodes, compare_to_springs, add_boolean_condition,
@@ -34,9 +40,13 @@ __all__ = [
     "tokenize_code_line", "assign_code_roles_fn", "SUPPORTED_LANGUAGES",
     "add_code_file", "initialize_scope_axis", "promote_code_springs",
     "train_code_grammar", "train_all_languages", "train_language",
+    "train_native_code", "train_all_languages_native",
     "PYTHON_PATTERNS", "RUST_PATTERNS", "JAVASCRIPT_PATTERNS", "GO_PATTERNS",
     "RUBY_PATTERNS", "COBOL_PATTERNS", "ZIG_PATTERNS",
     "ALL_LANGUAGE_PATTERNS", "ALL_LOGIC_PATTERNS",
+    "NATIVE_CODE_SAMPLES",
+    "learn_from_code", "discover_tokens", "native_tokenize",
+    "CHAR_NGRAM_SIZES", "TAU_THRESHOLD",
     "generate_code", "validate_syntax", "generate_code_sequence", "test_generation",
     "CODE_E_THRESHOLD", "CODE_CANDIDATE_MULTIPLIER",
     "initialize_logic_nodes", "compare_to_springs", "add_boolean_condition",
