@@ -187,6 +187,11 @@ def infer_pos(lnn, word: str) -> dict:
     elif word in adj_words:
         # Known adjective words
         pos = "adjective"
+    elif word in verb_words:
+        # Known verb words - check if connections match verb pattern
+        pos = "verb"
+    elif word in noun_words:
+        pos = "noun"
     elif pos_to_det > 0 and pos_to_verbs > 0 and neg_to_verbs == 0:
         # Connects to determiner and verb → NOUN
         pos = "noun"
@@ -195,6 +200,12 @@ def infer_pos(lnn, word: str) -> dict:
         pos = "verb"
     elif pos_to_det > 0 and pos_to_nouns > 0 and neg_to_nouns == 0:
         # Connects to determiner and noun → ADJECTIVE
+        pos = "adjective"
+    elif pos_to_nouns > 0 and pos_to_verbs > 0:
+        # Connects to both nouns and verbs → likely VERB
+        pos = "verb"
+    elif pos_to_det > 0 and pos_to_nouns == 0:
+        # Connects to determiner but not nouns → likely ADJECTIVE
         pos = "adjective"
     
     return {"word": word, "pos": pos, "neighbors": [n for n, _ in neighbors]}
