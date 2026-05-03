@@ -1,0 +1,125 @@
+{
+  "level": "Pre-K",
+  "date": "2026-05-02T16:24:44.594441",
+  "training_time": 99.70646715164185,
+  "nodes": 2127,
+  "springs": 6478,
+  "total_score": 60.5,
+  "total_possible": 77,
+  "mastery_pct": 78.0,
+  "mastery_status": "IN PROGRESS",
+  "assessments": {
+    "letters": {
+      "score": 19.5,
+      "possible": 26,
+      "pct": 75,
+      "details": [
+        "a: PARTIAL (both exist, not linked)",
+        "b: PARTIAL (both exist, not linked)",
+        "c: PARTIAL (both exist, not linked)",
+        "d: PARTIAL (both exist, not linked)",
+        "e: PARTIAL (both exist, not linked)"
+      ]
+    },
+    "numbers": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90,
+      "details": [
+        "one: PARTIAL",
+        "two: PASS",
+        "three: PASS",
+        "four: PASS",
+        "five: PASS",
+        "six: PASS",
+        "seven: PASS",
+        "eight: PASS",
+        "nine: PASS",
+        "ten: PARTIAL"
+      ]
+    },
+    "colors": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80,
+      "details": [
+        "red: PARTIAL",
+        "blue: PASS",
+        "green: PASS",
+        "yellow: PASS",
+        "orange: PASS",
+        "purple: PARTIAL",
+        "black: PARTIAL",
+        "white: PASS",
+        "brown: PASS",
+        "pink: PARTIAL"
+      ]
+    },
+    "shapes": {
+      "score": 5,
+      "possible": 5,
+      "pct": 100,
+      "details": [
+        "circle: PASS",
+        "square: PASS",
+        "triangle: PASS",
+        "rectangle: PASS",
+        "star: PASS"
+      ]
+    },
+    "animals": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80,
+      "details": [
+        "cat: PARTIAL",
+        "dog: PASS",
+        "bird: PASS",
+        "fish: PASS",
+        "horse: PASS",
+        "cow: PARTIAL",
+        "sheep: PARTIAL",
+        "pig: PASS",
+        "chicken: PASS",
+        "duck: PARTIAL"
+      ]
+    },
+    "emotions": {
+      "score": 5.0,
+      "possible": 6,
+      "pct": 83,
+      "details": [
+        "happy: PARTIAL",
+        "sad: PASS",
+        "angry: PASS",
+        "scared: PASS",
+        "surprised: PASS",
+        "tired: PARTIAL"
+      ]
+    },
+    "phonics": {
+      "score": 2.5,
+      "possible": 5,
+      "pct": 50,
+      "details": [
+        "cat: PARTIAL",
+        "dog: PARTIAL",
+        "bed: PARTIAL",
+        "sun: PARTIAL",
+        "big: PARTIAL"
+      ]
+    },
+    "sentences": {
+      "score": 3.5,
+      "possible": 5,
+      "pct": 70,
+      "details": [
+        "cat: PARTIAL",
+        "dog: PARTIAL",
+        "bird: PASS",
+        "fish: PASS",
+        "sun: PARTIAL"
+      ]
+    }
+  }
+}

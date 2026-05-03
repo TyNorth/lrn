@@ -1,0 +1,178 @@
+{
+  "stage": "prek_text",
+  "date": "2026-05-02T22:19:31.743415",
+  "nodes": 6400,
+  "springs": 3521,
+  "tau_distribution": {
+    "0": 0,
+    "1": 202,
+    "2": 1753,
+    "3": 1306,
+    "4": 260
+  },
+  "total_score": 277.0,
+  "total_possible": 327,
+  "mastery_pct": 84.0,
+  "assessments": {
+    "letter_recognition": {
+      "score": 24.5,
+      "possible": 26,
+      "pct": 94
+    },
+    "letter_case_matching": {
+      "score": 13.0,
+      "possible": 26,
+      "pct": 50
+    },
+    "phonological_awareness": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    },
+    "print_awareness": {
+      "score": 2.5,
+      "possible": 5,
+      "pct": 50
+    },
+    "sight_words": {
+      "score": 18.0,
+      "possible": 20,
+      "pct": 90
+    },
+    "number_recognition": {
+      "score": 9.5,
+      "possible": 10,
+      "pct": 95
+    },
+    "counting_sequence": {
+      "score": 9.0,
+      "possible": 9,
+      "pct": 100
+    },
+    "quantity_correspondence": {
+      "score": 3.0,
+      "possible": 5,
+      "pct": 60
+    },
+    "comparison": {
+      "score": 3.0,
+      "possible": 5,
+      "pct": 60
+    },
+    "patterns": {
+      "score": 5.0,
+      "possible": 5,
+      "pct": 100
+    },
+    "position_words": {
+      "score": 7.0,
+      "possible": 10,
+      "pct": 70
+    },
+    "sorting": {
+      "score": 7.0,
+      "possible": 10,
+      "pct": 70
+    },
+    "colors": {
+      "score": 9.5,
+      "possible": 10,
+      "pct": 95
+    },
+    "shapes": {
+      "score": 4.0,
+      "possible": 5,
+      "pct": 80
+    },
+    "animals": {
+      "score": 8.5,
+      "possible": 10,
+      "pct": 85
+    },
+    "body_parts": {
+      "score": 9.5,
+      "possible": 10,
+      "pct": 95
+    },
+    "five_senses": {
+      "score": 2.5,
+      "possible": 5,
+      "pct": 50
+    },
+    "weather": {
+      "score": 7.5,
+      "possible": 10,
+      "pct": 75
+    },
+    "seasons": {
+      "score": 7.0,
+      "possible": 8,
+      "pct": 87
+    },
+    "plants": {
+      "score": 9.5,
+      "possible": 10,
+      "pct": 95
+    },
+    "living_nonliving": {
+      "score": 12.0,
+      "possible": 12,
+      "pct": 100
+    },
+    "time_concepts": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    },
+    "family": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    },
+    "community": {
+      "score": 8.5,
+      "possible": 10,
+      "pct": 85
+    },
+    "money": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80
+    },
+    "emotions": {
+      "score": 5.0,
+      "possible": 6,
+      "pct": 83
+    },
+    "social_skills": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    },
+    "health_safety": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    },
+    "vocabulary": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80
+    },
+    "sentence_comprehension": {
+      "score": 6.0,
+      "possible": 10,
+      "pct": 60
+    },
+    "movement": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    },
+    "music_art": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100
+    }
+  }
+}

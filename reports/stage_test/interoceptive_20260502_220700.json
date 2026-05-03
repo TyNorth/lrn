@@ -1,0 +1,33 @@
+{
+  "stage": "interoceptive",
+  "date": "2026-05-02T22:07:00.791824",
+  "nodes": 12,
+  "springs": 54,
+  "tau_distribution": {
+    "0": 0,
+    "1": 4,
+    "2": 18,
+    "3": 23,
+    "4": 9
+  },
+  "total_score": 6,
+  "total_possible": 14,
+  "mastery_pct": 42,
+  "assessments": {
+    "color_clustering": {
+      "score": 0,
+      "possible": 0,
+      "pct": 0
+    },
+    "letter_visual": {
+      "score": 0,
+      "possible": 8,
+      "pct": 0
+    },
+    "opposite_separation": {
+      "score": 6,
+      "possible": 6,
+      "pct": 100
+    }
+  }
+}

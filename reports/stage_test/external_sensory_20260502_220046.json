@@ -1,0 +1,33 @@
+{
+  "stage": "external_sensory",
+  "date": "2026-05-02T22:00:46.926043",
+  "nodes": 121,
+  "springs": 626,
+  "tau_distribution": {
+    "0": 0,
+    "1": 202,
+    "2": 245,
+    "3": 136,
+    "4": 43
+  },
+  "total_score": 2122,
+  "total_possible": 2294,
+  "mastery_pct": 92,
+  "assessments": {
+    "color_clustering": {
+      "score": 2109,
+      "possible": 2280,
+      "pct": 92
+    },
+    "letter_visual": {
+      "score": 8,
+      "possible": 8,
+      "pct": 100
+    },
+    "opposite_separation": {
+      "score": 5,
+      "possible": 6,
+      "pct": 83
+    }
+  }
+}

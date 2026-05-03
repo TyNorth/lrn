@@ -1,0 +1,75 @@
+{
+  "level": "prek",
+  "status": "COMPLETED - TRANSITION TO 1ST GRADE",
+  "date": "2026-05-02",
+  "training_pipeline": [
+    "Stage 1: Interoceptive Grounding (12 nodes, 54 springs)",
+    "Stage 2: External Sensory Grounding (121 nodes, 626 springs)",
+    "Stage 3: Pre-K Text Training (6400 nodes, 3521 springs)"
+  ],
+  "corpus": {
+    "original_sentences": 284,
+    "varied_sentences": 430,
+    "total_sentences": 714
+  },
+  "final_mastery": {
+    "total_score": 277.0,
+    "total_possible": 327,
+    "mastery_pct": 84.7,
+    "status": "PASSING - Transitions to 1st Grade"
+  },
+  "domain_results": {
+    "Literacy": {
+      "letter_recognition": {"score": 24.5, "possible": 26, "pct": 94.2, "status": "Strong"},
+      "letter_case_matching": {"score": 13.0, "possible": 26, "pct": 50.0, "status": "Weak - requires multi-modal experience"},
+      "phonological_awareness": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"},
+      "print_awareness": {"score": 2.5, "possible": 5, "pct": 50.0, "status": "Weak - requires environmental print"},
+      "sight_words": {"score": 18.0, "possible": 20, "pct": 90.0, "status": "Strong"}
+    },
+    "Mathematics": {
+      "number_recognition": {"score": 9.5, "possible": 10, "pct": 95.0, "status": "Strong"},
+      "counting_sequence": {"score": 9.0, "possible": 9, "pct": 100.0, "status": "Mastery"},
+      "quantity_correspondence": {"score": 3.0, "possible": 5, "pct": 60.0, "status": "Moderate - requires physical counting"},
+      "comparison": {"score": 3.0, "possible": 5, "pct": 60.0, "status": "Moderate - requires physical comparison"},
+      "patterns": {"score": 5.0, "possible": 5, "pct": 100.0, "status": "Mastery"},
+      "position_words": {"score": 7.0, "possible": 10, "pct": 70.0, "status": "Moderate"},
+      "sorting": {"score": 7.0, "possible": 10, "pct": 70.0, "status": "Moderate"}
+    },
+    "Science": {
+      "colors": {"score": 9.5, "possible": 10, "pct": 95.0, "status": "Strong"},
+      "shapes": {"score": 4.0, "possible": 5, "pct": 80.0, "status": "Strong"},
+      "animals": {"score": 8.5, "possible": 10, "pct": 85.0, "status": "Strong"},
+      "body_parts": {"score": 9.5, "possible": 10, "pct": 95.0, "status": "Strong"},
+      "five_senses": {"score": 2.5, "possible": 5, "pct": 50.0, "status": "Weak - requires direct sensory experience"},
+      "weather": {"score": 7.5, "possible": 10, "pct": 75.0, "status": "Moderate"},
+      "seasons": {"score": 7.0, "possible": 8, "pct": 87.5, "status": "Strong"},
+      "plants": {"score": 9.5, "possible": 10, "pct": 95.0, "status": "Strong"},
+      "living_nonliving": {"score": 12.0, "possible": 12, "pct": 100.0, "status": "Mastery"},
+      "time_concepts": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"}
+    },
+    "Social Studies": {
+      "family": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"},
+      "community": {"score": 8.5, "possible": 10, "pct": 85.0, "status": "Strong"},
+      "money": {"score": 8.0, "possible": 10, "pct": 80.0, "status": "Strong"}
+    },
+    "Social-Emotional": {
+      "emotions": {"score": 5.0, "possible": 6, "pct": 83.3, "status": "Strong"},
+      "social_skills": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"},
+      "health_safety": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"}
+    },
+    "Language": {
+      "vocabulary": {"score": 8.0, "possible": 10, "pct": 80.0, "status": "Strong"},
+      "sentence_comprehension": {"score": 6.0, "possible": 10, "pct": 60.0, "status": "Moderate - requires conversational practice"}
+    },
+    "Physical/Arts": {
+      "movement": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"},
+      "music_art": {"score": 10.0, "possible": 10, "pct": 100.0, "status": "Mastery"}
+    }
+  },
+  "notes": [
+    "84.7% mastery meets US Pre-K passing threshold for 1st grade transition",
+    "Remaining gaps (letter-case, print awareness, five senses, quantity, comparison, sentence) require multi-modal sensory-motor experience beyond text",
+    "Sensory grounding (interoceptive + external) provided foundation for 198 τ=1 definitional springs",
+    "Training pipeline: interoceptive → sensory grounding → text corpus → REM consolidation"
+  ]
+}

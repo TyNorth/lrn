@@ -1,0 +1,62 @@
+{
+  "level": "prek",
+  "date": "2026-05-02T21:21:41.574495",
+  "training_time": 2.055729866027832,
+  "reps": 3,
+  "rem_interval": "end",
+  "nodes": 3254,
+  "springs": 1101,
+  "tau_distribution": {
+    "0": 0,
+    "1": 0,
+    "2": 704,
+    "3": 190,
+    "4": 207
+  },
+  "total_score": 64.5,
+  "total_possible": 87,
+  "mastery_pct": 74.0,
+  "mastery_status": "IN PROGRESS",
+  "assessments": {
+    "letters": {
+      "score": 19.5,
+      "possible": 26,
+      "pct": 75
+    },
+    "numbers": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90
+    },
+    "colors": {
+      "score": 8.5,
+      "possible": 10,
+      "pct": 85
+    },
+    "shapes": {
+      "score": 5,
+      "possible": 5,
+      "pct": 100
+    },
+    "animals": {
+      "score": 5.0,
+      "possible": 10,
+      "pct": 50
+    },
+    "emotions": {
+      "score": 3.5,
+      "possible": 6,
+      "pct": 58
+    },
+    "phonics": {
+      "score": 7.5,
+      "possible": 10,
+      "pct": 75
+    },
+    "sentences": {
+      "score": 6.5,
+      "possible": 10,
+      "pct": 65
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "stage": "prek_text",
+  "date": "2026-05-02T22:01:16.577882",
+  "nodes": 3325,
+  "springs": 1662,
+  "tau_distribution": {
+    "0": 0,
+    "1": 202,
+    "2": 937,
+    "3": 304,
+    "4": 219
+  },
+  "total_score": 68.0,
+  "total_possible": 87,
+  "mastery_pct": 78.0,
+  "assessments": {
+    "letters": {
+      "score": 19.5,
+      "possible": 26,
+      "pct": 75
+    },
+    "numbers": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90
+    },
+    "colors": {
+      "score": 9.5,
+      "possible": 10,
+      "pct": 95
+    },
+    "shapes": {
+      "score": 4.0,
+      "possible": 5,
+      "pct": 80
+    },
+    "animals": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80
+    },
+    "emotions": {
+      "score": 5.0,
+      "possible": 6,
+      "pct": 83
+    },
+    "phonics": {
+      "score": 7.0,
+      "possible": 10,
+      "pct": 70
+    },
+    "sentences": {
+      "score": 6.0,
+      "possible": 10,
+      "pct": 60
+    }
+  }
+}
