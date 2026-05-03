@@ -17,6 +17,9 @@ def assess_level(lnn, level_name):
     elif level_name == "kindergarten":
         from lrn.assessor_k import assess_kindergarten
         return assess_kindergarten(lnn)
+    elif level_name == "first_grade":
+        from lrn.assessor_1st import assess_first_grade
+        return assess_first_grade(lnn)
     raise ValueError(f"Unknown level: {level_name}")
 
 

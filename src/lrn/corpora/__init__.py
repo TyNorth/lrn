@@ -2,7 +2,7 @@
 LRN Level Corpora Registry
 """
 
-AVAILABLE_LEVELS = ["prek", "kindergarten"]
+AVAILABLE_LEVELS = ["prek", "kindergarten", "first_grade"]
 
 def get_corpus(level):
     if level == "prek":
@@ -10,6 +10,9 @@ def get_corpus(level):
         return FULL_CORPUS
     elif level == "kindergarten":
         from lrn.corpora.kindergarten import ORIGINAL_CORPUS, VARIED_EXAMPLES, FULL_CORPUS
+        return FULL_CORPUS
+    elif level == "first_grade":
+        from lrn.corpora.first_grade import ORIGINAL_CORPUS, VARIED_EXAMPLES, FULL_CORPUS
         return FULL_CORPUS
     raise ValueError(f"Unknown level: {level}")
 
@@ -23,6 +26,13 @@ def get_corpus_info(level):
         }
     elif level == "kindergarten":
         from lrn.corpora.kindergarten import ORIGINAL_CORPUS, VARIED_EXAMPLES
+        return {
+            "original": len(ORIGINAL_CORPUS),
+            "varied": len(VARIED_EXAMPLES),
+            "total": len(ORIGINAL_CORPUS) + len(VARIED_EXAMPLES),
+        }
+    elif level == "first_grade":
+        from lrn.corpora.first_grade import ORIGINAL_CORPUS, VARIED_EXAMPLES
         return {
             "original": len(ORIGINAL_CORPUS),
             "varied": len(VARIED_EXAMPLES),
