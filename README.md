@@ -14,16 +14,20 @@ The LRN represents a fundamentally different approach to neural computation:
 
 ## Training Pipeline
 
-Every curriculum level follows the same 4-stage pipeline:
+Every curriculum level follows the same 6-stage pipeline:
 
 ```
 1. INTEROCEPTIVE GROUNDING  → Internal body states (heartbeat, hunger, breath, comfort)
 2. EXTERNAL SENSORY         → Colors (EM spectrum), letters (visual geometry), shapes,
-                              temperature, texture, sound, taste, smell, weight, speed,
-                              distance, brightness
+                               temperature, texture, sound, taste, smell, weight, speed,
+                               distance, brightness
 3. HARMONIC VIDEO LABELING  → Multi-modal phase-locked lessons attach WORDS to
-                              pre-grounded concepts (the "Sesame Street effect")
-4. TEXT CORPUS              → Curriculum-specific sentences with REM consolidation
+                               pre-grounded concepts (the "Sesame Street effect")
+4. PHYSICAL MANIPULATION    → Counting objects, combining groups (addition),
+                               removing objects (subtraction), sorting, measuring
+5. SOCIAL INTERACTION       → Social roles, emotional resonance, group dynamics,
+                               conflict resolution, social norms
+6. TEXT CORPUS              → Curriculum-specific sentences with REM consolidation
 ```
 
 ### Stage 1: Interoceptive Grounding
@@ -56,7 +60,7 @@ Curriculum-specific sentences with REM sleep consolidation at the end of each pa
 
 ## Curriculum Results
 
-### Pre-K (84.7% — PASSING, transitions to 1st Grade)
+### Pre-K (84.7% — PASSING, transitions to Kindergarten)
 32 sub-skills across 7 domains, 714 sentences:
 
 | Domain | Mastery | Notes |
@@ -80,12 +84,49 @@ Curriculum-specific sentences with REM sleep consolidation at the end of each pa
 | Social Studies | 93.3% | Maps 100%, Citizenship 100% |
 | Social-Emotional | 85.0% | Self-Regulation 85% |
 
+### 1st Grade (96.5% — PASSING, transitions to 2nd Grade)
+24 sub-skills across 5 domains, 358 sentences + 8 harmonic video lessons:
+
+| Domain | Mastery | Notes |
+|--------|---------|-------|
+| Literacy | 96.4% | Phonics 100%, Sight Words 98%, Complex Sentences 100% |
+| Mathematics | 93.8% | Place Value 100%, Money 100%, Geometry 100% |
+| Science | 100% | Weather, Plant/Animal Needs, Light/Sound all 100% |
+| Social Studies | 100% | Communities, Maps, History all 100% |
+| Social-Emotional | 100% | Character Traits 100% |
+
+### 2nd Grade (99.7% — MASTERY)
+24 sub-skills across 5 domains, 342 sentences + 12 harmonic video lessons:
+
+| Domain | Mastery | Notes |
+|--------|---------|-------|
+| Literacy | 99.3% | Phonics 100%, Reading Comp 100%, Writing 100%, Grammar 100% |
+| Mathematics | 100% | Add/Sub 100%, Place Value 100%, Money 100%, Geometry 100% |
+| Science | 100% | Ecosystems 100%, Earth Systems 100%, Engineering 100% |
+| Social Studies | 100% | Citizenship 100%, Economics 100%, Geography 100%, History 100% |
+| Social-Emotional | 100% | Character Traits & SEL 100% |
+
+### Lattice Growth Across Curriculum
+
+| Level | Nodes | Springs | Mastery |
+|-------|-------|---------|---------|
+| Sensory Grounding | 110 | 572 | — |
+| Pre-K | 6,400 | 3,521 | 84.7% |
+| Kindergarten | 6,067 | 4,584 | 91.7% |
+| 1st Grade | 7,109 | 7,902 | 96.5% |
+| **2nd Grade** | **8,434** | **9,722** | **99.7%** |
+
 ## Quick Start
 
 ```bash
 # Train a curriculum level
 python3 -m lrn.cli train prek --reps 3 --rem-interval end
 python3 -m lrn.cli train kindergarten --reps 3 --rem-interval end
+python3 -m lrn.cli train first_grade --reps 3 --rem-interval end
+python3 -m lrn.cli train second_grade --reps 3 --rem-interval end
+
+# Run full cumulative pipeline (all levels sequentially)
+python3 -m lrn.pipeline --reps 3 --rem-interval end
 
 # List available levels
 python3 -m lrn.cli levels

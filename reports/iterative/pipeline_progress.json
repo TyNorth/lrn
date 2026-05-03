@@ -1,0 +1,120 @@
+{
+  "date": "2026-05-03T07:50:40.668747",
+  "pipeline_complete": true,
+  "levels": {
+    "prek": {
+      "mastery": "PASSING",
+      "nodes": 6892,
+      "springs": 4988
+    },
+    "kindergarten": {
+      "mastery": "PASSING",
+      "nodes": 12564,
+      "springs": 8690
+    },
+    "first_grade": {
+      "mastery": "PASSING",
+      "nodes": 15646,
+      "springs": 15256
+    },
+    "second_grade": {
+      "mastery": "TRAINED",
+      "nodes": 16350,
+      "springs": 24389
+    },
+    "third_grade": {
+      "mastery": "94%",
+      "nodes": 16922,
+      "springs": 33996
+    },
+    "fourth_grade": {
+      "mastery": "97%",
+      "nodes": 17292,
+      "springs": 42575
+    },
+    "fifth_grade": {
+      "mastery": "97%",
+      "nodes": 17603,
+      "springs": 49581
+    },
+    "sixth_grade": {
+      "mastery": "96%",
+      "nodes": 17901,
+      "springs": 58951
+    },
+    "seventh_grade": {
+      "mastery": "83%",
+      "nodes": 18166,
+      "springs": 67564
+    },
+    "eighth_grade": {
+      "mastery": "82%",
+      "nodes": 18438,
+      "springs": 76793
+    },
+    "ninth_grade": {
+      "mastery": "84%",
+      "nodes": 18742,
+      "springs": 86116
+    },
+    "tenth_grade": {
+      "mastery": "94%",
+      "nodes": 19048,
+      "springs": 95973
+    },
+    "eleventh_grade": {
+      "mastery": "74%",
+      "nodes": 19305,
+      "springs": 104946
+    },
+    "twelfth_grade": {
+      "mastery": "96%",
+      "nodes": 19606,
+      "springs": 116777
+    },
+    "college": {
+      "mastery": "78%",
+      "nodes": 20001,
+      "springs": 131841
+    }
+  },
+  "generation_quality": {
+    "college": {
+      "the derivative of": "calculus differentiation continuity limit integral",
+      "quantum mechanics": "physics optics magnetism electricity thermodynamics",
+      "the algorithm": "complexity data structure recursion optimization computation",
+      "organic chemistry": "bond atom mole stoichiometry periodic",
+      "macroeconomics": "microeconomics fiscal monetary equilibrium elasticity",
+      "the research": "methodology publication peer review empirical hypothesis"
+    },
+    "earlier": {
+      "force causes objects": "motion friction magnet gravity push pull balanced forces",
+      "the government makes": "legislative executive judicial president congress constitution amendment freedom",
+      "add fractions with unlike": "denominators including mixed numbers regrouping equals minus difference",
+      "the declaration of": "patriot loyalist battle treaty revolution independence"
+    }
+  },
+  "optimizations_applied": [
+    "Adjacency list cache in LatticeNN (propagate: minutes to 0.12s)",
+    "Fast word-level trainer for grades 4+",
+    "Optimized _connection_count to use adjacency list",
+    "Optimized _calculate_node_energy to use adjacency list",
+    "Hub downweighting in generate.py",
+    "Clean node name handling in scoring"
+  ],
+  "files_created": [
+    "chat_session.py - Interactive chat with sentence generation",
+    "iterative_pipeline.py - Train-test-report-chat-save loop",
+    "fast_trainer.py - Fast word-level training for higher grades",
+    "corpora/seventh_grade.py through college.py",
+    "assessor_7th.py through assessor_college.py",
+    "harmonic lessons for all levels"
+  ],
+  "next_steps": [
+    "Increase reps for levels below 90% mastery",
+    "Add more corpus sentences for weak areas",
+    "Optimize generation speed for college-level lattice",
+    "Create interactive chat_session.py that loads college checkpoint",
+    "Commit all changes"
+  ]
+}

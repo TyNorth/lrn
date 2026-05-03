@@ -1,0 +1,159 @@
+{
+  "level": "third_grade",
+  "date": "2026-05-03T07:03:27.311155",
+  "nodes": 16922,
+  "springs": 33996,
+  "total_score": 291.5,
+  "total_possible": 308,
+  "mastery_pct": 94,
+  "status": "IN PROGRESS",
+  "assessments": {
+    "phonics_multisyllable": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Multi-Syllable Phonics"
+    },
+    "sight_words_3rd": {
+      "score": 43.0,
+      "possible": 43,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Sight Words (3rd Grade)"
+    },
+    "reading_fluency": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Reading Fluency"
+    },
+    "reading_comprehension": {
+      "score": 7.5,
+      "possible": 8,
+      "pct": 93,
+      "domain": "Literacy",
+      "skill": "Reading Comprehension"
+    },
+    "writing_skills": {
+      "score": 20.0,
+      "possible": 20,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Writing Skills"
+    },
+    "grammar": {
+      "score": 7.0,
+      "possible": 7,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Grammar"
+    },
+    "vocabulary": {
+      "score": 13.0,
+      "possible": 14,
+      "pct": 92,
+      "domain": "Literacy",
+      "skill": "Vocabulary Strategies"
+    },
+    "multiplication": {
+      "score": 7.0,
+      "possible": 7,
+      "pct": 100,
+      "domain": "Mathematics",
+      "skill": "Multiplication Within 100"
+    },
+    "division": {
+      "score": 6.0,
+      "possible": 6,
+      "pct": 100,
+      "domain": "Mathematics",
+      "skill": "Division Within 100"
+    },
+    "fractions": {
+      "score": 12.0,
+      "possible": 12,
+      "pct": 100,
+      "domain": "Mathematics",
+      "skill": "Fractions"
+    },
+    "measurement": {
+      "score": 11.0,
+      "possible": 12,
+      "pct": 91,
+      "domain": "Mathematics",
+      "skill": "Measurement & Time"
+    },
+    "data_graphs": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Mathematics",
+      "skill": "Data & Graphs"
+    },
+    "geometry": {
+      "score": 15.0,
+      "possible": 15,
+      "pct": 100,
+      "domain": "Mathematics",
+      "skill": "Geometry"
+    },
+    "forces_motion": {
+      "score": 12.0,
+      "possible": 13,
+      "pct": 92,
+      "domain": "Science",
+      "skill": "Forces & Motion"
+    },
+    "weather_climate": {
+      "score": 14.0,
+      "possible": 15,
+      "pct": 93,
+      "domain": "Science",
+      "skill": "Weather & Climate"
+    },
+    "ecosystems_heredity": {
+      "score": 15.0,
+      "possible": 15,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Ecosystems & Heredity"
+    },
+    "government": {
+      "score": 18.0,
+      "possible": 18,
+      "pct": 100,
+      "domain": "Social Studies",
+      "skill": "Government"
+    },
+    "economics": {
+      "score": 14.0,
+      "possible": 15,
+      "pct": 93,
+      "domain": "Social Studies",
+      "skill": "Economics"
+    },
+    "geography": {
+      "score": 15.0,
+      "possible": 16,
+      "pct": 93,
+      "domain": "Social Studies",
+      "skill": "Geography"
+    },
+    "history": {
+      "score": 14.0,
+      "possible": 20,
+      "pct": 70,
+      "domain": "Social Studies",
+      "skill": "History"
+    },
+    "sel": {
+      "score": 18.0,
+      "possible": 22,
+      "pct": 81,
+      "domain": "Social-Emotional",
+      "skill": "SEL Competencies"
+    }
+  }
+}

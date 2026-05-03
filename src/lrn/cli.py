@@ -26,6 +26,8 @@ from lrn.trainer import create_lnn, train
 from lrn.assessor import assess_level
 from lrn.sensory_grounding import sensory_grounding
 from lrn.harmonic_lessons import harmonic_video_training
+from lrn.physical_manipulation import physical_manipulation
+from lrn.social_interaction import social_interaction
 from lrn.charts import (
     bar_chart, tau_distribution, category_density,
     probe_result, compare_result, chat_turn, confidence_label,
@@ -71,7 +73,13 @@ def cmd_train(args):
     # Step 3: Harmonic video labeling (always present, content varies by level)
     harmonic_video_training(lnn, level, verbose=True)
     
-    # Step 4: Text corpus training
+    # Step 4: Physical manipulation simulation (counting, sorting, measuring)
+    physical_manipulation(lnn, verbose=True)
+    
+    # Step 5: Social interaction simulation (empathy, community, fairness)
+    social_interaction(lnn, verbose=True)
+    
+    # Step 6: Text corpus training
     import time
     t0 = time.time()
     corpus = get_corpus(level)

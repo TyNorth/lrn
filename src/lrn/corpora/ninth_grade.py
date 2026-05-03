@@ -1,0 +1,111 @@
+"""
+9th Grade Corpus - aligned sentences
+Covers: algebra I, biology, world history, english 9, geography
+"""
+
+ORIGINAL_CORPUS = [
+    # Math - Algebra I
+    "interpret parts of an expression such as terms factors and coefficients",
+    "use the structure of an expression to identify ways to rewrite it",
+    "derive the formula for the sum of a finite geometric series and use it to solve problems",
+    "understand that polynomials form a system closed under addition subtraction and multiplication",
+    "solve quadratic equations by inspection taking square roots and factoring",
+    "complete the square in a quadratic equation to reveal the vertex form",
+    "use the quadratic formula to solve any quadratic equation",
+    "solve a system of linear equations exactly and approximately using graphs",
+    "solve a system consisting of a linear equation and a quadratic equation",
+    "graph linear and quadratic functions and show intercepts maxima and minima",
+    "determine whether a relation is a function by examining its graph or table",
+    "calculate and interpret the average rate of change of a function over a specified interval",
+    "analyze functions using different representations including graphs tables and equations",
+    "compare properties of two functions represented in different ways",
+    "construct linear and exponential functions given a graph or description of a relationship",
+
+    # Science - Biology
+    "all living organisms are composed of one or more cells",
+    "cells contain genetic information in the form of dna that directs protein synthesis",
+    "the cell membrane regulates what enters and leaves the cell",
+    "mitochondria convert chemical energy from food into usable energy for the cell",
+    "photosynthesis converts light energy into stored chemical energy in glucose",
+    "cellular respiration releases energy by breaking down glucose in the presence of oxygen",
+    "mitosis produces two genetically identical daughter cells for growth and repair",
+    "meiosis produces four genetically unique gametes for sexual reproduction",
+    "dna replication ensures that each new cell receives a complete set of genetic instructions",
+    "mutations in dna can lead to genetic variation within a population",
+    "natural selection acts on genetic variation to drive evolution over time",
+    "ecological interactions include competition predation mutualism and parasitism",
+    "energy flows through ecosystems from producers to consumers to decomposers",
+    "matter cycles through ecosystems in biogeochemical cycles such as the carbon and nitrogen cycles",
+    "biodiversity contributes to ecosystem stability and resilience",
+
+    # Social Studies - World History
+    "the french revolution began in seventeen eighty nine with the storming of the bastille",
+    "napoleon bonaparte rose to power and conquered much of europe",
+    "the congress of vienna redrew the map of europe after napoleons defeat",
+    "nationalism and liberalism swept across europe in the nineteenth century",
+    "the unification of germany and italy reshaped the balance of power in europe",
+    "the scramble for africa divided the continent among european colonial powers",
+    "world war one was triggered by the assassination of archduke franz ferdinand",
+    "trench warfare characterized the western front of world war one",
+    "the russian revolution led to the creation of the soviet union",
+    "the treaty of versailles imposed harsh penalties on germany after world war one",
+    "the league of nations was established to prevent future wars",
+    "the great depression devastated economies worldwide in the nineteen thirties",
+    "totalitarian regimes rose in germany italy and japan in the interwar period",
+    "world war two began with germanys invasion of poland in nineteen thirty nine",
+    "the holocaust was the systematic genocide of six million jews by nazi germany",
+
+    # English 9 - Literature & Composition
+    "identify the theme of a text and analyze how it emerges throughout the work",
+    "analyze how complex characters develop over the course of a text",
+    "examine how an authors choices about structure and order create effects",
+    "determine the meaning of words and phrases as they are used in a text",
+    "analyze how an authors point of view or purpose shapes the content and style",
+    "trace and evaluate the argument and specific claims in a text",
+    "write arguments to support claims with clear reasons and relevant evidence",
+    "write informative texts to examine and convey complex ideas clearly",
+    "narrative writing uses descriptive details and a clear sequence of events",
+    "revise and edit writing to improve clarity organization and style",
+    "integrate information from multiple sources to avoid plagiarism",
+    "analyze how classical myths and archetypes appear in modern literature",
+    "examine the elements of shakespearean drama including soliloquy and dramatic irony",
+    "identify and analyze figurative language including metaphor simile and personification",
+    "evaluate the effectiveness of an authors use of rhetoric and persuasive techniques",
+
+    # Geography
+    "geography studies the physical features and human activities of earth",
+    "the five themes of geography are location place human environment interaction movement and region",
+    "latitude and longitude form a grid system to locate places on earth",
+    "plate tectonics explains the movement of earths lithospheric plates",
+    "climate is determined by temperature precipitation and atmospheric patterns",
+    "population distribution is influenced by physical geography and economic opportunities",
+    "urbanization is the process of population shift from rural to urban areas",
+    "cultural geography examines how language religion and customs vary across regions",
+    "economic geography studies the distribution of resources and industries",
+    "political geography analyzes boundaries territories and geopolitical relationships",
+]
+
+VARIED_EXAMPLES = [
+    "factor the quadratic expression x squared plus five x plus six",
+    "solve for x using the quadratic formula two x squared minus three x minus two equals zero",
+    "the vertex of the parabola y equals x squared minus four x plus three is two comma negative one",
+    "dna is a double helix made of nucleotide base pairs",
+    "enzymes are biological catalysts that speed up chemical reactions",
+    "the french declaration of the rights of man inspired democratic movements",
+    "industrialization led to urban growth and social change",
+    "analyze the protagonists internal conflict in the novel",
+    "use textual evidence to support your thesis statement",
+    "map projections distort the earths surface in different ways",
+    "the water cycle includes evaporation condensation and precipitation",
+    "complete the square for x squared plus six x",
+    "the slope intercept form of a line is y equals mx plus b",
+    "ecosystems with high biodiversity are more resilient to disturbances",
+    "the nuremberg trials prosecuted war crimes after world war two",
+    "write a compare and contrast essay analyzing two poems",
+    "gis technology allows geographers to analyze spatial data",
+    "natural resources influence a countrys economic development",
+    "the renaissance began in fifteenth century italy",
+    "identify the tone and mood of the passage",
+]
+
+FULL_CORPUS = ORIGINAL_CORPUS + VARIED_EXAMPLES

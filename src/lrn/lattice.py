@@ -32,6 +32,7 @@ class LatticeNN:
         self.springs: Dict[Tuple[str, str], Spring] = {}
         self.trigrams: Dict[Tuple, int] = {}
         self.k_base = K_BASE
+        self._adj: Dict[str, list] = {}
         self._adj_dirty = True
         self._name_to_idx = {}
         self._idx_to_name = []
@@ -41,6 +42,17 @@ class LatticeNN:
 
     def _key(self, a: str, b: str) -> Tuple[str, str]:
         return (a, b) if a < b else (b, a)
+
+    def _rebuild_adj(self):
+        self._adj = {}
+        for (a, b), sp in self.springs.items():
+            if a not in self._adj:
+                self._adj[a] = []
+            if b not in self._adj:
+                self._adj[b] = []
+            self._adj[a].append((b, sp))
+            self._adj[b].append((a, sp))
+        self._adj_dirty = False
 
     def add_node(self, name: str) -> Node:
         if name not in self.nodes:
@@ -64,7 +76,10 @@ class LatticeNN:
         else:
             sp = Spring(stiffness=stiffness, tau=tau)
             self.springs[key] = sp
-        self._adj_dirty = True
+        if a in self._adj:
+            self._adj[a].append((b, self.springs[key]))
+        if b in self._adj:
+            self._adj[b].append((a, self.springs[key]))
         return sp
 
     def add_or_update_spring(self, a: str, b: str, stiffness: int,
@@ -88,17 +103,16 @@ class LatticeNN:
         else:
             sp = Spring(stiffness=stiffness, tau=tau, exposure_count=1)
             self.springs[key] = sp
-        self._adj_dirty = True
+            if a in self._adj:
+                self._adj[a].append((b, sp))
+            if b in self._adj:
+                self._adj[b].append((a, sp))
         return sp
 
     def get_neighbors(self, name: str) -> list:
-        neighbors = []
-        for (a, b), sp in self.springs.items():
-            if a == name:
-                neighbors.append((b, sp))
-            elif b == name:
-                neighbors.append((a, sp))
-        return neighbors
+        if self._adj_dirty:
+            self._rebuild_adj()
+        return self._adj.get(name, [])
 
     def _degree_of(self, name: str) -> int:
         return len(self.get_neighbors(name))

@@ -1,0 +1,37 @@
+{
+  "level": "college",
+  "prompts": {
+    "the derivative of": {
+      "response": "calculus differentiation continuity limit integral bird flies see",
+      "time": 12.39
+    },
+    "quantum mechanics describes": {
+      "response": "physics optics magnetism electricity thermodynamics hybridization ground shook",
+      "time": 12.8
+    },
+    "the algorithm complexity is": {
+      "response": "data structure recursion optimization computation digit remainder quotient product",
+      "time": 12.99
+    },
+    "organic chemistry studies": {
+      "response": "bond atom mole stoichiometry periodic reaction chemical reaction conservation",
+      "time": 13.03
+    },
+    "linear algebra uses": {
+      "response": "logarithm exponential trigonometric series sequence bracket parentheses alike",
+      "time": 13.06
+    },
+    "cognitive science explores": {
+      "response": "phenomena inflation unemployment tasks wall berlin bastille storming",
+      "time": 12.99
+    },
+    "the research methodology": {
+      "response": "publication peer review empirical hypothesis regression inference statistics distribution",
+      "time": 13.07
+    },
+    "macroeconomics analyzes": {
+      "response": "microeconomics fiscal monetary equilibrium elasticity nash note rope",
+      "time": 13.02
+    }
+  }
+}

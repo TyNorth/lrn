@@ -20,6 +20,42 @@ def assess_level(lnn, level_name):
     elif level_name == "first_grade":
         from lrn.assessor_1st import assess_first_grade
         return assess_first_grade(lnn)
+    elif level_name == "second_grade":
+        from lrn.assessor_2nd import assess_second_grade
+        return assess_second_grade(lnn)
+    elif level_name == "third_grade":
+        from lrn.assessor_3rd import assess_third_grade
+        return assess_third_grade(lnn)
+    elif level_name == "fourth_grade":
+        from lrn.assessor_4th import assess_fourth_grade
+        return assess_fourth_grade(lnn)
+    elif level_name == "fifth_grade":
+        from lrn.assessor_5th import assess_fifth_grade
+        return assess_fifth_grade(lnn)
+    elif level_name == "sixth_grade":
+        from lrn.assessor_6th import assess_sixth_grade
+        return assess_sixth_grade(lnn)
+    elif level_name == "seventh_grade":
+        from lrn.assessor_7th import assess_seventh_grade
+        return assess_seventh_grade(lnn)
+    elif level_name == "eighth_grade":
+        from lrn.assessor_8th import assess_eighth_grade
+        return assess_eighth_grade(lnn)
+    elif level_name == "ninth_grade":
+        from lrn.assessor_9th import assess_ninth_grade
+        return assess_ninth_grade(lnn)
+    elif level_name == "tenth_grade":
+        from lrn.assessor_10th import assess_tenth_grade
+        return assess_tenth_grade(lnn)
+    elif level_name == "eleventh_grade":
+        from lrn.assessor_11th import assess_eleventh_grade
+        return assess_eleventh_grade(lnn)
+    elif level_name == "twelfth_grade":
+        from lrn.assessor_12th import assess_twelfth_grade
+        return assess_twelfth_grade(lnn)
+    elif level_name == "college":
+        from lrn.assessor_college import assess_college
+        return assess_college(lnn)
     raise ValueError(f"Unknown level: {level_name}")
 
 

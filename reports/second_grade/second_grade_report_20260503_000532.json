@@ -1,0 +1,1797 @@
+{
+  "level": "second_grade",
+  "date": "2026-05-03T00:05:32.069440",
+  "training_time": 240.4104859828949,
+  "reps": 50,
+  "rem_interval": "end",
+  "nodes": 8005,
+  "springs": 9254,
+  "tau_distribution": {
+    "0": 71,
+    "1": 985,
+    "2": 2520,
+    "3": 5427,
+    "4": 251
+  },
+  "total_score": 288.0,
+  "total_possible": 319,
+  "mastery_pct": 90.0,
+  "mastery_status": "IN PROGRESS",
+  "assessments": {
+    "phonics_advanced": {
+      "score": 7.0,
+      "possible": 7,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Advanced Phonics Patterns",
+      "items": [
+        [
+          "tion",
+          "PASS",
+          "3 words present"
+        ],
+        [
+          "ture",
+          "PASS",
+          "3 words present"
+        ],
+        [
+          "cious",
+          "PASS",
+          "3 words present"
+        ],
+        [
+          "able",
+          "PASS",
+          "3 words present"
+        ],
+        [
+          "ful",
+          "PASS",
+          "3 words present"
+        ],
+        [
+          "ness",
+          "PASS",
+          "3 words present"
+        ],
+        [
+          "ment",
+          "PASS",
+          "3 words present"
+        ]
+      ]
+    },
+    "sight_words_2nd": {
+      "score": 55.0,
+      "possible": 56,
+      "pct": 98,
+      "domain": "Literacy",
+      "skill": "Sight Words (2nd Grade)",
+      "items": [
+        [
+          "always",
+          "PARTIAL",
+          "exists but isolated"
+        ],
+        [
+          "around",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "because",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "been",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "before",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "best",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "both",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "bring",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "build",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "carry",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "clean",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "cut",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "done",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "draw",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "drink",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "eight",
+          "PASS",
+          "43 connections"
+        ],
+        [
+          "else",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "fall",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "far",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "full",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "got",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "grow",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "hold",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "hot",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "if",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "keep",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "kind",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "laugh",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "light",
+          "PASS",
+          "27 connections"
+        ],
+        [
+          "long",
+          "PASS",
+          "23 connections"
+        ],
+        [
+          "much",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "myself",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "never",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "only",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "own",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "people",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "picture",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "plant",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "pull",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "read",
+          "PASS",
+          "8 connections"
+        ],
+        [
+          "ready",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "real",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "right",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "round",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "seem",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "sense",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "separate",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "seven",
+          "PASS",
+          "44 connections"
+        ],
+        [
+          "shall",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "together",
+          "PASS",
+          "30 connections"
+        ],
+        [
+          "try",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "upon",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "warm",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "why",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "wish",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "would",
+          "PARTIAL",
+          "exists but isolated"
+        ]
+      ]
+    },
+    "reading_comprehension": {
+      "score": 6.0,
+      "possible": 9,
+      "pct": 66,
+      "domain": "Literacy",
+      "skill": "Reading Comprehension",
+      "items": [
+        [
+          "main",
+          "PASS",
+          "connects to idea"
+        ],
+        [
+          "character",
+          "PARTIAL",
+          "exists but no expected connections"
+        ],
+        [
+          "setting",
+          "PARTIAL",
+          "exists but no expected connections"
+        ],
+        [
+          "plot",
+          "PARTIAL",
+          "exists but no expected connections"
+        ],
+        [
+          "solution",
+          "PASS",
+          "connects to problem"
+        ],
+        [
+          "lesson",
+          "PARTIAL",
+          "exists but no expected connections"
+        ],
+        [
+          "fantasy",
+          "PARTIAL",
+          "exists but no expected connections"
+        ],
+        [
+          "realistic",
+          "PARTIAL",
+          "exists but no expected connections"
+        ],
+        [
+          "context",
+          "PASS",
+          "connects to clues"
+        ]
+      ]
+    },
+    "writing_skills": {
+      "score": 18.0,
+      "possible": 20,
+      "pct": 90,
+      "domain": "Literacy",
+      "skill": "Writing Skills",
+      "items": [
+        [
+          "paragraph",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "topic",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "sentence",
+          "PASS",
+          "105 connections"
+        ],
+        [
+          "opinion",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "reason",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "report",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "research",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "narrative",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "sequence",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "transition",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "first",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "next",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "finally",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "conclusion",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "revise",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "edit",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "thesaurus",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "letter",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "greeting",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "closing",
+          "PASS",
+          "1 connections"
+        ]
+      ]
+    },
+    "grammar": {
+      "score": 6.5,
+      "possible": 7,
+      "pct": 92,
+      "domain": "Literacy",
+      "skill": "Grammar",
+      "items": [
+        [
+          "noun",
+          "PASS",
+          "connects to common, proper"
+        ],
+        [
+          "verb",
+          "PASS",
+          "connects to action, linking"
+        ],
+        [
+          "adjective",
+          "PASS",
+          "connects to noun"
+        ],
+        [
+          "adverb",
+          "PASS",
+          "connects to quickly"
+        ],
+        [
+          "conjunction",
+          "PASS",
+          "connects to and, but, joins"
+        ],
+        [
+          "interjection",
+          "PASS",
+          "connects to wow"
+        ],
+        [
+          "pronoun",
+          "PARTIAL",
+          "exists but no grammar connections"
+        ]
+      ]
+    },
+    "sentence_structure": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Sentence Structure",
+      "items": [
+        [
+          "simple",
+          "PASS",
+          "103 connections"
+        ],
+        [
+          "compound",
+          "PASS",
+          "105 connections"
+        ],
+        [
+          "subject",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "predicate",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "statement",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "question",
+          "PASS",
+          "104 connections"
+        ],
+        [
+          "command",
+          "PASS",
+          "104 connections"
+        ],
+        [
+          "exclamation",
+          "PASS",
+          "105 connections"
+        ],
+        [
+          "comma",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "thought",
+          "PASS",
+          "1 connections"
+        ]
+      ]
+    },
+    "addition_subtraction_100": {
+      "score": 5.5,
+      "possible": 7,
+      "pct": 78,
+      "domain": "Mathematics",
+      "skill": "Addition & Subtraction Within 100",
+      "items": [
+        [
+          "plus",
+          "PASS",
+          "connects to add, equals, sum, together"
+        ],
+        [
+          "minus",
+          "PASS",
+          "connects to subtract, equals, difference, less"
+        ],
+        [
+          "regroup",
+          "PARTIAL",
+          "exists but no math connections"
+        ],
+        [
+          "mental",
+          "PASS",
+          "connects to math"
+        ],
+        [
+          "check",
+          "PARTIAL",
+          "exists but no math connections"
+        ],
+        [
+          "twenty",
+          "PARTIAL",
+          "exists but no math connections"
+        ],
+        [
+          "seventy",
+          "PASS",
+          "connects to hundred"
+        ]
+      ]
+    },
+    "place_value_1000": {
+      "score": 11.0,
+      "possible": 12,
+      "pct": 91,
+      "domain": "Mathematics",
+      "skill": "Place Value to 1000",
+      "items": [
+        [
+          "hundreds",
+          "PASS",
+          "9 connections"
+        ],
+        [
+          "tens",
+          "PASS",
+          "13 connections"
+        ],
+        [
+          "ones",
+          "PASS",
+          "9 connections"
+        ],
+        [
+          "thousand",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "greater",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "less",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "count",
+          "PASS",
+          "13 connections"
+        ],
+        [
+          "read",
+          "PASS",
+          "8 connections"
+        ],
+        [
+          "write",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "number",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "digit",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "value",
+          "FAIL",
+          "no node"
+        ]
+      ]
+    },
+    "measurement": {
+      "score": 13.5,
+      "possible": 14,
+      "pct": 96,
+      "domain": "Mathematics",
+      "skill": "Measurement & Time",
+      "items": [
+        [
+          "centimeter",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "meters",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "estimate",
+          "PASS",
+          "11 connections"
+        ],
+        [
+          "length",
+          "PASS",
+          "26 connections"
+        ],
+        [
+          "longer",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "shorter",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "time",
+          "PASS",
+          "11 connections"
+        ],
+        [
+          "nearest",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "minute",
+          "PARTIAL",
+          "exists but isolated"
+        ],
+        [
+          "quarter",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "past",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "half",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "a.m.",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "p.m.",
+          "PASS",
+          "1 connections"
+        ]
+      ]
+    },
+    "money": {
+      "score": 9.5,
+      "possible": 12,
+      "pct": 79,
+      "domain": "Mathematics",
+      "skill": "Money",
+      "items": [
+        [
+          "dollar",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "dollars",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "cents",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "quarter",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "dime",
+          "PARTIAL",
+          "exists but isolated"
+        ],
+        [
+          "nickel",
+          "PARTIAL",
+          "exists but isolated"
+        ],
+        [
+          "penny",
+          "PARTIAL",
+          "exists but isolated"
+        ],
+        [
+          "change",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "cost",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "buy",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "price",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "total",
+          "PASS",
+          "7 connections"
+        ]
+      ]
+    },
+    "data_graphs": {
+      "score": 11.0,
+      "possible": 13,
+      "pct": 84,
+      "domain": "Mathematics",
+      "skill": "Data & Graphs",
+      "items": [
+        [
+          "line",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "plot",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "bar",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "graph",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "data",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "table",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "category",
+          "PASS",
+          "11 connections"
+        ],
+        [
+          "compare",
+          "PASS",
+          "27 connections"
+        ],
+        [
+          "most",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "least",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "pattern",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "collect",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "organize",
+          "FAIL",
+          "no node"
+        ]
+      ]
+    },
+    "geometry": {
+      "score": 15.0,
+      "possible": 16,
+      "pct": 93,
+      "domain": "Mathematics",
+      "skill": "Geometry",
+      "items": [
+        [
+          "triangle",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "quadrilateral",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "square",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "rectangle",
+          "PASS",
+          "11 connections"
+        ],
+        [
+          "rhombus",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "pentagon",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "hexagon",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "partition",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "equal",
+          "PASS",
+          "24 connections"
+        ],
+        [
+          "shares",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "halves",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "thirds",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "fourths",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "whole",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "angle",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "sides",
+          "PASS",
+          "6 connections"
+        ]
+      ]
+    },
+    "ecosystems": {
+      "score": 15.0,
+      "possible": 15,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Ecosystems",
+      "items": [
+        [
+          "plants",
+          "PASS",
+          "8 connections"
+        ],
+        [
+          "animals",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "depend",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "sunlight",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "food",
+          "PASS",
+          "8 connections"
+        ],
+        [
+          "chain",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "decomposer",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "pollinator",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "bee",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "butterfly",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "habitat",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "hibernate",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "migrate",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "camouflage",
+          "PASS",
+          "13 connections"
+        ],
+        [
+          "hide",
+          "PASS",
+          "3 connections"
+        ]
+      ]
+    },
+    "earth_systems": {
+      "score": 10.0,
+      "possible": 16,
+      "pct": 62,
+      "domain": "Science",
+      "skill": "Earth Systems",
+      "items": [
+        [
+          "land",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "water",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "mountain",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "hill",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "valley",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "plain",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "river",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "lake",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "ocean",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "map",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "earthquake",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "erosion",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "fossil",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "wind",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "soil",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "rock",
+          "FAIL",
+          "no node"
+        ]
+      ]
+    },
+    "engineering": {
+      "score": 12.0,
+      "possible": 12,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Engineering",
+      "items": [
+        [
+          "engineer",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "design",
+          "PASS",
+          "17 connections"
+        ],
+        [
+          "solution",
+          "PASS",
+          "24 connections"
+        ],
+        [
+          "problem",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "test",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "improve",
+          "PASS",
+          "17 connections"
+        ],
+        [
+          "material",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "property",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "strong",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "flexible",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "waterproof",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "absorb",
+          "PASS",
+          "2 connections"
+        ]
+      ]
+    },
+    "citizenship": {
+      "score": 14.0,
+      "possible": 15,
+      "pct": 93,
+      "domain": "Social Studies",
+      "skill": "Citizenship",
+      "items": [
+        [
+          "citizen",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "rights",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "responsibilities",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "constitution",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "amendment",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "freedom",
+          "PASS",
+          "11 connections"
+        ],
+        [
+          "speech",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "religion",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "vote",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "leader",
+          "PASS",
+          "8 connections"
+        ],
+        [
+          "community",
+          "PASS",
+          "36 connections"
+        ],
+        [
+          "volunteer",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "follow",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "rules",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "help",
+          "PASS",
+          "30 connections"
+        ]
+      ]
+    },
+    "economics": {
+      "score": 13.0,
+      "possible": 14,
+      "pct": 92,
+      "domain": "Social Studies",
+      "skill": "Economics",
+      "items": [
+        [
+          "goods",
+          "PASS",
+          "16 connections"
+        ],
+        [
+          "services",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "producer",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "consumer",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "supply",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "demand",
+          "PASS",
+          "12 connections"
+        ],
+        [
+          "price",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "save",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "bank",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "lend",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "money",
+          "PASS",
+          "8 connections"
+        ],
+        [
+          "business",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "buy",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "sell",
+          "PASS",
+          "1 connections"
+        ]
+      ]
+    },
+    "geography": {
+      "score": 17.0,
+      "possible": 19,
+      "pct": 89,
+      "domain": "Social Studies",
+      "skill": "Geography",
+      "items": [
+        [
+          "states",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "fifty",
+          "PASS",
+          "13 connections"
+        ],
+        [
+          "capital",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "city",
+          "PASS",
+          "15 connections"
+        ],
+        [
+          "washington",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "river",
+          "PASS",
+          "4 connections"
+        ],
+        [
+          "lake",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "mountain",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "natural",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "human",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "made",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "feature",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "move",
+          "PASS",
+          "5 connections"
+        ],
+        [
+          "place",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "cold",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "warm",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "dry",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "wet",
+          "PASS",
+          "10 connections"
+        ],
+        [
+          "adapt",
+          "PASS",
+          "2 connections"
+        ]
+      ]
+    },
+    "history": {
+      "score": 13.0,
+      "possible": 17,
+      "pct": 76,
+      "domain": "Social Studies",
+      "skill": "History",
+      "items": [
+        [
+          "historian",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "past",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "primary",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "secondary",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "source",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "timeline",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "event",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "important",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "people",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "change",
+          "PASS",
+          "7 connections"
+        ],
+        [
+          "country",
+          "PASS",
+          "13 connections"
+        ],
+        [
+          "mistake",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "learn",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "tradition",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "generation",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "holiday",
+          "PASS",
+          "6 connections"
+        ],
+        [
+          "celebrate",
+          "PASS",
+          "11 connections"
+        ]
+      ]
+    },
+    "character_traits": {
+      "score": 26.0,
+      "possible": 28,
+      "pct": 92,
+      "domain": "Social-Emotional",
+      "skill": "Character Traits & SEL",
+      "items": [
+        [
+          "self-control",
+          "PASS",
+          "9 connections"
+        ],
+        [
+          "manage",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "emotion",
+          "FAIL",
+          "no node"
+        ],
+        [
+          "perseverance",
+          "PASS",
+          "109 connections"
+        ],
+        [
+          "giving",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "responsibility",
+          "PASS",
+          "117 connections"
+        ],
+        [
+          "supposed",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "cooperation",
+          "PASS",
+          "110 connections"
+        ],
+        [
+          "working",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "together",
+          "PASS",
+          "30 connections"
+        ],
+        [
+          "respect",
+          "PASS",
+          "131 connections"
+        ],
+        [
+          "treating",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "honesty",
+          "PASS",
+          "104 connections"
+        ],
+        [
+          "truth",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "kindness",
+          "PASS",
+          "109 connections"
+        ],
+        [
+          "nice",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "empathy",
+          "PASS",
+          "121 connections"
+        ],
+        [
+          "understanding",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "feel",
+          "PASS",
+          "11 connections"
+        ],
+        [
+          "courage",
+          "PASS",
+          "106 connections"
+        ],
+        [
+          "right",
+          "PASS",
+          "14 connections"
+        ],
+        [
+          "thing",
+          "PASS",
+          "3 connections"
+        ],
+        [
+          "gratitude",
+          "PASS",
+          "109 connections"
+        ],
+        [
+          "thankful",
+          "PASS",
+          "2 connections"
+        ],
+        [
+          "fairness",
+          "PASS",
+          "110 connections"
+        ],
+        [
+          "equally",
+          "PASS",
+          "1 connections"
+        ],
+        [
+          "patience",
+          "PASS",
+          "108 connections"
+        ],
+        [
+          "waiting",
+          "PASS",
+          "2 connections"
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "level": "fourth_grade",
+  "date": "2026-05-03T07:19:59.847926",
+  "nodes": 17292,
+  "springs": 42575,
+  "total_score": 117.0,
+  "total_possible": 120,
+  "mastery_pct": 97,
+  "status": "IN PROGRESS",
+  "assessments": {
+    "multi_digit_arithmetic": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Multi-Digit Arithmetic"
+    },
+    "fractions_4th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Fractions & Decimals"
+    },
+    "measurement_data": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Measurement & Data"
+    },
+    "geometry_4th": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80,
+      "domain": "Math",
+      "skill": "Geometry"
+    },
+    "reading_literature_4th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Reading Literature"
+    },
+    "reading_informational_4th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Reading Informational"
+    },
+    "writing_4th": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90,
+      "domain": "Literacy",
+      "skill": "Writing"
+    },
+    "energy": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Energy"
+    },
+    "waves": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Waves & Technology"
+    },
+    "earth_systems": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Earth Systems"
+    },
+    "colonial_america": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Social Studies",
+      "skill": "Colonial America"
+    },
+    "civics_4th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Social Studies",
+      "skill": "Civics"
+    }
+  }
+}

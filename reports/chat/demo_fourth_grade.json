@@ -1,0 +1,29 @@
+{
+  "level": "fourth_grade",
+  "prompts": {
+    "multiply two digit": {
+      "response": "algorithm remainder quotient product divide multiple factor times",
+      "time": 4.92
+    },
+    "the fraction equals": {
+      "response": "add sum difference subtract minus plus numerator denominator",
+      "time": 5.15
+    },
+    "energy transfers through": {
+      "response": "transfer collision speed motion circuit sound friction magnet",
+      "time": 5.15
+    },
+    "the constitution protects": {
+      "response": "congress president government executive legislative citizen vote rule",
+      "time": 5.3
+    },
+    "colonists came to": {
+      "response": "america dance march find patterns weather scientists ones",
+      "time": 5.29
+    },
+    "the area of a": {
+      "response": "estimate regroup carry borrow check answer operation verify",
+      "time": 5.17
+    }
+  }
+}

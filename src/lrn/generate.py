@@ -39,14 +39,13 @@ def _next_expected_role(context: list) -> int:
 def _calculate_node_energy(lnn: LatticeNN, node_name: str) -> int:
     total_energy = 0
     degree = 0
-    for (a, b), sp in lnn.springs.items():
-        if a == node_name or b == node_name:
-            if a in lnn.nodes and b in lnn.nodes:
-                node_a = lnn.nodes[a]
-                node_b = lnn.nodes[b]
-                if node_a.activation > 0 or node_b.activation > 0:
-                    total_energy += sp.energy
-                    degree += 1
+    for neighbor_name, sp in lnn.get_neighbors(node_name):
+        if neighbor_name in lnn.nodes:
+            node_a = lnn.nodes[node_name]
+            node_b = lnn.nodes[neighbor_name]
+            if node_a.activation > 0 or node_b.activation > 0:
+                total_energy += sp.energy
+                degree += 1
     if degree == 0:
         return 0
     return total_energy // degree
@@ -62,23 +61,27 @@ def _score_candidates(lnn: LatticeNN, context: list, top_k: int = 5) -> list:
             continue
         if name.startswith("identity:"):
             continue
-        if name in context:
+        clean_name = name.replace("word:", "").replace("lang:", "").strip()
+        if clean_name in context:
             continue
         if node.activation < 5:
             continue
         if node.pinned:
             continue
 
+        node_key = f"word:{clean_name}" if not name.startswith("word:") else name
+
         H = 0
         for n in [3, 4, 5]:
             if len(context) >= n - 1:
-                gram = tuple(context[-(n-1):] + [name])
+                gram = tuple(context[-(n-1):] + [clean_name])
                 count = lnn.trigrams.get(gram, 0)
                 H += count * 50
 
         S = 0
         if last_word:
-            sp = lnn.springs.get(lnn._key(last_word, name))
+            last_key = f"word:{last_word}" if not last_word.startswith("word:") else last_word
+            sp = lnn.springs.get(lnn._key(last_key, node_key))
             if sp:
                 S = max(0, sp.stiffness) * node.activation // 100
 
@@ -86,7 +89,8 @@ def _score_candidates(lnn: LatticeNN, context: list, top_k: int = 5) -> list:
 
         C = 0
         for i, ctx_word in enumerate(context):
-            sp = lnn.springs.get(lnn._key(ctx_word, name))
+            ctx_key = f"word:{ctx_word}" if not ctx_word.startswith("word:") else ctx_word
+            sp = lnn.springs.get(lnn._key(ctx_key, node_key))
             if sp and sp.stiffness > 0:
                 decay = max(1, len(context) - i)
                 C += sp.stiffness * node.activation // (decay * 100)
@@ -95,7 +99,8 @@ def _score_candidates(lnn: LatticeNN, context: list, top_k: int = 5) -> list:
 
         c_boost = K_BASE
         if last_word:
-            sp = lnn.springs.get(lnn._key(last_word, name))
+            last_key = f"word:{last_word}" if not last_word.startswith("word:") else last_word
+            sp = lnn.springs.get(lnn._key(last_key, node_key))
             if sp and sp.tau <= 2 and sp.directional:
                 c_boost = CAUSAL_BOOST
 
@@ -105,14 +110,16 @@ def _score_candidates(lnn: LatticeNN, context: list, top_k: int = 5) -> list:
         elif abs(node.dominant_role - expected_role) == 1:
             phi = K_BASE + 150
 
-        final_score = (raw_score * c_boost * phi) // (K_BASE * K_BASE)
+        hub_degree = len(lnn.get_neighbors(name))
+        hub_penalty = max(1, hub_degree // 20)
+        final_score = (raw_score * c_boost * phi) // (K_BASE * K_BASE * hub_penalty)
 
         node_energy = _calculate_node_energy(lnn, name)
         if node_energy > E_THRESHOLD:
             continue
 
         candidates.append({
-            "word": name,
+            "word": clean_name,
             "score": final_score,
             "energy": node_energy,
             "role": node.dominant_role,
@@ -128,6 +135,8 @@ def generate(lnn: LatticeNN, prompt: list, top_k: int = 5, verbose: bool = False
 
     for tok in prompt:
         node = lnn.nodes.get(tok)
+        if not node:
+            node = lnn.nodes.get(f"word:{tok}")
         if node:
             node.activation = 100
             node.pinned = True

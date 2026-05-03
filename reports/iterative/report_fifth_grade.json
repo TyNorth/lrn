@@ -1,0 +1,75 @@
+{
+  "level": "fifth_grade",
+  "date": "2026-05-03T07:23:04.719770",
+  "nodes": 17603,
+  "springs": 49581,
+  "total_score": 88.0,
+  "total_possible": 90,
+  "mastery_pct": 97,
+  "status": "IN PROGRESS",
+  "assessments": {
+    "algebraic_thinking": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Algebraic Thinking"
+    },
+    "place_value_decimals": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Place Value & Decimals"
+    },
+    "fraction_operations": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Fraction Operations"
+    },
+    "volume": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Volume"
+    },
+    "coordinate_geometry": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Coordinate Geometry"
+    },
+    "matter": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90,
+      "domain": "Science",
+      "skill": "Matter & Interactions"
+    },
+    "ecosystems_5th": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90,
+      "domain": "Science",
+      "skill": "Ecosystems"
+    },
+    "american_revolution": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Social Studies",
+      "skill": "American Revolution"
+    },
+    "critical_thinking": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Literacy",
+      "skill": "Critical Thinking"
+    }
+  }
+}

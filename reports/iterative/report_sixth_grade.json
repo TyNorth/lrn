@@ -1,0 +1,68 @@
+{
+  "level": "sixth_grade",
+  "date": "2026-05-03T07:32:04.543526",
+  "nodes": 17901,
+  "springs": 58951,
+  "total_score": 75.0,
+  "total_possible": 78,
+  "mastery_pct": 96,
+  "status": "IN PROGRESS",
+  "assessments": {
+    "ratios_proportions": {
+      "score": 8.0,
+      "possible": 8,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Ratios & Proportional Relationships"
+    },
+    "number_system_6th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Number System"
+    },
+    "expressions_equations": {
+      "score": 9.0,
+      "possible": 10,
+      "pct": 90,
+      "domain": "Math",
+      "skill": "Expressions & Equations"
+    },
+    "geometry_6th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Geometry"
+    },
+    "statistics_6th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Math",
+      "skill": "Statistics"
+    },
+    "earth_science_6th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Earth Science"
+    },
+    "life_science_6th": {
+      "score": 10.0,
+      "possible": 10,
+      "pct": 100,
+      "domain": "Science",
+      "skill": "Life Science"
+    },
+    "ancient_civilizations": {
+      "score": 8.0,
+      "possible": 10,
+      "pct": 80,
+      "domain": "Social Studies",
+      "skill": "Ancient Civilizations"
+    }
+  }
+}

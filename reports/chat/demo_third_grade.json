@@ -1,0 +1,37 @@
+{
+  "level": "third_grade",
+  "prompts": {
+    "the theme of the story": {
+      "response": "plot setting brave describe solution problem character material",
+      "time": 4.22
+    },
+    "force causes objects": {
+      "response": "motion friction magnet gravity push pull balanced forces",
+      "time": 4.11
+    },
+    "the government makes": {
+      "response": "legislative executive judicial president congress constitution amendment freedom",
+      "time": 4.12
+    },
+    "empathy means": {
+      "response": "self-control cooperation gratitude perseverance none doing telling understanding",
+      "time": 4.08
+    },
+    "multiplication is": {
+      "response": "sun mouse below above pencil longer than bigger",
+      "time": 4.1
+    },
+    "gravity pulls": {
+      "response": "ball bat hit kit bit roll ground shook",
+      "time": 4.15
+    },
+    "climate affects": {
+      "response": "organism inherit trait fossil survive environment changes some",
+      "time": 4.04
+    },
+    "resilience means": {
+      "response": "bouncing back from challenges bounce understanding perspectives waiting",
+      "time": 4.1
+    }
+  }
+}

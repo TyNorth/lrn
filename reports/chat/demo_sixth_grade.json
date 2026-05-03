@@ -1,0 +1,29 @@
+{
+  "level": "sixth_grade",
+  "prompts": {
+    "the ratio of": {
+      "response": "quantity proportional unit rate percent rate bird flies see",
+      "time": 6.94
+    },
+    "evaluate the exponent": {
+      "response": "place value thousandth decimal dividend integer absolute value multiple quotient",
+      "time": 6.98
+    },
+    "the area of a polygon": {
+      "response": "surface area net vertex three dimensional coordinate unit cube cube sphere",
+      "time": 7.15
+    },
+    "cells are the basic": {
+      "response": "see ball b c d e f fish",
+      "time": 7.22
+    },
+    "ancient mesopotamia was": {
+      "response": "egypt pharaoh athens republic democracy mayflower tax resist",
+      "time": 7.12
+    },
+    "the median of the": {
+      "response": "distribution statistical variability deviation histogram mean mat man",
+      "time": 7.11
+    }
+  }
+}

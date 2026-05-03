@@ -1,7 +1,7 @@
 """
-1st Grade Curriculum Assessment - Detailed sub-skill breakdown
+2nd Grade Curriculum Assessment - Detailed sub-skill breakdown
 
-Based on Common Core 1st Grade standards.
+Based on Common Core 2nd Grade standards.
 Uses direct spring lookups for speed (no propagation per test item).
 """
 import sys
@@ -24,10 +24,6 @@ def _connection_count(lnn, word):
     if node not in lnn.nodes:
         return 0
     return len(lnn.get_neighbors(node))
-
-
-def _has_any_connection(lnn, word):
-    return _connection_count(lnn, word) >= 1
 
 
 def _has_connections_to(lnn, word, targets):
@@ -56,55 +52,55 @@ def _make_result(items, domain, skill):
     }
 
 
-def assess_first_grade(lnn):
-    """Full 1st Grade curriculum assessment."""
+def assess_second_grade(lnn):
+    """Full 2nd Grade curriculum assessment."""
     results = {}
     
     # === LITERACY DOMAIN ===
-    results["phonics_complex"] = test_phonics_complex(lnn)
-    results["sight_words_1st"] = test_sight_words_1st(lnn)
-    results["reading_fluency"] = test_reading_fluency_1st(lnn)
-    results["writing_skills"] = test_writing_skills_1st(lnn)
-    results["grammar"] = test_grammar(lnn)
-    results["complex_sentences"] = test_complex_sentences(lnn)
+    results["phonics_advanced"] = test_phonics_advanced(lnn)
+    results["sight_words_2nd"] = test_sight_words_2nd(lnn)
+    results["reading_comprehension"] = test_reading_comprehension_2nd(lnn)
+    results["writing_skills"] = test_writing_skills_2nd(lnn)
+    results["grammar"] = test_grammar_2nd(lnn)
+    results["sentence_structure"] = test_sentence_structure_2nd(lnn)
     
     # === MATHEMATICS DOMAIN ===
-    results["addition_within_20"] = test_addition_within_20(lnn)
-    results["subtraction_within_20"] = test_subtraction_within_20(lnn)
-    results["place_value_to_100"] = test_place_value_to_100(lnn)
-    results["measurement"] = test_measurement_1st(lnn)
-    results["money"] = test_money_1st(lnn)
-    results["data_graphs"] = test_data_graphs_1st(lnn)
-    results["geometry"] = test_geometry_1st(lnn)
+    results["addition_subtraction_100"] = test_addition_subtraction_100(lnn)
+    results["place_value_1000"] = test_place_value_1000(lnn)
+    results["measurement"] = test_measurement_2nd(lnn)
+    results["money"] = test_money_2nd(lnn)
+    results["data_graphs"] = test_data_graphs_2nd(lnn)
+    results["geometry"] = test_geometry_2nd(lnn)
     
     # === SCIENCE DOMAIN ===
-    results["weather_patterns"] = test_weather_patterns(lnn)
-    results["plant_animal_needs"] = test_plant_animal_needs(lnn)
-    results["light_sound"] = test_light_sound(lnn)
+    results["ecosystems"] = test_ecosystems(lnn)
+    results["earth_systems"] = test_earth_systems(lnn)
+    results["engineering"] = test_engineering(lnn)
     
     # === SOCIAL STUDIES ===
-    results["communities"] = test_communities(lnn)
-    results["maps"] = test_maps_1st(lnn)
-    results["history"] = test_history(lnn)
+    results["citizenship"] = test_citizenship(lnn)
+    results["economics"] = test_economics(lnn)
+    results["geography"] = test_geography_2nd(lnn)
+    results["history"] = test_history_2nd(lnn)
     
     # === SOCIAL-EMOTIONAL ===
-    results["character_traits"] = test_character_traits(lnn)
+    results["character_traits"] = test_character_traits_2nd(lnn)
     
     return results
 
 
 # === LITERACY ===
 
-def test_phonics_complex(lnn):
+def test_phonics_advanced(lnn):
     items = []
     patterns = [
-        ("air", ["chair", "hair", "fair"]),
-        ("ear", ["hear", "bear", "near"]),
-        ("oi", ["coin", "join", "boil"]),
-        ("ou", ["cloud", "loud", "proud"]),
-        ("aw", ["saw", "paw", "draw"]),
-        ("oo", ["moon", "spoon", "boot"]),
-        ("ew", ["grew", "flew", "crew"]),
+        ("tion", ["action", "nation", "station"]),
+        ("ture", ["picture", "nature", "future"]),
+        ("cious", ["delicious", "precious", "spacious"]),
+        ("able", ["comfortable", "remarkable", "valuable"]),
+        ("ful", ["beautiful", "wonderful", "careful"]),
+        ("ness", ["kindness", "happiness", "darkness"]),
+        ("ment", ["movement", "excitement", "development"]),
     ]
     for pattern, words in patterns:
         present = [w for w in words if _node_exists(lnn, w)]
@@ -112,23 +108,18 @@ def test_phonics_complex(lnn):
             items.append((pattern, "PASS", f"{len(present)} words present"))
         else:
             items.append((pattern, "PARTIAL", f"{len(present)} words present"))
-    return _make_result(items, "Literacy", "Complex Phonics Patterns")
+    return _make_result(items, "Literacy", "Advanced Phonics Patterns")
 
 
-def test_sight_words_1st(lnn):
+def test_sight_words_2nd(lnn):
     items = []
-    sight_words = ["after", "again", "any", "ask", "away", "back", "been", "both", "buy", "call",
-                   "came", "could", "does", "each", "even", "ever", "first", "found", "from", "give",
-                   "goes", "going", "had", "has", "her", "him", "his", "just", "keep", "know",
-                   "land", "large", "last", "let", "long", "look", "made", "make", "may", "many",
-                   "might", "most", "my", "never", "next", "off", "old", "once", "open", "or",
-                   "order", "other", "over", "own", "pick", "place", "pretty", "quite", "read",
-                   "right", "round", "said", "saw", "say", "set", "shall", "show", "six", "small",
-                   "start", "seven", "she", "soon", "sound", "spell", "stop", "such", "take",
-                   "tell", "than", "that", "them", "then", "think", "this", "those", "thought",
-                   "through", "under", "until", "up", "upon", "us", "use", "very", "walk", "want",
-                   "warm", "was", "watch", "water", "way", "we", "well", "were", "what", "when",
-                   "which", "while", "wish", "with", "work", "would", "write", "you"]
+    sight_words = ["always", "around", "because", "been", "before", "best", "both", "bring",
+                   "build", "carry", "clean", "cut", "done", "draw", "drink", "eight", "else",
+                   "fall", "far", "full", "got", "grow", "hold", "hot", "if", "keep", "kind",
+                   "laugh", "light", "long", "much", "myself", "never", "only", "own", "people",
+                   "picture", "plant", "pull", "read", "ready", "real", "right", "round", "seem",
+                   "sense", "separate", "seven", "shall", "together", "try", "upon", "warm",
+                   "why", "wish", "would"]
     for word in sight_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -138,21 +129,23 @@ def test_sight_words_1st(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Literacy", "Sight Words (1st Grade)")
+    return _make_result(items, "Literacy", "Sight Words (2nd Grade)")
 
 
-def test_reading_fluency_1st(lnn):
+def test_reading_comprehension_2nd(lnn):
     items = []
-    fluency_tests = [
-        ("read", ["book", "story", "sentence"]),
-        ("fiction", ["story", "made", "character"]),
-        ("nonfiction", ["real", "facts", "true"]),
-        ("author", ["wrote", "book", "story"]),
-        ("character", ["main", "brave", "story"]),
-        ("problem", ["solution", "happened", "story"]),
-        ("paragraph", ["main", "idea", "sentence"]),
+    comprehension_tests = [
+        ("main", ["idea", "story", "about"]),
+        ("character", ["brave", "story", "describe"]),
+        ("setting", ["story", "place", "time"]),
+        ("plot", ["happens", "story", "problem"]),
+        ("solution", ["problem", "end", "answer"]),
+        ("lesson", ["moral", "story", "learn"]),
+        ("fantasy", ["cannot", "really", "happen"]),
+        ("realistic", ["could", "really", "happen"]),
+        ("context", ["clues", "figure", "word"]),
     ]
-    for word, expected in fluency_tests:
+    for word, expected in comprehension_tests:
         if _node_exists(lnn, word):
             found_any, found = _has_connections_to(lnn, word, expected)
             if found_any:
@@ -161,14 +154,15 @@ def test_reading_fluency_1st(lnn):
                 items.append((word, "PARTIAL", "exists but no expected connections"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Literacy", "Reading Fluency")
+    return _make_result(items, "Literacy", "Reading Comprehension")
 
 
-def test_writing_skills_1st(lnn):
+def test_writing_skills_2nd(lnn):
     items = []
-    writing_words = ["write", "sentence", "capital", "period", "question", "exclamation",
-                     "opinion", "reason", "instructions", "describing", "action", "letter",
-                     "dictionary", "spell", "sounding"]
+    writing_words = ["paragraph", "topic", "sentence", "opinion", "reason", "report",
+                     "research", "narrative", "sequence", "transition", "first", "next",
+                     "finally", "conclusion", "revise", "edit", "thesaurus", "letter",
+                     "greeting", "closing"]
     for word in writing_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -181,14 +175,16 @@ def test_writing_skills_1st(lnn):
     return _make_result(items, "Literacy", "Writing Skills")
 
 
-def test_grammar(lnn):
+def test_grammar_2nd(lnn):
     items = []
     grammar_tests = [
-        ("noun", ["person", "place", "thing"]),
-        ("verb", ["action", "run", "jump"]),
-        ("adjective", ["describes", "big", "red"]),
-        ("pronoun", ["he", "she", "they"]),
-        ("subject", ["who", "what", "sentence"]),
+        ("noun", ["common", "proper", "person", "place"]),
+        ("verb", ["action", "linking", "does", "is"]),
+        ("adjective", ["describes", "noun", "big", "red"]),
+        ("adverb", ["quickly", "slowly", "how", "when"]),
+        ("conjunction", ["and", "but", "or", "joins"]),
+        ("interjection", ["wow", "ouch", "feeling"]),
+        ("pronoun", ["he", "she", "they", "replaces"]),
     ]
     for word, expected in grammar_tests:
         if _node_exists(lnn, word):
@@ -202,10 +198,11 @@ def test_grammar(lnn):
     return _make_result(items, "Literacy", "Grammar")
 
 
-def test_complex_sentences(lnn):
+def test_sentence_structure_2nd(lnn):
     items = []
-    connectors = ["because", "although", "if", "while", "after", "before", "since", "unless"]
-    for word in connectors:
+    structure_words = ["simple", "compound", "subject", "predicate", "statement",
+                       "question", "command", "exclamation", "comma", "thought"]
+    for word in structure_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
             if count >= 1:
@@ -214,21 +211,23 @@ def test_complex_sentences(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Literacy", "Complex Sentences")
+    return _make_result(items, "Literacy", "Sentence Structure")
 
 
 # === MATHEMATICS ===
 
-def test_addition_within_20(lnn):
+def test_addition_subtraction_100(lnn):
     items = []
-    add_tests = [
+    add_sub_tests = [
         ("plus", ["add", "equals", "sum", "together"]),
-        ("eleven", ["ten", "plus", "one"]),
-        ("fifteen", ["ten", "plus", "five"]),
-        ("twenty", ["ten", "plus", "ten"]),
-        ("equals", ["is", "same", "answer"]),
+        ("minus", ["subtract", "equals", "difference", "less"]),
+        ("regroup", ["carry", "borrow", "ten", "place"]),
+        ("mental", ["math", "add", "subtract", "quick"]),
+        ("check", ["answer", "opposite", "operation", "verify"]),
+        ("twenty", ["thirty", "forty", "fifty", "sixty"]),
+        ("seventy", ["eighty", "ninety", "hundred"]),
     ]
-    for word, expected in add_tests:
+    for word, expected in add_sub_tests:
         if _node_exists(lnn, word):
             found_any, found = _has_connections_to(lnn, word, expected)
             if found_any:
@@ -237,33 +236,13 @@ def test_addition_within_20(lnn):
                 items.append((word, "PARTIAL", "exists but no math connections"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Mathematics", "Addition Within 20")
+    return _make_result(items, "Mathematics", "Addition & Subtraction Within 100")
 
 
-def test_subtraction_within_20(lnn):
+def test_place_value_1000(lnn):
     items = []
-    sub_tests = [
-        ("minus", ["subtract", "equals", "difference"]),
-        ("subtract", ["minus", "less", "away"]),
-        ("take", ["away", "minus", "left"]),
-        ("left", ["remain", "minus", "subtract"]),
-    ]
-    for word, expected in sub_tests:
-        if _node_exists(lnn, word):
-            found_any, found = _has_connections_to(lnn, word, expected)
-            if found_any:
-                items.append((word, "PASS", f"connects to {', '.join(found)}"))
-            else:
-                items.append((word, "PARTIAL", "exists but no math connections"))
-        else:
-            items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Mathematics", "Subtraction Within 20")
-
-
-def test_place_value_to_100(lnn):
-    items = []
-    pv_words = ["tens", "ones", "greater", "less", "equals", "twenty", "thirty", "forty", "fifty",
-                "sixty", "seventy", "eighty", "ninety", "hundred"]
+    pv_words = ["hundreds", "tens", "ones", "thousand", "greater", "less",
+                "count", "read", "write", "number", "digit", "value"]
     for word in pv_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -273,13 +252,13 @@ def test_place_value_to_100(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Mathematics", "Place Value to 100")
+    return _make_result(items, "Mathematics", "Place Value to 1000")
 
 
-def test_measurement_1st(lnn):
+def test_measurement_2nd(lnn):
     items = []
-    measure_words = ["measure", "length", "inches", "feet", "yardstick", "longer", "shorter",
-                     "same", "time", "hour", "half", "o'clock", "thermometer", "temperature"]
+    measure_words = ["centimeter", "meters", "estimate", "length", "longer", "shorter",
+                     "time", "nearest", "minute", "quarter", "past", "half", "a.m.", "p.m."]
     for word in measure_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -292,10 +271,10 @@ def test_measurement_1st(lnn):
     return _make_result(items, "Mathematics", "Measurement & Time")
 
 
-def test_money_1st(lnn):
+def test_money_2nd(lnn):
     items = []
-    money_words = ["penny", "nickel", "dime", "quarter", "dollar", "cent", "cents",
-                   "coins", "count", "total", "save", "buy", "worth"]
+    money_words = ["dollar", "dollars", "cents", "quarter", "dime", "nickel", "penny",
+                   "change", "cost", "buy", "price", "total"]
     for word in money_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -308,10 +287,10 @@ def test_money_1st(lnn):
     return _make_result(items, "Mathematics", "Money")
 
 
-def test_data_graphs_1st(lnn):
+def test_data_graphs_2nd(lnn):
     items = []
-    graph_words = ["graph", "picture", "bar", "tally", "survey", "data", "categories",
-                   "organized", "interpret", "questions", "more", "same", "favorite"]
+    graph_words = ["line", "plot", "bar", "graph", "data", "table", "category",
+                   "compare", "most", "least", "pattern", "collect", "organize"]
     for word in graph_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -324,10 +303,11 @@ def test_data_graphs_1st(lnn):
     return _make_result(items, "Mathematics", "Data & Graphs")
 
 
-def test_geometry_1st(lnn):
+def test_geometry_2nd(lnn):
     items = []
-    geo_words = ["triangle", "square", "rectangle", "circle", "hexagon", "sides", "corners",
-                 "equal", "halves", "fourths", "divide", "shapes", "together"]
+    geo_words = ["triangle", "quadrilateral", "square", "rectangle", "rhombus",
+                 "pentagon", "hexagon", "partition", "equal", "shares", "halves",
+                 "thirds", "fourths", "whole", "angle", "sides"]
     for word in geo_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -342,12 +322,12 @@ def test_geometry_1st(lnn):
 
 # === SCIENCE ===
 
-def test_weather_patterns(lnn):
+def test_ecosystems(lnn):
     items = []
-    weather_words = ["weather", "sunny", "cloudy", "rainy", "snowy", "windy", "seasons",
-                     "spring", "summer", "fall", "winter", "temperature", "observe", "record",
-                     "pattern", "changes"]
-    for word in weather_words:
+    eco_words = ["plants", "animals", "depend", "sunlight", "food", "chain",
+                 "decomposer", "pollinator", "bee", "butterfly", "habitat",
+                 "hibernate", "migrate", "camouflage", "hide"]
+    for word in eco_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
             if count >= 1:
@@ -356,15 +336,15 @@ def test_weather_patterns(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Science", "Weather Patterns")
+    return _make_result(items, "Science", "Ecosystems")
 
 
-def test_plant_animal_needs(lnn):
+def test_earth_systems(lnn):
     items = []
-    needs_words = ["plants", "animals", "sunlight", "water", "air", "food", "shelter",
-                   "grow", "live", "habitat", "breathe", "fly", "swim", "baby", "parents",
-                   "caterpillar", "butterfly"]
-    for word in needs_words:
+    earth_words = ["land", "water", "mountain", "hill", "valley", "plain",
+                   "river", "lake", "ocean", "map", "earthquake", "erosion",
+                   "fossil", "wind", "soil", "rock"]
+    for word in earth_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
             if count >= 1:
@@ -373,15 +353,14 @@ def test_plant_animal_needs(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Science", "Plant & Animal Needs")
+    return _make_result(items, "Science", "Earth Systems")
 
 
-def test_light_sound(lnn):
+def test_engineering(lnn):
     items = []
-    ls_words = ["light", "sound", "straight", "reflected", "mirror", "clear", "opaque",
-                "shadow", "blocked", "vibrate", "vibration", "loud", "quiet", "communicate",
-                "signal", "flashlight", "drum"]
-    for word in ls_words:
+    eng_words = ["engineer", "design", "solution", "problem", "test", "improve",
+                 "material", "property", "strong", "flexible", "waterproof", "absorb"]
+    for word in eng_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
             if count >= 1:
@@ -390,17 +369,17 @@ def test_light_sound(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Science", "Light & Sound")
+    return _make_result(items, "Science", "Engineering")
 
 
 # === SOCIAL STUDIES ===
 
-def test_communities(lnn):
+def test_citizenship(lnn):
     items = []
-    comm_words = ["community", "rules", "safe", "jobs", "goods", "services", "teaching",
-                  "healing", "money", "save", "leaders", "decisions", "vote", "choose",
-                  "baker", "nurse", "teacher"]
-    for word in comm_words:
+    cit_words = ["citizen", "rights", "responsibilities", "constitution", "amendment",
+                 "freedom", "speech", "religion", "vote", "leader", "community",
+                 "volunteer", "follow", "rules", "help"]
+    for word in cit_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
             if count >= 1:
@@ -409,15 +388,14 @@ def test_communities(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Social Studies", "Communities")
+    return _make_result(items, "Social Studies", "Citizenship")
 
 
-def test_maps_1st(lnn):
+def test_economics(lnn):
     items = []
-    map_words = ["map", "drawing", "above", "key", "symbols", "compass", "rose",
-                 "north", "south", "east", "west", "classroom", "neighborhood",
-                 "continent", "ocean", "earth", "seven", "five"]
-    for word in map_words:
+    econ_words = ["goods", "services", "producer", "consumer", "supply", "demand",
+                  "price", "save", "bank", "lend", "money", "business", "buy", "sell"]
+    for word in econ_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
             if count >= 1:
@@ -426,14 +404,31 @@ def test_maps_1st(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Social Studies", "Maps & Geography")
+    return _make_result(items, "Social Studies", "Economics")
 
 
-def test_history(lnn):
+def test_geography_2nd(lnn):
     items = []
-    hist_words = ["history", "past", "present", "future", "today", "happened",
-                  "photos", "stories", "important", "people", "changed", "world",
-                  "holidays", "celebrate", "events", "family", "country"]
+    geo_words = ["states", "fifty", "capital", "city", "washington", "river",
+                 "lake", "mountain", "natural", "human", "made", "feature",
+                 "move", "place", "cold", "warm", "dry", "wet", "adapt"]
+    for word in geo_words:
+        if _node_exists(lnn, word):
+            count = _connection_count(lnn, word)
+            if count >= 1:
+                items.append((word, "PASS", f"{count} connections"))
+            else:
+                items.append((word, "PARTIAL", "exists but isolated"))
+        else:
+            items.append((word, "FAIL", "no node"))
+    return _make_result(items, "Social Studies", "Geography")
+
+
+def test_history_2nd(lnn):
+    items = []
+    hist_words = ["historian", "past", "primary", "secondary", "source", "timeline",
+                  "event", "important", "people", "change", "country", "mistake",
+                  "learn", "tradition", "generation", "holiday", "celebrate"]
     for word in hist_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -448,12 +443,13 @@ def test_history(lnn):
 
 # === SOCIAL-EMOTIONAL ===
 
-def test_character_traits(lnn):
+def test_character_traits_2nd(lnn):
     items = []
-    trait_words = ["honesty", "truth", "respect", "kindly", "responsibility", "courage",
-                   "brave", "kindness", "nice", "patience", "waiting", "calmly",
-                   "perseverance", "giving", "fairness", "equally", "gratitude",
-                   "thankful", "empathy", "understanding"]
+    trait_words = ["self-control", "manage", "emotion", "perseverance", "giving",
+                   "responsibility", "supposed", "cooperation", "working", "together",
+                   "respect", "treating", "honesty", "truth", "kindness", "nice",
+                   "empathy", "understanding", "feel", "courage", "right", "thing",
+                   "gratitude", "thankful", "fairness", "equally", "patience", "waiting"]
     for word in trait_words:
         if _node_exists(lnn, word):
             count = _connection_count(lnn, word)
@@ -463,4 +459,4 @@ def test_character_traits(lnn):
                 items.append((word, "PARTIAL", "exists but isolated"))
         else:
             items.append((word, "FAIL", "no node"))
-    return _make_result(items, "Social-Emotional", "Character Traits")
+    return _make_result(items, "Social-Emotional", "Character Traits & SEL")
