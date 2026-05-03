@@ -1,0 +1,50 @@
+{
+  "elapsed": 115.00669693946838,
+  "levels": {
+    "prek": {
+      "nodes": 6782,
+      "springs": 13430
+    },
+    "k": {
+      "nodes": 8996,
+      "springs": 16168
+    },
+    "1st": {
+      "nodes": 11153,
+      "springs": 24219
+    },
+    "2nd": {
+      "nodes": 13263,
+      "springs": 32364
+    },
+    "3rd": {
+      "nodes": 14900,
+      "springs": 40940
+    },
+    "4th": {
+      "nodes": 16033,
+      "springs": 58980
+    },
+    "5th": {
+      "nodes": 16604,
+      "springs": 69268
+    },
+    "6th": {
+      "nodes": 17235,
+      "springs": 82178
+    },
+    "7th": {
+      "nodes": 17884,
+      "springs": 97519
+    },
+    "8th": {
+      "nodes": 18420,
+      "springs": 110869
+    }
+  },
+  "final": {
+    "nodes": 18420,
+    "springs": 110869,
+    "trigrams": 7856
+  }
+}

@@ -126,6 +126,18 @@ def test_ancient_civilizations(lnn):
     return _make_result(items, "Social Studies", "Ancient Civilizations")
 
 
+def test_programming_logic_6th(lnn):
+    items = []
+    words = ["object", "class", "instance", "method", "property", "event", "handler", "stack", "queue", "data"]
+    for word in words:
+        if _node_exists(lnn, word):
+            count = _connection_count(lnn, word)
+            items.append((word, "PASS" if count >= 2 else "PARTIAL", f"{count} connections"))
+        else:
+            items.append((word, "FAIL", "no node"))
+    return _make_result(items, "Computer Science", "Programming Logic")
+
+
 def assess_sixth_grade(lnn):
     results = {}
     results["ratios_proportions"] = test_ratios_proportions(lnn)
@@ -133,6 +145,7 @@ def assess_sixth_grade(lnn):
     results["expressions_equations"] = test_expressions_equations(lnn)
     results["geometry_6th"] = test_geometry_6th(lnn)
     results["statistics_6th"] = test_statistics_6th(lnn)
+    results["programming_logic"] = test_programming_logic_6th(lnn)
     results["earth_science_6th"] = test_earth_science_6th(lnn)
     results["life_science_6th"] = test_life_science_6th(lnn)
     results["ancient_civilizations"] = test_ancient_civilizations(lnn)

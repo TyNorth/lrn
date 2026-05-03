@@ -145,6 +145,18 @@ def test_critical_thinking(lnn):
     return _make_result(items, "Literacy", "Critical Thinking")
 
 
+def test_programming_logic_5th(lnn):
+    items = []
+    words = ["boolean", "and", "or", "not", "true", "false", "condition", "loop", "iterate", "variable"]
+    for word in words:
+        if _node_exists(lnn, word):
+            count = _connection_count(lnn, word)
+            items.append((word, "PASS" if count >= 2 else "PARTIAL", f"{count} connections"))
+        else:
+            items.append((word, "FAIL", "no node"))
+    return _make_result(items, "Computer Science", "Programming Logic")
+
+
 def assess_fifth_grade(lnn):
     results = {}
     results["algebraic_thinking"] = test_algebraic_thinking(lnn)
@@ -152,6 +164,7 @@ def assess_fifth_grade(lnn):
     results["fraction_operations"] = test_fraction_operations(lnn)
     results["volume"] = test_volume(lnn)
     results["coordinate_geometry"] = test_coordinate_geometry(lnn)
+    results["programming_logic"] = test_programming_logic_5th(lnn)
     results["matter"] = test_matter(lnn)
     results["ecosystems_5th"] = test_ecosystems_5th(lnn)
     results["american_revolution"] = test_american_revolution(lnn)

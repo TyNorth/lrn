@@ -1,0 +1,30 @@
+{
+  "elapsed": 53.616344928741455,
+  "levels": {
+    "prek": {
+      "nodes": 6782,
+      "springs": 13430
+    },
+    "k": {
+      "nodes": 12063,
+      "springs": 16372
+    },
+    "1st": {
+      "nodes": 14950,
+      "springs": 24433
+    },
+    "2nd": {
+      "nodes": 17392,
+      "springs": 32580
+    },
+    "3rd": {
+      "nodes": 19198,
+      "springs": 41157
+    }
+  },
+  "final": {
+    "nodes": 19198,
+    "springs": 41157,
+    "trigrams": 2921
+  }
+}

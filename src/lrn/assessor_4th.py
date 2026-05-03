@@ -192,6 +192,18 @@ def test_civics_4th(lnn):
     return _make_result(items, "Social Studies", "Civics")
 
 
+def test_programming_logic_4th(lnn):
+    items = []
+    words = ["algorithm", "step", "sequence", "pattern", "error", "debug", "function", "loop", "variable", "array"]
+    for word in words:
+        if _node_exists(lnn, word):
+            count = _connection_count(lnn, word)
+            items.append((word, "PASS" if count >= 2 else "PARTIAL", f"{count} connections"))
+        else:
+            items.append((word, "FAIL", "no node"))
+    return _make_result(items, "Computer Science", "Programming Logic")
+
+
 def assess_fourth_grade(lnn):
     results = {}
     results["multi_digit_arithmetic"] = test_multi_digit_arithmetic(lnn)
@@ -201,6 +213,7 @@ def assess_fourth_grade(lnn):
     results["reading_literature_4th"] = test_reading_literature_4th(lnn)
     results["reading_informational_4th"] = test_reading_informational_4th(lnn)
     results["writing_4th"] = test_writing_4th(lnn)
+    results["programming_logic"] = test_programming_logic_4th(lnn)
     results["energy"] = test_energy(lnn)
     results["waves"] = test_waves(lnn)
     results["earth_systems"] = test_earth_systems(lnn)
